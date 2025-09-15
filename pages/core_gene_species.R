@@ -4,19 +4,26 @@
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
   ui <- fluidPage(
-      selectInput(
-              "selected_species",
-              "Choose a species to explore its gene frequency:",
-              list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
+      sidebarLayout(
+        sidebarPanel(
+          selectInput(
+            "selected_species",
+            "Choose a species to explore its gene frequency:",
+            list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
           ),
-      # select core gene threshold for core_gene_species plot
-      sliderInput(
-        "core_threshold",
-        "Select a minimum frequency threshold for core genes:",
-        min=0,max=1,value=0.9
-      ),
-      plotOutput("coreGeneSpeciesPlot"),
-
+          # select core gene threshold for core_gene_species plot
+          sliderInput(
+            "core_threshold",
+            "Select a minimum frequency threshold for core genes:",
+            min=0,max=1,value=0.9
+          )
+        ),
+        
+        # Show a plot of the generated distribution
+        mainPanel(
+          plotOutput("coreGeneSpeciesPlot"),
+        )
+      )
   )
 
 
