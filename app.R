@@ -13,7 +13,8 @@ library(dplyr)
 library(bslib)
 
 
-source("pages/core_gene.R")
+source("pages/core_gene_species.R")
+source("pages/core_gene_genus.R")
 
 
 # read in raw data, this has a merge of AFP and the species call + HQ
@@ -33,14 +34,19 @@ ui <- page_navbar(
         }
       "))
   ),
-  nav_panel("Core Genes", uiOutput("core_genes")),
+  nav_panel("Core Genes Species", uiOutput("core_genes_species"), icon = icon("dna")),
+  nav_panel("Core Genes Genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
+
 )
 
 # Define server logic required to draw a core gene plot for a selected species
 server <- function(input, output) {
     # Render pages
-    output$core_genes <- renderUI({
+    output$core_genes_species <- renderUI({
         coreGenesForSpeciesPage(afp, input, output)
+    })
+    output$core_genes_genus <- renderUI({
+        coreGenesForGenusPage(afp, input, output)
     })
 }
 
