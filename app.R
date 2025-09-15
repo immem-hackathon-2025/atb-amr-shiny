@@ -14,21 +14,20 @@ library(dplyr)
 source("core_gene_species.R")
 
 
+# read in raw data, this has a merge of AFP and the species call + HQ
+### TODO: REPLACE WITH INTERNAL DATA OBJECT
+### IDEA: could remove filter to AMR, so we can plot the same info for virulence genes etc reported by AMRfp
+afp <-read_tsv("ATB_Enterobacter_AFP.tsv.gz") %>% filter(HQ) %>% filter(`Element subtype`=="AMR")
+
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("AllTheBacteria AMR Explorer"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
 
         # Show a plot of the generated distribution
         mainPanel(
@@ -58,7 +57,7 @@ server <- function(input, output) {
 
     output$coreGeneSpecies <- renderPlot({
     
-      plotCoreGenesForSpecies(core_threshold=input$core_threshold, selected_species=input$selected_species)
+      plotCoreGenesForSpecies(afp=afp, core_threshold=input$core_threshold, selected_species=input$selected_species)
       
     })
     

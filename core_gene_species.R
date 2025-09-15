@@ -1,11 +1,7 @@
 # plot candidate core genes for a selected species and core threshold
 # take inputs from core_gene_species_controls.R
 
-plotCoreGenesForSpecies <- function(core_threshold, selected_species) {
-  # read in raw data, this has a merge of AFP and the species call + HQ
-  ### TODO: REPLACE WITH INTERNAL DATA OBJECT
-  ### IDEA: could remove filter to AMR, so we can plot the same info for virulence genes etc reported by AMRfp
-  afp <-read_tsv("ATB_Enterobacter_AFP.tsv.gz") %>% filter(HQ) %>% filter(`Element subtype`=="AMR")
+plotCoreGenesForSpecies <- function(afp, core_threshold, selected_species) {
   
   # for a single species, plot candidate core genes
   # TODO: user settable
