@@ -4,25 +4,31 @@
 coreGenesForGenusPage <- function(afp, input, output) {
   
   ui <- fluidPage(
-      # select Genus for core_gene_species plot
-      selectInput(
-        "selected_genus",
-        "Choose a genus to explore gene frequency across its species:",
-        list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
-      ),
-      # select core gene threshold for core_gene_species plot
-      sliderInput(
-        "core_threshold",
-        "Select a minimum frequency threshold for core genes:",
-        min=0,max=1,value=0.9
-      ),
-      # select core gene threshold for core_gene_species plot
-      sliderInput(
-        "min_genomes_per_species",
-        "Select a minimum number of genomes per species, to include in plot:",
-        min=5,max=100,value=10
-      ),
+      sidebarLayout(
+          sidebarPanel(
+        # select Genus for core_gene_species plot
+        selectInput(
+          "selected_genus",
+          "Choose a genus to explore gene frequency across its species:",
+          list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
+        ),
+        # select core gene threshold for core_gene_species plot
+        sliderInput(
+          "core_threshold",
+          "Select a minimum frequency threshold for core genes:",
+          min=0,max=1,value=0.9
+        ),
+        # select core gene threshold for core_gene_species plot
+        sliderInput(
+          "min_genomes_per_species",
+          "Select a minimum number of genomes per species, to include in plot:",
+          min=5,max=100,value=10
+        ),
+          ),
+          mainPanel(
       plotOutput("coreGeneGenusPlot")
+          )
+      )
   )
 
 
