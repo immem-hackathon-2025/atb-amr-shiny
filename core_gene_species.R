@@ -4,11 +4,17 @@
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
   ui <- fluidPage(
-       # select species for core_gene_species plot
       selectInput(
-          "selected_species",
-          "Choose a species to explore its core genes:",
-          list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
+              "selected_species",
+              "Choose a species to explore its gene frequency:",
+              list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
+          ),
+          
+      # select Genus for core_gene_species plot
+      selectInput(
+        "selected_genus",
+        "Choose a genus to explore gene frequency across its species:",
+        list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
       ),
       
       # select core gene threshold for core_gene_species plot
@@ -17,7 +23,15 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
         "Select a minimum frequency threshold for core genes:",
         min=0,max=1,value=0.9
       ),
-      plotOutput("coreGeneSpeciesPlot")
+      
+      # select core gene threshold for core_gene_species plot
+      sliderInput(
+        "min_genomes_per_species",
+        "Select a minimum number of genomes per species, to include in plot:",
+        min=5,max=100,value=10
+      ),
+      plotOutput("coreGeneSpeciesPlot"),
+      plotOutput("coreGeneGenusPlot")
   )
 
 
@@ -37,8 +51,46 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
       count() %>% 
       mutate(freq=n/length(unique(afp_this_spp$Name))) %>%
       filter(freq>=input$core_threshold) %>% 
-      ggplot(aes(x=freq, y=`Gene symbol`)) +
-      geom_col()
+      ggplot(aes(x=freq, y=`Gene symbol`, fill=Class)) +
+      geom_col() + 
+      theme(axis.text.y=element_text(size=10)) + 
+      labs(y="", x="Gene frequency", title=paste0("Genes with freq >= ",input$core_threshold," in ", input$selected_species))
+      
+  }) 
+  
+  output$coreGeneGenusPlot <- renderPlot({
+    
+    # for a single species, plot candidate core genes
+    # TODO: user settable
+  
+    afp <- afp %>% filter(grepl(input$selected_genus, Species))
+  
+    # total number per species
+    n_per_species <- afp %>% 
+      group_by(Name, Species) %>% 
+      count() %>% distinct() %>% ungroup() %>% 
+      group_by(Species) %>% 
+      summarise(nspp=n()) %>% 
+      arrange(-nspp)
+    
+    ### TODO: allow user to select node instead of gene, as the unit of measurement
+    # gene frequency per species
+    gene_count_per_spp <- afp %>% 
+      group_by(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
+      count() %>% distinct() %>% ungroup() %>% 
+      group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
+      count() %>% 
+      left_join(n_per_species, by="Species") %>% 
+      mutate(freq=n/nspp)
+    
+    # extract core genes and display freq per species
+    gene_count_per_spp %>% filter(nspp>input$min_genomes_per_species & freq>input$core_threshold) %>%
+      mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
+      arrange(-nspp) %>%
+      ggplot(aes(y=label, x=freq)) + 
+      geom_col(position='dodge') + 
+      facet_wrap(~`Gene symbol`) + 
+      theme(legend.position="bottom")
       
   }) 
 
