@@ -15,7 +15,7 @@ library(bslib)
 
 source("pages/core_gene_species.R")
 source("pages/core_gene_genus.R")
-#source("pages/gene_distribution.R")
+source("pages/gene_by_species.R")
 
 
 # read in raw data, this has a merge of AFP and the species call + HQ
@@ -35,8 +35,9 @@ ui <- page_navbar(
         }
       "))
   ),
-  nav_panel("Genes per Species", uiOutput("core_genes_species"), icon = icon("dna")),
-  nav_panel("Genes per Genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
+  nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("dna")),
+  nav_panel("Gene view", uiOutput("gene_distribution"), icon = icon("dna")),
+  nav_panel("Common genes by genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
 
 )
 
@@ -48,6 +49,9 @@ server <- function(input, output) {
     })
     output$core_genes_genus <- renderUI({
         coreGenesForGenusPage(afp, input, output)
+    })
+    output$gene_distribution <- renderUI({
+      geneAcrossSpeciesPage(afp, input, output)
     })
 }
 

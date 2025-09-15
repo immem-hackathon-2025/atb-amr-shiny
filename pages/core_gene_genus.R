@@ -59,8 +59,9 @@ coreGenesForGenusPage <- function(afp, input, output) {
       mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
       arrange(-nspp) %>%
       ggplot(aes(y=label, x=freq)) + 
-      geom_col(position='dodge') + 
+      geom_col(position='dodge', fill="navy") + 
       facet_wrap(~`Gene symbol`) + 
+      theme_bw() +
       theme(legend.position="bottom")
       
   }) 

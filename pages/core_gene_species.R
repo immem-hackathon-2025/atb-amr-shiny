@@ -41,6 +41,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
       filter(freq>=input$core_threshold) %>% 
       ggplot(aes(x=freq, y=`Gene symbol`, fill=Class)) +
       geom_col() + 
+      theme_bw() +
       theme(axis.text.y=element_text(size=10)) + 
       labs(y="", x="Gene frequency", title=paste0("Genes with freq >= ",input$core_threshold," in ", input$selected_species))
       
