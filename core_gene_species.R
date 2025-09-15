@@ -2,9 +2,6 @@
 # take inputs from core_gene_species_controls.R
 
 plotCoreGenesForSpecies <- function(afp, core_threshold, selected_species) {
-  
-  # for a single species, plot candidate core genes
-  # TODO: user settable
  
   afp_this_spp <- afp %>% filter(Species==selected_species)
   n_this_spp <- length(unique(afp_this_spp$Name))
@@ -17,7 +14,9 @@ plotCoreGenesForSpecies <- function(afp, core_threshold, selected_species) {
     count() %>% 
     mutate(freq=n/length(unique(afp_this_spp$Name))) %>%
     filter(freq>=core_threshold) %>% 
-    ggplot(aes(x=freq, y=`Gene symbol`)) +
-    geom_col()
+    ggplot(aes(x=freq, y=`Gene symbol`, fill=Class)) +
+    geom_col() + 
+    theme(axis.text.y=element_text(size=10)) + 
+    labs(y="", x="Gene frequency", title=paste0("Genes with freq >= ",core_threshold," in ", selected_species))
 
 }

@@ -12,6 +12,7 @@ library(tidyverse)
 library(dplyr)
 
 source("core_gene_species.R")
+source("core_gene_genus.R")
 
 
 # read in raw data, this has a merge of AFP and the species call + HQ
@@ -27,7 +28,7 @@ ui <- fluidPage(
     titlePanel("AllTheBacteria AMR Explorer"),
 
     # Sidebar with a slider input for number of bins 
-    sidebarLayout(
+    #sidebarLayout(
 
         # Show a plot of the generated distribution
         mainPanel(
@@ -35,8 +36,15 @@ ui <- fluidPage(
            # select species for core_gene_species plot
           selectInput(
               "selected_species",
-              "Choose a species to explore its core genes:",
+              "Choose a species to explore its gene frequency:",
               list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
+          ),
+          
+          # select Genus for core_gene_species plot
+          selectInput(
+            "selected_genus",
+            "Choose a genus to explore gene frequency across its species:",
+            list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
           ),
           
           # select core gene threshold for core_gene_species plot
@@ -46,20 +54,31 @@ ui <- fluidPage(
             min=0,max=1,value=0.9
           ),
           
-           plotOutput("coreGeneSpecies")
+          # select core gene threshold for core_gene_species plot
+          sliderInput(
+            "min_genomes_per_species",
+            "Select a minimum number of genomes per species, to include in plot:",
+            min=5,max=100,value=10
+          ),
+          
+          plotOutput("coreGeneSpecies"),
+          
+          plotOutput("coreGeneGenus")
         )
-    )
+    #)
     
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw a core gene plot for a selected species
 server <- function(input, output) {
 
     output$coreGeneSpecies <- renderPlot({
-    
       plotCoreGenesForSpecies(afp=afp, core_threshold=input$core_threshold, selected_species=input$selected_species)
-      
     })
+    
+    output$coreGeneGenus <- renderPlot({
+      plotCoreGenesAcrossGenus(afp=afp, core_threshold=input$core_threshold, selected_genus=input$selected_genus, min_genomes_per_species=input$min_genomes_per_species)
+    }, height = 600)
     
 }
 
