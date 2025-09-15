@@ -1,5 +1,4 @@
-# plot candidate core genes for a selected species and core threshold
-# take inputs from core_gene_species_controls.R
+# plot gene frequencies for a selected species and threshold
 
 coreGenesForGenusPage <- function(afp, input, output) {
   
@@ -15,7 +14,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
         # select core gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold",
-          "Select a minimum frequency threshold for core genes:",
+          "Select a minimum frequency threshold for genes to plot:",
           min=0,max=1,value=0.9
         ),
         # select core gene threshold for core_gene_species plot
@@ -35,8 +34,6 @@ coreGenesForGenusPage <- function(afp, input, output) {
   output$coreGeneGenusPlot <- renderPlot({
     
     # for a single species, plot candidate core genes
-    # TODO: user settable
-  
     afp <- afp %>% filter(grepl(input$selected_genus, Species))
   
     # total number per species

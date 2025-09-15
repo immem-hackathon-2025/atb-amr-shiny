@@ -1,5 +1,4 @@
-# plot candidate core genes for a selected species and core threshold
-# take inputs from core_gene_species_controls.R
+# plot gene frequency for a selected species and core threshold
 
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
@@ -11,10 +10,10 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
             "Choose a species to explore its gene frequency:",
             list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
           ),
-          # select core gene threshold for core_gene_species plot
+          # select gene threshold for core_gene_species plot
           sliderInput(
             "core_threshold",
-            "Select a minimum frequency threshold for core genes:",
+            "Select a minimum frequency threshold for genes to include:",
             min=0,max=1,value=0.9
           )
         ),
@@ -30,12 +29,9 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   output$coreGeneSpeciesPlot <- renderPlot({
     
     # for a single species, plot candidate core genes
-    # TODO: user settable
-  
     afp_this_spp <- afp %>% filter(Species==input$selected_species)
     n_this_spp <- length(unique(afp_this_spp$Name))
-    
-    # TODO: make pretty, annotate with class/subclass
+  
     afp_this_spp %>%
       group_by(Name, `Gene symbol`, Class, Subclass) %>% 
       count() %>% distinct() %>% ungroup() %>% 
