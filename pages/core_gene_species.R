@@ -14,7 +14,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           sliderInput(
             "core_threshold",
             "Select a minimum frequency threshold for genes to include:",
-            min=0,max=1,value=0.9
+            min=0,max=1,value=c(0.6, 1)
           )
         ),
         
@@ -38,11 +38,11 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
       group_by(`Gene symbol`, Class, Subclass) %>% 
       count() %>% 
       mutate(freq=n/length(unique(afp_this_spp$Name))) %>%
-      filter(freq>=input$core_threshold) %>% 
+      filter(freq >= input$core_threshold[1] & freq <= input$core_threshold[2]) %>% 
       ggplot(aes(x=freq, y=`Gene symbol`, fill=Class)) +
       geom_col() + 
       theme(axis.text.y=element_text(size=10)) + 
-      labs(y="", x="Gene frequency", title=paste0("Genes with freq >= ",input$core_threshold," in ", input$selected_species))
+      labs(y="", x="Gene frequency", title=paste0("Genes with freq between ",input$core_threshold[1]," and ", input$core_threshold[2]," in ", input$selected_species))
       
   }) 
   
