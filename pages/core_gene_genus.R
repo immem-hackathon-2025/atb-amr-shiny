@@ -25,7 +25,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
         ),
           ),
           mainPanel(
-      plotOutput("coreGeneGenusPlot")
+      plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)")
           )
       )
   )

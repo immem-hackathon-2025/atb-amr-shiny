@@ -20,7 +20,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
         
         # Show a plot of the generated distribution
         mainPanel(
-          plotOutput("coreGeneSpeciesPlot"),
+          plotOutput("coreGeneSpeciesPlot", height = "calc(100vh - 200px)"),
         )
       )
   )
