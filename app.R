@@ -13,8 +13,7 @@ library(dplyr)
 library(bslib)
 
 
-source("core_gene_species.R")
-source("core_gene_genus.R")
+source("core_gene.R")
 
 
 # read in raw data, this has a merge of AFP and the species call + HQ
