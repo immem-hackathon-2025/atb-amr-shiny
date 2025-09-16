@@ -11,7 +11,7 @@
   },
   "environment": {
     "r": {
-      "requires": "~=4.2.0"
+      "requires": ">= 4.2.0"
     }
   },
   "packages": {
@@ -949,6 +949,45 @@
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "aarch64-apple-darwin20",
         "RemoteSha": "1.3.2"
+      }
+    },
+    "duckdb": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "description": {
+        "Package": "duckdb",
+        "Title": "DBI Package for the DuckDB Database Management System",
+        "Version": "1.3.3",
+        "Authors@R": "c(\n    person(\"Hannes\", \"Mühleisen\", , \"hannes@cwi.nl\", role = \"aut\",\n           comment = c(ORCID = \"0000-0001-8552-0029\")),\n    person(\"Mark\", \"Raasveldt\", , \"mark.raasveldt@cwi.nl\", role = \"aut\",\n           comment = c(ORCID = \"0000-0001-5005-6844\")),\n    person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = \"cre\",\n           comment = c(ORCID = \"0000-0002-1416-3412\")),\n    person(\"Stichting DuckDB Foundation\", role = \"cph\"),\n    person(\"Apache Software Foundation\", role = \"cph\"),\n    person(\"PostgreSQL Global Development Group\", role = \"cph\"),\n    person(\"The Regents of the University of California\", role = \"cph\"),\n    person(\"Cameron Desrochers\", role = \"cph\"),\n    person(\"Victor Zverovich\", role = \"cph\"),\n    person(\"RAD Game Tools\", role = \"cph\"),\n    person(\"Valve Software\", role = \"cph\"),\n    person(\"Rich Geldreich\", role = \"cph\"),\n    person(\"Tenacious Software LLC\", role = \"cph\"),\n    person(\"The RE2 Authors\", role = \"cph\"),\n    person(\"Google Inc.\", role = \"cph\"),\n    person(\"Facebook Inc.\", role = \"cph\"),\n    person(\"Steven G. Johnson\", role = \"cph\"),\n    person(\"Jiahao Chen\", role = \"cph\"),\n    person(\"Tony Kelman\", role = \"cph\"),\n    person(\"Jonas Fonseca\", role = \"cph\"),\n    person(\"Lukas Fittl\", role = \"cph\"),\n    person(\"Salvatore Sanfilippo\", role = \"cph\"),\n    person(\"Art.sy, Inc.\", role = \"cph\"),\n    person(\"Oran Agra\", role = \"cph\"),\n    person(\"Redis Labs, Inc.\", role = \"cph\"),\n    person(\"Melissa O'Neill\", role = \"cph\"),\n    person(\"PCG Project contributors\", role = \"cph\")\n  )",
+        "Description": "The DuckDB project is an embedded analytical data management\n    system with support for the Structured Query Language (SQL). This\n    package includes all of DuckDB and an R Database Interface (DBI)\n    connector.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://r.duckdb.org/, https://github.com/duckdb/duckdb-r",
+        "BugReports": "https://github.com/duckdb/duckdb-r/issues",
+        "Depends": "DBI, R (>= 4.1.0)",
+        "Imports": "methods, utils",
+        "Suggests": "adbcdrivermanager, arrow (>= 13.0.0), bit64, callr, clock,\nDBItest, dbplyr, dplyr, rlang, testthat, tibble, vctrs, withr",
+        "Config/build/compilation-database": "false",
+        "Config/build/never-clean": "true",
+        "Config/comment/compilation-database": "Generate manually with\npkgload:::generate_db() for faster pkgload::load_all()",
+        "Config/gha/extra-packages": "arrow=?ignore-before-r=4.2.0\nadbcdrivermanager=?ignore-before-r=4.2.0",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3.9000",
+        "SystemRequirements": "xz (for building from source)",
+        "Biarch": "true",
+        "NeedsCompilation": "yes",
+        "Packaged": "2025-09-10 09:33:35 UTC; kirill",
+        "Author": "Hannes Mühleisen [aut] (ORCID: <https://orcid.org/0000-0001-8552-0029>),\n  Mark Raasveldt [aut] (ORCID: <https://orcid.org/0000-0001-5005-6844>),\n  Kirill Müller [cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>),\n  Stichting DuckDB Foundation [cph],\n  Apache Software Foundation [cph],\n  PostgreSQL Global Development Group [cph],\n  The Regents of the University of California [cph],\n  Cameron Desrochers [cph],\n  Victor Zverovich [cph],\n  RAD Game Tools [cph],\n  Valve Software [cph],\n  Rich Geldreich [cph],\n  Tenacious Software LLC [cph],\n  The RE2 Authors [cph],\n  Google Inc. [cph],\n  Facebook Inc. [cph],\n  Steven G. Johnson [cph],\n  Jiahao Chen [cph],\n  Tony Kelman [cph],\n  Jonas Fonseca [cph],\n  Lukas Fittl [cph],\n  Salvatore Sanfilippo [cph],\n  Art.sy, Inc. [cph],\n  Oran Agra [cph],\n  Redis Labs, Inc. [cph],\n  Melissa O'Neill [cph],\n  PCG Project contributors [cph]",
+        "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2025-09-10 16:00:14 UTC",
+        "Built": "R 4.2.0; x86_64-pc-linux-gnu; 2025-09-11 05:59:55 UTC; unix",
+        "RemoteType": "standard",
+        "RemoteRef": "duckdb",
+        "RemotePkgRef": "duckdb",
+        "RemoteRepos": "https://packagemanager.posit.co/cran/latest",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "aarch64-apple-darwin20",
+        "RemoteSha": "1.3.3"
       }
     },
     "ellipsis": {
@@ -3768,25 +3807,2713 @@
       "checksum": "d1338d8c9def1e19375faab06893dc2a"
     },
     ".Rprofile": {
-      "checksum": "2c5c58ce3c453195f89a2f60949b430b"
+      "checksum": "ee67ebafc24849096271292e8ad90c21"
+    },
+    "AllTheBacteria/ATB_AFP_preprocessed_AMRonly.tsv.bz2": {
+      "checksum": "b9e7541032790e61b1510775e91e079d"
+    },
+    "AllTheBacteria/ATB_AFP_preprocessed.tsv.bz2": {
+      "checksum": "8e42fe8703cd4c5563c8f708a7761115"
+    },
+    "AllTheBacteria/ATB_Enterobacter_AFP_preprocessed.tsv.bz2": {
+      "checksum": "5177af127cc3392d6cbe1a40e6fd195b"
     },
     "app.R": {
-      "checksum": "c7b2fe4ba808f1e09f3012166cf8f89b"
+      "checksum": "2eee49bda8527c2b5d7a8ac8145b5e21"
     },
     "ATB_Enterobacter_AFP.tsv.gz": {
       "checksum": "60ae79b4de78666800f99efbad54ded1"
     },
+    "ATB_preprocessing_perspecies.Rmd": {
+      "checksum": "c9a162b53950c1721925a6b01f8c5eac"
+    },
+    "ATB_preprocessing.Rmd": {
+      "checksum": "f711ed6b96409be6ec87fc8acf179620"
+    },
+    "data/parquet_by_genus/Genus=14-2/data_0.parquet": {
+      "checksum": "7643b6f60d3706834a600c912c5339c2"
+    },
+    "data/parquet_by_genus/Genus=Abiotrophia/data_0.parquet": {
+      "checksum": "4764d59d7221e97d763de9e9f1df49da"
+    },
+    "data/parquet_by_genus/Genus=Acetatifactor/data_0.parquet": {
+      "checksum": "b5483eb4c78d70f235a6bd976415b238"
+    },
+    "data/parquet_by_genus/Genus=Acetitomaculum/data_0.parquet": {
+      "checksum": "bc590906fd9b90c2484df2d5de7190d4"
+    },
+    "data/parquet_by_genus/Genus=Acetivibrio/data_0.parquet": {
+      "checksum": "290f4ac8761cd0540830d0620a53c975"
+    },
+    "data/parquet_by_genus/Genus=Acetobacter/data_0.parquet": {
+      "checksum": "7cf8ea0e59711f9599453d624816df86"
+    },
+    "data/parquet_by_genus/Genus=Acetobacterium/data_0.parquet": {
+      "checksum": "202a0d3e20fb23adbb3038048a58610b"
+    },
+    "data/parquet_by_genus/Genus=Achromobacter/data_0.parquet": {
+      "checksum": "af5093ca605b15ddb16dbd6272131032"
+    },
+    "data/parquet_by_genus/Genus=Acidaminococcus/data_0.parquet": {
+      "checksum": "c9e08d52a3abad3d0a66531b96000012"
+    },
+    "data/parquet_by_genus/Genus=Acidomonas/data_0.parquet": {
+      "checksum": "6a59b82f15e631fb4b687e839bd1a476"
+    },
+    "data/parquet_by_genus/Genus=Acidovorax/data_0.parquet": {
+      "checksum": "793d6ba8d0d9a6ec2b157adc883f4199"
+    },
+    "data/parquet_by_genus/Genus=Acinetobacter/data_0.parquet": {
+      "checksum": "766958dda10a541e20edefe0e9ff74fd"
+    },
+    "data/parquet_by_genus/Genus=Actinobacillus_A/data_0.parquet": {
+      "checksum": "c8fb5f51cbdd734a8f48a99babdc2eb9"
+    },
+    "data/parquet_by_genus/Genus=Actinobacillus/data_0.parquet": {
+      "checksum": "39a22a99519693792ad7afd48c13f1ad"
+    },
+    "data/parquet_by_genus/Genus=Actinokineospora/data_0.parquet": {
+      "checksum": "32a845c2b5037c4a983f6cb47ebfaf1a"
+    },
+    "data/parquet_by_genus/Genus=Actinomadura_B/data_0.parquet": {
+      "checksum": "2eac61bd280167718190a44f973035af"
+    },
+    "data/parquet_by_genus/Genus=Actinomyces/data_0.parquet": {
+      "checksum": "980b3df9472e787ce4a72b515c07c62a"
+    },
+    "data/parquet_by_genus/Genus=Actinomycetospora/data_0.parquet": {
+      "checksum": "ac49e1a69e3fd39a35a04860346d577c"
+    },
+    "data/parquet_by_genus/Genus=Actinoplanes/data_0.parquet": {
+      "checksum": "d4e4eb2184bf5c421546b929f29e2d69"
+    },
+    "data/parquet_by_genus/Genus=Actinopolymorpha/data_0.parquet": {
+      "checksum": "6abe8c0c86314cd007f947eaa22a4e97"
+    },
+    "data/parquet_by_genus/Genus=Actinosynnema/data_0.parquet": {
+      "checksum": "f77aaace043307338457802eca6d0145"
+    },
+    "data/parquet_by_genus/Genus=Actinotignum/data_0.parquet": {
+      "checksum": "873bae335a3050975433bed03d0960e6"
+    },
+    "data/parquet_by_genus/Genus=Adlercreutzia/data_0.parquet": {
+      "checksum": "04738c88dc255e614cbb1586b452967a"
+    },
+    "data/parquet_by_genus/Genus=Aerococcus/data_0.parquet": {
+      "checksum": "d93c152e1cb1c55b7a7a92fbd1a7019d"
+    },
+    "data/parquet_by_genus/Genus=Aerococcus/data_1.parquet": {
+      "checksum": "23f22b1018c93cbd3c78cf4eb77b07a2"
+    },
+    "data/parquet_by_genus/Genus=Aeromicrobium/data_0.parquet": {
+      "checksum": "97ca329c36c2ff11fde86e290a48bd83"
+    },
+    "data/parquet_by_genus/Genus=Aeromonas/data_0.parquet": {
+      "checksum": "b516d5b6070dea389fad720388cad8d7"
+    },
+    "data/parquet_by_genus/Genus=Afifella/data_0.parquet": {
+      "checksum": "c2d151bd8706bcf5a96e484b6c4acb1d"
+    },
+    "data/parquet_by_genus/Genus=Agathobacter/data_0.parquet": {
+      "checksum": "2610b0f09e7e1259f39f2bce0f4dd519"
+    },
+    "data/parquet_by_genus/Genus=Agathobaculum/data_0.parquet": {
+      "checksum": "2505ff21ee2151cfe4620bd73e361107"
+    },
+    "data/parquet_by_genus/Genus=Agrobacterium/data_0.parquet": {
+      "checksum": "d7dc6727cc3ad6f79a4ab6b6dcf11414"
+    },
+    "data/parquet_by_genus/Genus=Agrobacterium/data_1.parquet": {
+      "checksum": "72cb0be390961ee1c683ebde050a1311"
+    },
+    "data/parquet_by_genus/Genus=Agrococcus/data_0.parquet": {
+      "checksum": "4baddb98f38f6ccf3bc40b0a842710a7"
+    },
+    "data/parquet_by_genus/Genus=Agromyces/data_0.parquet": {
+      "checksum": "5feff0626499d6658957a8d9d0e58c9b"
+    },
+    "data/parquet_by_genus/Genus=AKCV01/data_0.parquet": {
+      "checksum": "d41d97681781b6a3588ab0236bd40056"
+    },
+    "data/parquet_by_genus/Genus=Akkermansia/data_0.parquet": {
+      "checksum": "6c85dacdb77f4a65f776d3979d02542a"
+    },
+    "data/parquet_by_genus/Genus=Alcaligenes/data_0.parquet": {
+      "checksum": "b871882aaa6b2b7ea004649b0caef542"
+    },
+    "data/parquet_by_genus/Genus=Alcaligenes/data_1.parquet": {
+      "checksum": "6b8e9b197540f1d20dff554593da0ecf"
+    },
+    "data/parquet_by_genus/Genus=Algoriphagus/data_0.parquet": {
+      "checksum": "708e610748fed90f0a7e903707e0a6be"
+    },
+    "data/parquet_by_genus/Genus=Aliarcobacter/data_0.parquet": {
+      "checksum": "f2339fdccfb5219495602c8a3bca8343"
+    },
+    "data/parquet_by_genus/Genus=Aliarcobacter/data_1.parquet": {
+      "checksum": "cb2ea661da0bce55a4135b7d468e20ec"
+    },
+    "data/parquet_by_genus/Genus=Alicycliphilus/data_0.parquet": {
+      "checksum": "195a641358e138c92b80b7312c8adabd"
+    },
+    "data/parquet_by_genus/Genus=Alicyclobacillus_H/data_0.parquet": {
+      "checksum": "d17eb78826a8367f74aa94cae80f0622"
+    },
+    "data/parquet_by_genus/Genus=Alicyclobacillus/data_0.parquet": {
+      "checksum": "a1e981dad9650ac022057ccc7f5c85bc"
+    },
+    "data/parquet_by_genus/Genus=Aliicoccus/data_0.parquet": {
+      "checksum": "7a3e80d06db53e35bb148976ac406f89"
+    },
+    "data/parquet_by_genus/Genus=Aliivibrio/data_0.parquet": {
+      "checksum": "caa8f254e38dc5ffacb748b389a27327"
+    },
+    "data/parquet_by_genus/Genus=Alistipes_A/data_0.parquet": {
+      "checksum": "5df4f5930d37160c2d238c02877acc00"
+    },
+    "data/parquet_by_genus/Genus=Alistipes/data_0.parquet": {
+      "checksum": "e1598492457a243d0882922e180d80b4"
+    },
+    "data/parquet_by_genus/Genus=Alkalibacterium/data_0.parquet": {
+      "checksum": "5ab6f2d6fa4f7f168699007be72382bd"
+    },
+    "data/parquet_by_genus/Genus=Alkalibaculum/data_0.parquet": {
+      "checksum": "3f096ce58af27fdfa26f93c179f62425"
+    },
+    "data/parquet_by_genus/Genus=Alkaliphilus_C/data_0.parquet": {
+      "checksum": "986fa20111aacc759ba52b53a35ebeec"
+    },
+    "data/parquet_by_genus/Genus=Allofustis/data_0.parquet": {
+      "checksum": "69f8a3a6171c2b3eef4dec6c157265bc"
+    },
+    "data/parquet_by_genus/Genus=Allonocardiopsis/data_0.parquet": {
+      "checksum": "8ba61bcd8bf2f8525d55c7d249f153f6"
+    },
+    "data/parquet_by_genus/Genus=Alloprevotella/data_0.parquet": {
+      "checksum": "18d029e86c139001832833603727f1a8"
+    },
+    "data/parquet_by_genus/Genus=Allorhizobium/data_0.parquet": {
+      "checksum": "2745de821e903afa9494e28dc46f0201"
+    },
+    "data/parquet_by_genus/Genus=Alteromonas/data_0.parquet": {
+      "checksum": "eaf539c992767ddb4ef8dd3de195e1c7"
+    },
+    "data/parquet_by_genus/Genus=Aminidesulfovibrio/data_0.parquet": {
+      "checksum": "3ef176a63cb66625f0172392c21b44f5"
+    },
+    "data/parquet_by_genus/Genus=Amphiplicatus/data_0.parquet": {
+      "checksum": "2768391def313dfb7092026f7a6f8ff9"
+    },
+    "data/parquet_by_genus/Genus=Amycolatopsis/data_0.parquet": {
+      "checksum": "adc6770cf6f1e249b4fad8c151486a2d"
+    },
+    "data/parquet_by_genus/Genus=Amylolactobacillus/data_0.parquet": {
+      "checksum": "58d9466beb82848080c56716a8d5fe7a"
+    },
+    "data/parquet_by_genus/Genus=Anaerobium/data_0.parquet": {
+      "checksum": "3aaa071329a5a964a44bb61c9a6be7b3"
+    },
+    "data/parquet_by_genus/Genus=Anaerobutyricum/data_0.parquet": {
+      "checksum": "a31c5c11dbb8de3098bfba1dd6018e24"
+    },
+    "data/parquet_by_genus/Genus=Anaerococcus/data_0.parquet": {
+      "checksum": "a2aac0616e6a629dcdc6065c6cbf4533"
+    },
+    "data/parquet_by_genus/Genus=Anaeromassilibacillus/data_0.parquet": {
+      "checksum": "8e4dcb25502a73cda4951b0f897535d2"
+    },
+    "data/parquet_by_genus/Genus=Anaerosporobacter/data_0.parquet": {
+      "checksum": "811326abd6711014d953b2930a933903"
+    },
+    "data/parquet_by_genus/Genus=Anaerostipes/data_0.parquet": {
+      "checksum": "cfe4e67567a4c526b9bd10af0b13878a"
+    },
+    "data/parquet_by_genus/Genus=Anaerotignum/data_0.parquet": {
+      "checksum": "6df0924e57c942507822c763c6eae289"
+    },
+    "data/parquet_by_genus/Genus=Anaerotruncus/data_0.parquet": {
+      "checksum": "17ff462560a98aece5d862f1532d8859"
+    },
+    "data/parquet_by_genus/Genus=Anaerovibrio/data_0.parquet": {
+      "checksum": "5294ead147600a563675b1aa52061b38"
+    },
+    "data/parquet_by_genus/Genus=Anaerovirgula/data_0.parquet": {
+      "checksum": "0fb713c30772b5e615518d16343b7098"
+    },
+    "data/parquet_by_genus/Genus=Anaplasma/data_0.parquet": {
+      "checksum": "7cc5ea81e1bddd838b99e477f920c136"
+    },
+    "data/parquet_by_genus/Genus=Aneurinibacillus/data_0.parquet": {
+      "checksum": "92e8e7f6627f14600bc346e45333b328"
+    },
+    "data/parquet_by_genus/Genus=Anoxybacillus_B/data_0.parquet": {
+      "checksum": "079e85cd0174f938d3ab29a25b12c0c5"
+    },
+    "data/parquet_by_genus/Genus=Aquamicrobium_A/data_0.parquet": {
+      "checksum": "127c4d75729adfd5e7b026267231ab31"
+    },
+    "data/parquet_by_genus/Genus=Arachnia/data_0.parquet": {
+      "checksum": "7aa7169e1655cd92653ee21a1ddefc21"
+    },
+    "data/parquet_by_genus/Genus=Arcanobacterium_A/data_0.parquet": {
+      "checksum": "c0c4ea037cd405b40a170d6ba84299f9"
+    },
+    "data/parquet_by_genus/Genus=Arcanobacterium/data_0.parquet": {
+      "checksum": "762963eb6004c090feafee7daad712a1"
+    },
+    "data/parquet_by_genus/Genus=Arenicella/data_0.parquet": {
+      "checksum": "226301068e8e8b847443860dad6daec4"
+    },
+    "data/parquet_by_genus/Genus=Arenimonas/data_0.parquet": {
+      "checksum": "6d6460df161048c409327f4a6bdc27f2"
+    },
+    "data/parquet_by_genus/Genus=Arthrobacter_D/data_0.parquet": {
+      "checksum": "2c320ce2149607fdfb8642ab2cfb02b3"
+    },
+    "data/parquet_by_genus/Genus=Arthrobacter_G/data_0.parquet": {
+      "checksum": "ea5d6c0e9134afcbfec1a4a701d9702f"
+    },
+    "data/parquet_by_genus/Genus=Arthrobacter/data_0.parquet": {
+      "checksum": "1b8cf852c666dc390585d802971f0bef"
+    },
+    "data/parquet_by_genus/Genus=Asaia/data_0.parquet": {
+      "checksum": "ae62ce1cd994bca8871e04da300649d7"
+    },
+    "data/parquet_by_genus/Genus=Asanoa/data_0.parquet": {
+      "checksum": "e59f64e70f06ae072a24de56835e063a"
+    },
+    "data/parquet_by_genus/Genus=Atlantibacter/data_0.parquet": {
+      "checksum": "213b4a968f497fc8656ac66de8301444"
+    },
+    "data/parquet_by_genus/Genus=Atlantibacter/data_1.parquet": {
+      "checksum": "b78df00179fea3a908ecf7e42d65ce8c"
+    },
+    "data/parquet_by_genus/Genus=Atopobacter/data_0.parquet": {
+      "checksum": "58f02cc53a4f6bb056cc10e9956b59a4"
+    },
+    "data/parquet_by_genus/Genus=Atopobium/data_0.parquet": {
+      "checksum": "23dbf3ee1ce65f530e546e220e3b4c37"
+    },
+    "data/parquet_by_genus/Genus=Atopostipes/data_0.parquet": {
+      "checksum": "1bcd928b8493a203f6c5cea7bee39beb"
+    },
+    "data/parquet_by_genus/Genus=Auritidibacter/data_0.parquet": {
+      "checksum": "3960355dba8a667e879d10a38b85162d"
+    },
+    "data/parquet_by_genus/Genus=Avibacterium/data_0.parquet": {
+      "checksum": "adf5d70a89563d1ea41fcba82e902fe6"
+    },
+    "data/parquet_by_genus/Genus=Avibacterium/data_1.parquet": {
+      "checksum": "6d7a22a0c21006757199e3802ce37a9e"
+    },
+    "data/parquet_by_genus/Genus=Azorhizobium/data_0.parquet": {
+      "checksum": "e62eea5e901ea266281c0cfef996206a"
+    },
+    "data/parquet_by_genus/Genus=Azospirillum/data_0.parquet": {
+      "checksum": "949d6c164142098c5dd75e4c1ddd00ab"
+    },
+    "data/parquet_by_genus/Genus=Bacilliculturomica/data_0.parquet": {
+      "checksum": "5157f9828dbeabb6b19f3c607440df1d"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_A/data_0.parquet": {
+      "checksum": "3504d06b7da3d22fa0798538b0f46a72"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_AZ/data_0.parquet": {
+      "checksum": "167005efad1daee879bae33b15b7f8fa"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_BF/data_0.parquet": {
+      "checksum": "e9358fd15eddb68833ccac4bb4c33cf6"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_H/data_0.parquet": {
+      "checksum": "825b8949e30aad05d60823e80dc33ec4"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_H/data_1.parquet": {
+      "checksum": "948eb4ae8e56bda55ae1d1ab76c13012"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_J/data_0.parquet": {
+      "checksum": "8eeaab824b7c7b1d5a7be538e50dbdad"
+    },
+    "data/parquet_by_genus/Genus=Bacillus_J/data_1.parquet": {
+      "checksum": "86ae80309ec7dd680523135539c239e1"
+    },
+    "data/parquet_by_genus/Genus=Bacillus/data_0.parquet": {
+      "checksum": "098e971d4273a9c38d9b3ef6f3a16015"
+    },
+    "data/parquet_by_genus/Genus=Bacteroides_E/data_0.parquet": {
+      "checksum": "704508301090a0af19d6a8875338e7f4"
+    },
+    "data/parquet_by_genus/Genus=Bacteroides_G/data_0.parquet": {
+      "checksum": "20c2858bbba1f991587028416d60a023"
+    },
+    "data/parquet_by_genus/Genus=Bacteroides/data_0.parquet": {
+      "checksum": "e65b14c9b72d63e97ecc88cd84d29d7a"
+    },
+    "data/parquet_by_genus/Genus=Bacteroides/data_1.parquet": {
+      "checksum": "c2ae77b295e3f135f4921036395b091f"
+    },
+    "data/parquet_by_genus/Genus=Bariatricus/data_0.parquet": {
+      "checksum": "e78831885357931c7ae66c7ea5ed0af0"
+    },
+    "data/parquet_by_genus/Genus=Barnesiella/data_0.parquet": {
+      "checksum": "8cb94fe70431a9d9dfabf70d09b561a7"
+    },
+    "data/parquet_by_genus/Genus=Bartonella/data_0.parquet": {
+      "checksum": "ad75e5091fd75c28d9914036d43b5884"
+    },
+    "data/parquet_by_genus/Genus=Basfia_A/data_0.parquet": {
+      "checksum": "bf88f4a9fd6d0570b9e322107f5c5bb7"
+    },
+    "data/parquet_by_genus/Genus=Belliella/data_0.parquet": {
+      "checksum": "cc176828b6d407fc73cfe6d641fc30b7"
+    },
+    "data/parquet_by_genus/Genus=Berryella/data_0.parquet": {
+      "checksum": "e7dd414cc1b6eaa76af7f1d10679c758"
+    },
+    "data/parquet_by_genus/Genus=Bibersteinia/data_0.parquet": {
+      "checksum": "e66e1b489891c81a85b7ef7a6174034e"
+    },
+    "data/parquet_by_genus/Genus=Bifidobacterium/data_0.parquet": {
+      "checksum": "b3df3db9c6dd31da567fb897afa81956"
+    },
+    "data/parquet_by_genus/Genus=Bittarella/data_0.parquet": {
+      "checksum": "4a692808817216858acf4ea91595d0f6"
+    },
+    "data/parquet_by_genus/Genus=Blastococcus/data_0.parquet": {
+      "checksum": "f48897fa3975299e4c110dae232ec118"
+    },
+    "data/parquet_by_genus/Genus=Blautia_A/data_0.parquet": {
+      "checksum": "cd688b697e88709ba63bfb79badeb787"
+    },
+    "data/parquet_by_genus/Genus=Blautia_A/data_1.parquet": {
+      "checksum": "926addec25c5f0c7b80daa5eec5e84a6"
+    },
+    "data/parquet_by_genus/Genus=Blautia/data_0.parquet": {
+      "checksum": "7f5d2bcde8f9a8e17831f8e89ac72078"
+    },
+    "data/parquet_by_genus/Genus=Bordetella_C/data_0.parquet": {
+      "checksum": "5858b0e3ff7ae68c5e1369203f09c452"
+    },
+    "data/parquet_by_genus/Genus=Bordetella/data_0.parquet": {
+      "checksum": "887129a0247b0c5df7a9ceee8bfed665"
+    },
+    "data/parquet_by_genus/Genus=Bosea/data_0.parquet": {
+      "checksum": "9710b666f3424a2ec89f8e938e998942"
+    },
+    "data/parquet_by_genus/Genus=Brachybacterium/data_0.parquet": {
+      "checksum": "bf6eaefa03cf3404d7a68887b015eda7"
+    },
+    "data/parquet_by_genus/Genus=Brachyspira/data_0.parquet": {
+      "checksum": "9f5811d1d77fe87be9a1210e970105a4"
+    },
+    "data/parquet_by_genus/Genus=Brachyspira/data_1.parquet": {
+      "checksum": "42cd2fc8cb373d3c8fa07d02a59f3582"
+    },
+    "data/parquet_by_genus/Genus=Bradyrhizobium/data_0.parquet": {
+      "checksum": "e8790cbdc7445f989e679a311cb260c6"
+    },
+    "data/parquet_by_genus/Genus=Brevibacillus_B/data_0.parquet": {
+      "checksum": "0182c42f0b0b006a87f386815a4c3daa"
+    },
+    "data/parquet_by_genus/Genus=Brevibacillus/data_0.parquet": {
+      "checksum": "3713d53a5181dc4dfa9eaa12876f187a"
+    },
+    "data/parquet_by_genus/Genus=Brevibacillus/data_1.parquet": {
+      "checksum": "1381b985f4407e6b1eb3a480a537cff3"
+    },
+    "data/parquet_by_genus/Genus=Brevibacterium/data_0.parquet": {
+      "checksum": "d2e695f5c7e1cfcabe3e123805efc77b"
+    },
+    "data/parquet_by_genus/Genus=Brevundimonas/data_0.parquet": {
+      "checksum": "01d5e6dda7b7778fcc2a856bd1f46d32"
+    },
+    "data/parquet_by_genus/Genus=Brevundimonas/data_1.parquet": {
+      "checksum": "c0cb756b580b59d690ce2bdb7a4fac1d"
+    },
+    "data/parquet_by_genus/Genus=Brucella/data_0.parquet": {
+      "checksum": "fd279fc30f2af37d11b089c8d90c8a58"
+    },
+    "data/parquet_by_genus/Genus=Bulleidia/data_0.parquet": {
+      "checksum": "8d0687b45152adfd3f2633810c0e6a2b"
+    },
+    "data/parquet_by_genus/Genus=Burkholderia/data_0.parquet": {
+      "checksum": "ed969c85e95c99231bfe399924c81482"
+    },
+    "data/parquet_by_genus/Genus=Buttiauxella/data_0.parquet": {
+      "checksum": "ab2b379e58ce0a6f62f74aaece5c9955"
+    },
+    "data/parquet_by_genus/Genus=Butyricicoccus/data_0.parquet": {
+      "checksum": "527a539549a264e199edc830a5d1388d"
+    },
+    "data/parquet_by_genus/Genus=Butyricimonas/data_0.parquet": {
+      "checksum": "3778fc8b3ae231a959471cbbd5236f05"
+    },
+    "data/parquet_by_genus/Genus=Butyrivibrio/data_0.parquet": {
+      "checksum": "e70701056f261300457677c19ab10d41"
+    },
+    "data/parquet_by_genus/Genus=Caballeronia/data_0.parquet": {
+      "checksum": "96c994fcd7ac5ce457df4c2e76f22009"
+    },
+    "data/parquet_by_genus/Genus=Caccousia/data_0.parquet": {
+      "checksum": "536c9de27fcb8f9e87e3690cb1aaa383"
+    },
+    "data/parquet_by_genus/Genus=CAG-317/data_0.parquet": {
+      "checksum": "3022f74f0371451a9f3377e703e82632"
+    },
+    "data/parquet_by_genus/Genus=CAG-353/data_0.parquet": {
+      "checksum": "82fdf98feecad533b1a8d1b9631425c0"
+    },
+    "data/parquet_by_genus/Genus=CAG-41/data_0.parquet": {
+      "checksum": "4b785134275b030701c4670651fe2c9e"
+    },
+    "data/parquet_by_genus/Genus=CAG-45/data_0.parquet": {
+      "checksum": "77be22d66aec076d61805ce757e31f10"
+    },
+    "data/parquet_by_genus/Genus=CAG-485/data_0.parquet": {
+      "checksum": "e258680158d861a82bcaf28e870db3df"
+    },
+    "data/parquet_by_genus/Genus=CAG-56/data_0.parquet": {
+      "checksum": "7896fbcfa7fec464f74dc4016add6df3"
+    },
+    "data/parquet_by_genus/Genus=CAG-95/data_0.parquet": {
+      "checksum": "9524d8c635fd19e73d5ecf582d2acd8e"
+    },
+    "data/parquet_by_genus/Genus=Caldicellulosiruptor/data_0.parquet": {
+      "checksum": "cefa7e76fa38bb1b3eca6c5524ed736c"
+    },
+    "data/parquet_by_genus/Genus=Campylobacter_A/data_0.parquet": {
+      "checksum": "11d7a059b1318e6059831ede24f4b9ac"
+    },
+    "data/parquet_by_genus/Genus=Campylobacter_B/data_0.parquet": {
+      "checksum": "36a3ee88e9d949319a9902af60093d7e"
+    },
+    "data/parquet_by_genus/Genus=Campylobacter_B/data_1.parquet": {
+      "checksum": "4a06b4b2d5f24787a46ff49a6480d286"
+    },
+    "data/parquet_by_genus/Genus=Campylobacter_D/data_0.parquet": {
+      "checksum": "0335cdbaff7bd12e6c093f455210ece3"
+    },
+    "data/parquet_by_genus/Genus=Campylobacter/data_0.parquet": {
+      "checksum": "78199dfcf1ee06028c72c3327cd8999c"
+    },
+    "data/parquet_by_genus/Genus=Candidimonas_A/data_0.parquet": {
+      "checksum": "02be416b6e9482fbf13524bcdd5a59e8"
+    },
+    "data/parquet_by_genus/Genus=Capnocytophaga/data_0.parquet": {
+      "checksum": "02cce1c43cf6239e5ead7dd0a4348f07"
+    },
+    "data/parquet_by_genus/Genus=Caproiciproducens/data_0.parquet": {
+      "checksum": "38cf4c5ad0ac9546759610477c3813fa"
+    },
+    "data/parquet_by_genus/Genus=Carboxydothermus/data_0.parquet": {
+      "checksum": "ee2321d982afb46e9844b038cfbe4c77"
+    },
+    "data/parquet_by_genus/Genus=Catenibacillus/data_0.parquet": {
+      "checksum": "9251424a327f562c132a0dff5f241fab"
+    },
+    "data/parquet_by_genus/Genus=Catenibacterium/data_0.parquet": {
+      "checksum": "ae0480fcb206b9d22fd3ec1b43dba772"
+    },
+    "data/parquet_by_genus/Genus=Catenulispora/data_0.parquet": {
+      "checksum": "530e77b1dbff8374b201101a80c1cea6"
+    },
+    "data/parquet_by_genus/Genus=CAU-1509/data_0.parquet": {
+      "checksum": "e9d7a2f2d2a5926bcef54dc7eb578408"
+    },
+    "data/parquet_by_genus/Genus=Caulobacter/data_0.parquet": {
+      "checksum": "ca4e71c463679ad7e812aba3072417e0"
+    },
+    "data/parquet_by_genus/Genus=Cedecea/data_0.parquet": {
+      "checksum": "9471959de3fb79a0c7c0bb6df9ed3b26"
+    },
+    "data/parquet_by_genus/Genus=Cedecea/data_1.parquet": {
+      "checksum": "b6324b1527545fbb886a52e5f1c81122"
+    },
+    "data/parquet_by_genus/Genus=Celeribacter/data_0.parquet": {
+      "checksum": "b70505c1472b3c7ca60743b226eea093"
+    },
+    "data/parquet_by_genus/Genus=Cellulomonas/data_0.parquet": {
+      "checksum": "10d2306d941825f98171d623cab16cff"
+    },
+    "data/parquet_by_genus/Genus=Cellulosimicrobium/data_0.parquet": {
+      "checksum": "e5dac1ed505d7219b76510390f56e219"
+    },
+    "data/parquet_by_genus/Genus=Centipeda/data_0.parquet": {
+      "checksum": "f14f733f1fbe85dfd299f98dcf5ae980"
+    },
+    "data/parquet_by_genus/Genus=Cereibacter_A/data_0.parquet": {
+      "checksum": "48bc27971413f79b2ec54a37ab55a80f"
+    },
+    "data/parquet_by_genus/Genus=Cereibacter_A/data_1.parquet": {
+      "checksum": "d4f7281d5b1c34321f36f47fd9d3d498"
+    },
+    "data/parquet_by_genus/Genus=Cereibacter/data_0.parquet": {
+      "checksum": "5bc48059b2bc0f775e22aa24282c92d9"
+    },
+    "data/parquet_by_genus/Genus=Cetobacterium_A/data_0.parquet": {
+      "checksum": "b75605895d74fa9c3f665c0b301ea7e5"
+    },
+    "data/parquet_by_genus/Genus=Changpingibacter/data_0.parquet": {
+      "checksum": "ea32401c4281cbd7b25c18a67d925038"
+    },
+    "data/parquet_by_genus/Genus=Chelatococcus_A/data_0.parquet": {
+      "checksum": "be294c1ba3e8682d371d99e6f4471d72"
+    },
+    "data/parquet_by_genus/Genus=Chelatococcus/data_0.parquet": {
+      "checksum": "f9f7a7cf8441c4842d325e3ae4acd3da"
+    },
+    "data/parquet_by_genus/Genus=Chitinilyticum/data_0.parquet": {
+      "checksum": "c2413f1242acd6613682990a6d7e6339"
+    },
+    "data/parquet_by_genus/Genus=Chitinophaga/data_0.parquet": {
+      "checksum": "9b9562cc95c9434100c9cde2ae7ee2ec"
+    },
+    "data/parquet_by_genus/Genus=Chlamydia/data_0.parquet": {
+      "checksum": "c9c479d8ef3cd040acce7d801bfd3b7c"
+    },
+    "data/parquet_by_genus/Genus=Chlamydophila/data_0.parquet": {
+      "checksum": "1b866a2165f6e2da2aecc862d91e8fac"
+    },
+    "data/parquet_by_genus/Genus=Choladocola/data_0.parquet": {
+      "checksum": "a738cf4296e148a7a69f123aae85e368"
+    },
+    "data/parquet_by_genus/Genus=Choladousia/data_0.parquet": {
+      "checksum": "a385d7bc6599ad0b8a67f57bb363e7cf"
+    },
+    "data/parquet_by_genus/Genus=Christensenella/data_0.parquet": {
+      "checksum": "56fb9e49f9a9e2296baaa4c54409a17f"
+    },
+    "data/parquet_by_genus/Genus=Chromatium/data_0.parquet": {
+      "checksum": "fd69e79ae8575f2fa1ea75e3138b52b5"
+    },
+    "data/parquet_by_genus/Genus=Chromobacterium/data_0.parquet": {
+      "checksum": "ff5b3ebacaee651f03556a723f5f9ea7"
+    },
+    "data/parquet_by_genus/Genus=Chromobacterium/data_1.parquet": {
+      "checksum": "2de175f905e00427dc08ed8226d499a1"
+    },
+    "data/parquet_by_genus/Genus=Chryseobacterium/data_0.parquet": {
+      "checksum": "52edce410ce84e4ecf8d11e12c328f40"
+    },
+    "data/parquet_by_genus/Genus=Chryseolinea/data_0.parquet": {
+      "checksum": "81f12cf231e75a575040c8bce5678d5e"
+    },
+    "data/parquet_by_genus/Genus=Chthonomonas/data_0.parquet": {
+      "checksum": "3f036b59c4e6493794c43b0388dc8aa1"
+    },
+    "data/parquet_by_genus/Genus=Citricoccus/data_0.parquet": {
+      "checksum": "1046dc24c6f0e998b9dff6317c3e95f3"
+    },
+    "data/parquet_by_genus/Genus=Citrobacter_A/data_0.parquet": {
+      "checksum": "e5ff1c60de598b95c1c151313641e95b"
+    },
+    "data/parquet_by_genus/Genus=Citrobacter_A/data_1.parquet": {
+      "checksum": "63113dcaafd6cd5704c9ee84829072c7"
+    },
+    "data/parquet_by_genus/Genus=Citrobacter_B/data_0.parquet": {
+      "checksum": "6ed130fad5081c53894c3a54c2fada85"
+    },
+    "data/parquet_by_genus/Genus=Citrobacter/data_0.parquet": {
+      "checksum": "e28ccfb3b71eea06d5405a3959ebf315"
+    },
+    "data/parquet_by_genus/Genus=Clavibacter/data_0.parquet": {
+      "checksum": "46bcd79ef0bba35b96a12d42feaa4986"
+    },
+    "data/parquet_by_genus/Genus=Cloacibacterium/data_0.parquet": {
+      "checksum": "11d9740673a13756741b395052e65613"
+    },
+    "data/parquet_by_genus/Genus=Clostridioides/data_0.parquet": {
+      "checksum": "92dec017e8bfb4dbd45d69436e320e28"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_A/data_0.parquet": {
+      "checksum": "274ceb3a28806f0671c02eba7822d7a5"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_AP/data_0.parquet": {
+      "checksum": "e676535a12961c4e23c01507be1fe1ff"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_AQ/data_0.parquet": {
+      "checksum": "6f18b94757374d27ad3b906db1487fce"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_B/data_0.parquet": {
+      "checksum": "dd22d23b1a9a1ddddf19edcb6cae4f2a"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_D/data_0.parquet": {
+      "checksum": "fe7bb3c1d8ada8645c2533d496542947"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_F/data_0.parquet": {
+      "checksum": "db14d6f5e11a820123105e28b9dc6732"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_G/data_0.parquet": {
+      "checksum": "ae97f67fa64075073d6e4ab1063e40f1"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_H/data_0.parquet": {
+      "checksum": "0aeec95207a86a50e4a52f8d1bb46bd3"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_J/data_0.parquet": {
+      "checksum": "cf3d5565d0942d602066d7c670de0b12"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_J/data_1.parquet": {
+      "checksum": "ac9bf820316645741b485c0b097edfaf"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_K/data_0.parquet": {
+      "checksum": "d42c6657127d485864a48372b72cd306"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_Q/data_0.parquet": {
+      "checksum": "37c431accf2670cab599ef4bd445b322"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_R/data_0.parquet": {
+      "checksum": "967c7fe8b5020cc921f5659c51641e2d"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_S/data_0.parquet": {
+      "checksum": "a4b9ff6c5f978d10cb0585b7a84581b6"
+    },
+    "data/parquet_by_genus/Genus=Clostridium_X/data_0.parquet": {
+      "checksum": "40432673073b35d31a5c66f9e4e0d786"
+    },
+    "data/parquet_by_genus/Genus=Clostridium/data_0.parquet": {
+      "checksum": "32cd6bf915dee6afcd57dce0a5885508"
+    },
+    "data/parquet_by_genus/Genus=Clostridium/data_1.parquet": {
+      "checksum": "bcda7994ff848bddacc73ad3917fd04d"
+    },
+    "data/parquet_by_genus/Genus=Cognaticolwellia/data_0.parquet": {
+      "checksum": "cd46c71f1d9c6879e77e7ea3698d542b"
+    },
+    "data/parquet_by_genus/Genus=Cohnella/data_0.parquet": {
+      "checksum": "b4b14979c29bda03828133e3690eacf4"
+    },
+    "data/parquet_by_genus/Genus=Collinsella/data_0.parquet": {
+      "checksum": "6843683c4c0ba26671fa30665f72b2fb"
+    },
+    "data/parquet_by_genus/Genus=Comamonas/data_0.parquet": {
+      "checksum": "d6f2878be2a5ff366a3e5a387201a586"
+    },
+    "data/parquet_by_genus/Genus=Comamonas/data_1.parquet": {
+      "checksum": "e7a6ba9d292e645624e162a5e24d2005"
+    },
+    "data/parquet_by_genus/Genus=Companilactobacillus/data_0.parquet": {
+      "checksum": "28a2a010dad6cfcc99ea59ffd1193197"
+    },
+    "data/parquet_by_genus/Genus=Coprobacillus/data_0.parquet": {
+      "checksum": "e6c823c3e9e6ae65a733d5bf76873181"
+    },
+    "data/parquet_by_genus/Genus=Coprococcus_A/data_0.parquet": {
+      "checksum": "60670a58adce0eb810c4fef5247deaae"
+    },
+    "data/parquet_by_genus/Genus=Coprococcus/data_0.parquet": {
+      "checksum": "8ca8ee65233d5d0f05c335a2fcdac689"
+    },
+    "data/parquet_by_genus/Genus=Copromonas/data_0.parquet": {
+      "checksum": "8e14c5d705b13494062416bed6034b7e"
+    },
+    "data/parquet_by_genus/Genus=Copromonas/data_1.parquet": {
+      "checksum": "b8fa3993e2ce414efc16ad71baac14c7"
+    },
+    "data/parquet_by_genus/Genus=Corynebacterium/data_0.parquet": {
+      "checksum": "77ac6c725df90c43b6c919309afd32c3"
+    },
+    "data/parquet_by_genus/Genus=Cronobacter/data_0.parquet": {
+      "checksum": "18f5853330bb67a12d9d331918595deb"
+    },
+    "data/parquet_by_genus/Genus=Crossiella/data_0.parquet": {
+      "checksum": "2eac7cd9d19acf554bfc1300ffd3e6d5"
+    },
+    "data/parquet_by_genus/Genus=Cryobacterium/data_0.parquet": {
+      "checksum": "ed3a5e1ce23361c81bc9b08470c07299"
+    },
+    "data/parquet_by_genus/Genus=Cryptosporangium/data_0.parquet": {
+      "checksum": "df1f5db21358b80b954a36e4efabe58e"
+    },
+    "data/parquet_by_genus/Genus=Cuneatibacter/data_0.parquet": {
+      "checksum": "998c2c8bceaea36a69f4654bfb7845a0"
+    },
+    "data/parquet_by_genus/Genus=Cupriavidus/data_0.parquet": {
+      "checksum": "75ed715843bb9a25f30e5a6b099ac7c0"
+    },
+    "data/parquet_by_genus/Genus=Cupriavidus/data_1.parquet": {
+      "checksum": "1b3bce0388df5152cac9d58550a88a52"
+    },
+    "data/parquet_by_genus/Genus=Curtobacterium/data_0.parquet": {
+      "checksum": "448302d088d7ff44a5fd884d12128e43"
+    },
+    "data/parquet_by_genus/Genus=Cutibacterium/data_0.parquet": {
+      "checksum": "cf6780cb05ad28101fb0cb8daf8b367d"
+    },
+    "data/parquet_by_genus/Genus=Cytobacillus/data_0.parquet": {
+      "checksum": "1faa0ddd8c6dbfd2c9f59c8adb65925c"
+    },
+    "data/parquet_by_genus/Genus=Cytophaga/data_0.parquet": {
+      "checksum": "fd054ac3119f58543901aea0768b98bb"
+    },
+    "data/parquet_by_genus/Genus=Deferrimonas/data_0.parquet": {
+      "checksum": "8e10ac1d881876c6c1aedb080f16c706"
+    },
+    "data/parquet_by_genus/Genus=Dehalobacter/data_0.parquet": {
+      "checksum": "04976db6a759eace5183e3128e1609ef"
+    },
+    "data/parquet_by_genus/Genus=Deinococcus/data_0.parquet": {
+      "checksum": "eacc7537cae30ac64f47baa2eb92b690"
+    },
+    "data/parquet_by_genus/Genus=Dermabacter/data_0.parquet": {
+      "checksum": "880b6958b54e488009a01c03e8862dde"
+    },
+    "data/parquet_by_genus/Genus=Dermatophilus/data_0.parquet": {
+      "checksum": "9c48651fbdbecdd4c82a0b02ce474309"
+    },
+    "data/parquet_by_genus/Genus=Desulfitobacterium/data_0.parquet": {
+      "checksum": "40689aaf51d4c36c31348ff19a943680"
+    },
+    "data/parquet_by_genus/Genus=Desulfococcus/data_0.parquet": {
+      "checksum": "136672033eeb0b990c74ff7198e6e120"
+    },
+    "data/parquet_by_genus/Genus=Desulfocurvibacter/data_0.parquet": {
+      "checksum": "ddc17a0f5a9a1c993a815b0e938a2add"
+    },
+    "data/parquet_by_genus/Genus=Desulfonatronum/data_0.parquet": {
+      "checksum": "939c30310158f03135e05a0ba957d7cb"
+    },
+    "data/parquet_by_genus/Genus=Desulfosporosinus/data_0.parquet": {
+      "checksum": "44970b62c88e3b6a78fdbfd7ae033598"
+    },
+    "data/parquet_by_genus/Genus=Desulfotomaculum/data_0.parquet": {
+      "checksum": "7571f5c1e82fffd78a8bb4be8adcf4ef"
+    },
+    "data/parquet_by_genus/Genus=Desulfovibrio/data_0.parquet": {
+      "checksum": "3fd8fbe71c3bdfd2b0f3197908f7c491"
+    },
+    "data/parquet_by_genus/Genus=Devosia/data_0.parquet": {
+      "checksum": "c450e6ca062533b428c12c72fc9a4231"
+    },
+    "data/parquet_by_genus/Genus=Dialister/data_0.parquet": {
+      "checksum": "f3999c996dd1b7def0af12d4b8a18190"
+    },
+    "data/parquet_by_genus/Genus=Diaminobutyricimonas/data_0.parquet": {
+      "checksum": "0bdd87e1fc14d847047a4d709cd2a072"
+    },
+    "data/parquet_by_genus/Genus=Dickeya/data_0.parquet": {
+      "checksum": "91eeb39bf26d682acc86d646423a0dee"
+    },
+    "data/parquet_by_genus/Genus=Dinoroseobacter/data_0.parquet": {
+      "checksum": "9628082266dbead4b2b5754aa9b3222b"
+    },
+    "data/parquet_by_genus/Genus=Diplocloster/data_0.parquet": {
+      "checksum": "130adaf41d2a38d4c385e4b865ee982c"
+    },
+    "data/parquet_by_genus/Genus=Dolosicoccus/data_0.parquet": {
+      "checksum": "a03727e5adc339a2c979f7ae7ada2667"
+    },
+    "data/parquet_by_genus/Genus=Domibacillus/data_0.parquet": {
+      "checksum": "1b8bd2e0b4601d63da9256eeed50d0e4"
+    },
+    "data/parquet_by_genus/Genus=Donghicola/data_0.parquet": {
+      "checksum": "ae2f66e69834f4cf42a3822384413cff"
+    },
+    "data/parquet_by_genus/Genus=Dorea_A/data_0.parquet": {
+      "checksum": "ca18eadae10d68dfeb04b1a39133b219"
+    },
+    "data/parquet_by_genus/Genus=Dorea_A/data_1.parquet": {
+      "checksum": "ed82bb1ba03cf23c49283c13682178a1"
+    },
+    "data/parquet_by_genus/Genus=Dorea/data_0.parquet": {
+      "checksum": "a736f21d1ffaed1368a3031e7f6108db"
+    },
+    "data/parquet_by_genus/Genus=Dorea/data_1.parquet": {
+      "checksum": "d05383cf3b8cfd3ecda85e0f3d3ba586"
+    },
+    "data/parquet_by_genus/Genus=DT-91/data_0.parquet": {
+      "checksum": "dd95f65f380713abef781c630a426491"
+    },
+    "data/parquet_by_genus/Genus=Duganella/data_0.parquet": {
+      "checksum": "d106ceb2ff1cf85e425dbb8d9ade94fa"
+    },
+    "data/parquet_by_genus/Genus=Duncaniella/data_0.parquet": {
+      "checksum": "36f81048b44349a09f4d2b96847d77b6"
+    },
+    "data/parquet_by_genus/Genus=Duodenibacillus/data_0.parquet": {
+      "checksum": "35e1eb75e5c70b21c05acfeacff7e1c2"
+    },
+    "data/parquet_by_genus/Genus=Dyadobacter/data_0.parquet": {
+      "checksum": "8790f61af9255e90a500b9a83b24fdcb"
+    },
+    "data/parquet_by_genus/Genus=Dyella/data_0.parquet": {
+      "checksum": "50b999a336b69c7cfe12376dc47e94a3"
+    },
+    "data/parquet_by_genus/Genus=Dysgonomonas/data_0.parquet": {
+      "checksum": "dda3bc3fb1201dc572b6f77826a5f66b"
+    },
+    "data/parquet_by_genus/Genus=Dysosmobacter/data_0.parquet": {
+      "checksum": "fe4b53a424c4320f54ae4d2f11ad337f"
+    },
+    "data/parquet_by_genus/Genus=Echinicola/data_0.parquet": {
+      "checksum": "429178f37998ae9727b3b3f828ff6e51"
+    },
+    "data/parquet_by_genus/Genus=Ectothiorhodospira/data_0.parquet": {
+      "checksum": "e820332af216a0bc9cbcee32c0205168"
+    },
+    "data/parquet_by_genus/Genus=Edwardiiplasma/data_0.parquet": {
+      "checksum": "7238b46c8e71beb42ace32cf1ec2af0c"
+    },
+    "data/parquet_by_genus/Genus=Edwardsiella/data_0.parquet": {
+      "checksum": "ffb2020370e54f1591c8d1cd6632d705"
+    },
+    "data/parquet_by_genus/Genus=Eggerthella/data_0.parquet": {
+      "checksum": "bbe00edd571dd500bf80adedfeea38c9"
+    },
+    "data/parquet_by_genus/Genus=Elizabethkingia/data_0.parquet": {
+      "checksum": "e9335e9551b99211c608882fcb0de40c"
+    },
+    "data/parquet_by_genus/Genus=Embleya/data_0.parquet": {
+      "checksum": "e94a3af4a85466bea9dd08f095ba3b46"
+    },
+    "data/parquet_by_genus/Genus=Emergencia/data_0.parquet": {
+      "checksum": "31235976ebd98af39690263f651419d7"
+    },
+    "data/parquet_by_genus/Genus=Empedobacter/data_0.parquet": {
+      "checksum": "ccb06ef6761d4805c8ad0697f6b9ac29"
+    },
+    "data/parquet_by_genus/Genus=Empedobacter/data_1.parquet": {
+      "checksum": "185852a98ca926e8446b4c2fb2397087"
+    },
+    "data/parquet_by_genus/Genus=Enorma/data_0.parquet": {
+      "checksum": "18430d52f9f7a7dc7527ce1757f7c350"
+    },
+    "data/parquet_by_genus/Genus=Ensifer/data_0.parquet": {
+      "checksum": "86a913fc8a68de89d212cc6450ebcd25"
+    },
+    "data/parquet_by_genus/Genus=Enterenecus/data_0.parquet": {
+      "checksum": "e8abdb83931047649d40bf969dd64ee7"
+    },
+    "data/parquet_by_genus/Genus=Enterobacter_A/data_0.parquet": {
+      "checksum": "bf8a927aa67c4f4e3483b93dbed13232"
+    },
+    "data/parquet_by_genus/Genus=Enterobacter_A/data_1.parquet": {
+      "checksum": "fcf361c5268083ba0d33e8129398c4b5"
+    },
+    "data/parquet_by_genus/Genus=Enterobacter/data_0.parquet": {
+      "checksum": "d734191388e91916d21a62812ac24854"
+    },
+    "data/parquet_by_genus/Genus=Enterocloster/data_0.parquet": {
+      "checksum": "53138a53259fb3d02c57ab9a6a5ca413"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_A/data_0.parquet": {
+      "checksum": "4fbe0188fca2f2ccdb76012d11b233f3"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_A/data_1.parquet": {
+      "checksum": "7c41728d736c77094402223fe24c2f89"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_B/data_0.parquet": {
+      "checksum": "1194b5e3cd062a67d9bc95650ed920b2"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_C/data_0.parquet": {
+      "checksum": "ba4b66df98ee519735544938206dda5e"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_C/data_1.parquet": {
+      "checksum": "fa538a0c658aa05308d6d0a7f2d05e99"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_D/data_0.parquet": {
+      "checksum": "09a081e7174bd6e56166a29ca2163c38"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_E/data_0.parquet": {
+      "checksum": "88a6d7317e119e95693e3b135c8f153d"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_F/data_0.parquet": {
+      "checksum": "2b8b1cd35b09c722fb1ca5d76d8d4754"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus_I/data_0.parquet": {
+      "checksum": "1d4f96fec8dbefe4b03735c7eddc45a5"
+    },
+    "data/parquet_by_genus/Genus=Enterococcus/data_0.parquet": {
+      "checksum": "1faf6376f4455c62e22b62d0ddb32614"
+    },
+    "data/parquet_by_genus/Genus=Epibacterium/data_0.parquet": {
+      "checksum": "2961b0d04fd7772e9b79892d9387c0ce"
+    },
+    "data/parquet_by_genus/Genus=Epilithonimonas/data_0.parquet": {
+      "checksum": "6e8aab404d6c8660664ee46d1534fe82"
+    },
+    "data/parquet_by_genus/Genus=ER4/data_0.parquet": {
+      "checksum": "a07f45cf533493077071c2871846135b"
+    },
+    "data/parquet_by_genus/Genus=Erwinia/data_0.parquet": {
+      "checksum": "f50408fc3fdadc5286809346c6e15da3"
+    },
+    "data/parquet_by_genus/Genus=Erysipelothrix/data_0.parquet": {
+      "checksum": "d111d5aed508a32ffbfc12e9a07f1b60"
+    },
+    "data/parquet_by_genus/Genus=Escherichia/data_0.parquet": {
+      "checksum": "1dc7eb43b79b19d76b85c351149aadd0"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium_F/data_0.parquet": {
+      "checksum": "733a7f229925f604b808449352ae67f5"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium_G/data_0.parquet": {
+      "checksum": "fb3518a1814c8b58446c96df395a9e39"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium_I/data_0.parquet": {
+      "checksum": "66080ecdff1760eb140e685e150d5575"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium_O/data_0.parquet": {
+      "checksum": "247c7970208e719df5cfae0133f34d75"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium_T/data_0.parquet": {
+      "checksum": "5180aaa8e59c0b56bf74b808b7a757b7"
+    },
+    "data/parquet_by_genus/Genus=Eubacterium/data_0.parquet": {
+      "checksum": "e4d66c1eb0b589e20c91e02d0058c4fd"
+    },
+    "data/parquet_by_genus/Genus=Exiguobacterium_A/data_0.parquet": {
+      "checksum": "5536c83ec52f1652a572e70f23ecd6d0"
+    },
+    "data/parquet_by_genus/Genus=Exiguobacterium/data_0.parquet": {
+      "checksum": "2953db5544c78f757cfba9684d20ddd5"
+    },
+    "data/parquet_by_genus/Genus=Exiguobacterium/data_1.parquet": {
+      "checksum": "9f8ff81e31fa7d4dc89d4cc3fdb0e392"
+    },
+    "data/parquet_by_genus/Genus=Extibacter/data_0.parquet": {
+      "checksum": "5e2354df8de4069bdd7d8ae77ac85d07"
+    },
+    "data/parquet_by_genus/Genus=Ezakiella/data_0.parquet": {
+      "checksum": "ad281e7581a0012fba879c6cba78fbf9"
+    },
+    "data/parquet_by_genus/Genus=F0422/data_0.parquet": {
+      "checksum": "1779a7ac6b699aae1274c7b53a111c8f"
+    },
+    "data/parquet_by_genus/Genus=Facklamia/data_0.parquet": {
+      "checksum": "491827936c393d7f5c385ee482c4845a"
+    },
+    "data/parquet_by_genus/Genus=Faecalibacillus/data_0.parquet": {
+      "checksum": "4e7d56e1ea4172eff9cf07caca8fb17f"
+    },
+    "data/parquet_by_genus/Genus=Faecalibacterium/data_0.parquet": {
+      "checksum": "fd74f5815a585292434d518021552954"
+    },
+    "data/parquet_by_genus/Genus=Faecalibacterium/data_1.parquet": {
+      "checksum": "156bb5909dfccf92ed9d12e99ded9f3e"
+    },
+    "data/parquet_by_genus/Genus=Faecalicoccus/data_0.parquet": {
+      "checksum": "a8fd0d37caac9ccacd626d6d75cf70b6"
+    },
+    "data/parquet_by_genus/Genus=Faecalimonas/data_0.parquet": {
+      "checksum": "ef65123a50608634905596d956712116"
+    },
+    "data/parquet_by_genus/Genus=Faecalitalea/data_0.parquet": {
+      "checksum": "4103fe0eb1ed23d77e0c64c2e45a43d0"
+    },
+    "data/parquet_by_genus/Genus=Falseniella/data_0.parquet": {
+      "checksum": "ea519b49744eb726c3517d76f400c653"
+    },
+    "data/parquet_by_genus/Genus=Fenollaria/data_0.parquet": {
+      "checksum": "9beca31630aec8ae9faa9fa07931a887"
+    },
+    "data/parquet_by_genus/Genus=Fibrobacter/data_0.parquet": {
+      "checksum": "44e809686a92b05b21a81881b31174ea"
+    },
+    "data/parquet_by_genus/Genus=Fictibacillus_C/data_0.parquet": {
+      "checksum": "a4b3c1293b6a0a81f93215f3ab7b5353"
+    },
+    "data/parquet_by_genus/Genus=Filimonas/data_0.parquet": {
+      "checksum": "584a9524e0059c7b92db3901916e2e2e"
+    },
+    "data/parquet_by_genus/Genus=Fimenecus/data_0.parquet": {
+      "checksum": "a57ccec3aa0561bb58738275e4fee35e"
+    },
+    "data/parquet_by_genus/Genus=Fimiplasma/data_0.parquet": {
+      "checksum": "165b34a92c21997aaca2765157651453"
+    },
+    "data/parquet_by_genus/Genus=Fimivivens/data_0.parquet": {
+      "checksum": "07d26b0f68dd8e185b220156edba0bfc"
+    },
+    "data/parquet_by_genus/Genus=Finegoldia/data_0.parquet": {
+      "checksum": "d1b66ede3017e7d60458cdb63449edd1"
+    },
+    "data/parquet_by_genus/Genus=Flavimaricola/data_0.parquet": {
+      "checksum": "c5f59df44b686d3129e1b1ff25611a0e"
+    },
+    "data/parquet_by_genus/Genus=Flavobacterium/data_0.parquet": {
+      "checksum": "460062b95956355fcfc9d3edfe054ce8"
+    },
+    "data/parquet_by_genus/Genus=Flavobacterium/data_1.parquet": {
+      "checksum": "a676fb38b50f8e20eef9a116e8196d69"
+    },
+    "data/parquet_by_genus/Genus=Flavonifractor/data_0.parquet": {
+      "checksum": "b8f8137768b913604052ba31411ef77f"
+    },
+    "data/parquet_by_genus/Genus=Fluviibacter/data_0.parquet": {
+      "checksum": "1228ea8f71876df96d90b307200ef770"
+    },
+    "data/parquet_by_genus/Genus=Fournierella/data_0.parquet": {
+      "checksum": "02b268d8629dc1d2271e6f0e2828c2a8"
+    },
+    "data/parquet_by_genus/Genus=Francisella/data_0.parquet": {
+      "checksum": "ead06a59abb360c937fd4e23d9c56889"
+    },
+    "data/parquet_by_genus/Genus=Frischella/data_0.parquet": {
+      "checksum": "69d9471aab5e0f83b32f7d5f6068d88a"
+    },
+    "data/parquet_by_genus/Genus=Fusicatenibacter/data_0.parquet": {
+      "checksum": "547941df2382388747de4e10849026b9"
+    },
+    "data/parquet_by_genus/Genus=Fusobacterium_A/data_0.parquet": {
+      "checksum": "ddce23a69bb6f2bdee320b74cf6b41d3"
+    },
+    "data/parquet_by_genus/Genus=Fusobacterium_B/data_0.parquet": {
+      "checksum": "779bee4723aa3f2cbf07bc0184febb7f"
+    },
+    "data/parquet_by_genus/Genus=Fusobacterium_C/data_0.parquet": {
+      "checksum": "b125d91b6c5831232b08ab2185ea715f"
+    },
+    "data/parquet_by_genus/Genus=Fusobacterium_C/data_1.parquet": {
+      "checksum": "bd7b0beb2a1c6d9e470e44a671fcac56"
+    },
+    "data/parquet_by_genus/Genus=Fusobacterium/data_0.parquet": {
+      "checksum": "a0bd185f792ed418f8c8f12c16291f9e"
+    },
+    "data/parquet_by_genus/Genus=Gallibacterium/data_0.parquet": {
+      "checksum": "87a04bb46b3dd2ba04a7b7c60a211627"
+    },
+    "data/parquet_by_genus/Genus=Gallibacterium/data_1.parquet": {
+      "checksum": "c52b45acfff5810f74fc8360de80454f"
+    },
+    "data/parquet_by_genus/Genus=Galliscardovia/data_0.parquet": {
+      "checksum": "5155eb5fac48ce43c23c1c3be272c28b"
+    },
+    "data/parquet_by_genus/Genus=GCA-900066495/data_0.parquet": {
+      "checksum": "b95b0645effe2032d426149678bf91e1"
+    },
+    "data/parquet_by_genus/Genus=Gemella/data_0.parquet": {
+      "checksum": "7fede284e29a50bc616a744c664050bd"
+    },
+    "data/parquet_by_genus/Genus=Gemmiger/data_0.parquet": {
+      "checksum": "f1a0918d0a4adf63e8c5aa5737699028"
+    },
+    "data/parquet_by_genus/Genus=Geobacter/data_0.parquet": {
+      "checksum": "e0d41c815fce07c1ae33e4743ef27212"
+    },
+    "data/parquet_by_genus/Genus=Geodermatophilus/data_0.parquet": {
+      "checksum": "58eb4c43c8e34ad371a67bac58f01d52"
+    },
+    "data/parquet_by_genus/Genus=Gilliamella/data_0.parquet": {
+      "checksum": "1181f640828ca05fce8602efd7b673af"
+    },
+    "data/parquet_by_genus/Genus=Glaesserella/data_0.parquet": {
+      "checksum": "a53367c64554ce4d3746e2bbd4fddd90"
+    },
+    "data/parquet_by_genus/Genus=Gleimia/data_0.parquet": {
+      "checksum": "cefaec8ffa17fb4cbd358ce8f7e1639e"
+    },
+    "data/parquet_by_genus/Genus=Globicatella/data_0.parquet": {
+      "checksum": "f5510b19e13fe07e79b023f6abf9e86c"
+    },
+    "data/parquet_by_genus/Genus=Gluconobacter_A/data_0.parquet": {
+      "checksum": "d570ca78266b6fc73ab1b7cd86512b3d"
+    },
+    "data/parquet_by_genus/Genus=Gluconobacter/data_0.parquet": {
+      "checksum": "60a1f1bf1d4c2aa07d6244c275b9bf81"
+    },
+    "data/parquet_by_genus/Genus=Gluconobacter/data_1.parquet": {
+      "checksum": "f927097533fa823d98e3242718e96477"
+    },
+    "data/parquet_by_genus/Genus=Glycomyces/data_0.parquet": {
+      "checksum": "db5e6f1b27a8379649086e99046f7e8b"
+    },
+    "data/parquet_by_genus/Genus=Goodfellowiella/data_0.parquet": {
+      "checksum": "1a899a5a9a6cb9986879037993915c97"
+    },
+    "data/parquet_by_genus/Genus=Gordonibacter/data_0.parquet": {
+      "checksum": "be3f230234846eafd4a0aedc92749a2c"
+    },
+    "data/parquet_by_genus/Genus=Granulicatella/data_0.parquet": {
+      "checksum": "ef6cbb95ca6668b4321a9cb920c76c09"
+    },
+    "data/parquet_by_genus/Genus=Granulicella_C/data_0.parquet": {
+      "checksum": "27a769fb67847c7bf6b0920a1d7dc58c"
+    },
+    "data/parquet_by_genus/Genus=Gryllotalpicola/data_0.parquet": {
+      "checksum": "ff421f3d05a2b9ca6100edf9ed91ef65"
+    },
+    "data/parquet_by_genus/Genus=Gulosibacter/data_0.parquet": {
+      "checksum": "09ce073fb06e13bdaf943c7a30c78733"
+    },
+    "data/parquet_by_genus/Genus=Haemophilus_D/data_0.parquet": {
+      "checksum": "65f782414da92914480fc2cc28fcc9d4"
+    },
+    "data/parquet_by_genus/Genus=Haemophilus/data_0.parquet": {
+      "checksum": "cf59a8f1175fa4d77f33dab0a440a0d3"
+    },
+    "data/parquet_by_genus/Genus=Hafnia/data_0.parquet": {
+      "checksum": "25dac2dd96e158e8bac7b2b988c06205"
+    },
+    "data/parquet_by_genus/Genus=Halanaerobium/data_0.parquet": {
+      "checksum": "4654bb2a122eb70ea3ffd6bd25eb8f58"
+    },
+    "data/parquet_by_genus/Genus=Haliea/data_0.parquet": {
+      "checksum": "7de9b976eab0829d3bfa8fd425f85d06"
+    },
+    "data/parquet_by_genus/Genus=Halioglobus/data_0.parquet": {
+      "checksum": "dff2b4605947944ba983c0400a673c88"
+    },
+    "data/parquet_by_genus/Genus=Hallerella/data_0.parquet": {
+      "checksum": "133f17416e4e02d5d5bca633b67d1ea7"
+    },
+    "data/parquet_by_genus/Genus=Halochromatium/data_0.parquet": {
+      "checksum": "6d8f6fcf2fa5541590b67e45214d0411"
+    },
+    "data/parquet_by_genus/Genus=Haloimpatiens/data_0.parquet": {
+      "checksum": "d1df5f27f00a7b0a5928f7db98de3534"
+    },
+    "data/parquet_by_genus/Genus=Halopseudomonas/data_0.parquet": {
+      "checksum": "aac881ea98b59ea37f0c4648962c1484"
+    },
+    "data/parquet_by_genus/Genus=Halorhodospira/data_0.parquet": {
+      "checksum": "02e2d8f1976a65065fbf88bf1465766e"
+    },
+    "data/parquet_by_genus/Genus=Haploplasma/data_0.parquet": {
+      "checksum": "c71367e507796e74b0b338d30b2d2fdf"
+    },
+    "data/parquet_by_genus/Genus=Hasllibacter/data_0.parquet": {
+      "checksum": "83fa709d80cf5680ffb6212f905b6055"
+    },
+    "data/parquet_by_genus/Genus=Hathewaya/data_0.parquet": {
+      "checksum": "7f70d22ab4600b2a5ab60fd1f567dc9e"
+    },
+    "data/parquet_by_genus/Genus=Helcococcus/data_0.parquet": {
+      "checksum": "64d2538d4889d30a4d97c59e63f90cf5"
+    },
+    "data/parquet_by_genus/Genus=Helicobacter_D/data_0.parquet": {
+      "checksum": "620a45496ebf3eb87833b4c362ade210"
+    },
+    "data/parquet_by_genus/Genus=Helicobacter/data_0.parquet": {
+      "checksum": "bfa6bd9692fad711137cc14af576c720"
+    },
+    "data/parquet_by_genus/Genus=Hespellia/data_0.parquet": {
+      "checksum": "25b30bacbeb9a7da1db773b1a5925230"
+    },
+    "data/parquet_by_genus/Genus=Histophilus/data_0.parquet": {
+      "checksum": "e8b92a1cc58bf6dc46857ab7eab76c50"
+    },
+    "data/parquet_by_genus/Genus=Holdemania/data_0.parquet": {
+      "checksum": "fd3e333969df80a981330d2f3b080d8c"
+    },
+    "data/parquet_by_genus/Genus=Hominisplanchenecus/data_0.parquet": {
+      "checksum": "460c1030e6da28b44dc58cb06cdd6980"
+    },
+    "data/parquet_by_genus/Genus=Hungateiclostridium/data_0.parquet": {
+      "checksum": "a36fb01a0e2601c8cdc445651a2df36d"
+    },
+    "data/parquet_by_genus/Genus=Hydrogenobaculum/data_0.parquet": {
+      "checksum": "54a1a4612690523c156e476409b425b6"
+    },
+    "data/parquet_by_genus/Genus=Hydrogenophaga/data_0.parquet": {
+      "checksum": "6881b2a7744a616cbccd2034ea261286"
+    },
+    "data/parquet_by_genus/Genus=Hymenobacter/data_0.parquet": {
+      "checksum": "4160807df60fbd4e5da94593eff1eefe"
+    },
+    "data/parquet_by_genus/Genus=Ichthyocystis/data_0.parquet": {
+      "checksum": "f01aad16a4afb0d0ff55e1624c8f97de"
+    },
+    "data/parquet_by_genus/Genus=Ignatzschineria/data_0.parquet": {
+      "checksum": "2fa3e50e7bd565c92c9626ae48519c3e"
+    },
+    "data/parquet_by_genus/Genus=Inquilinus/data_0.parquet": {
+      "checksum": "40dc9709f2a310f44fd2c621a7411e8f"
+    },
+    "data/parquet_by_genus/Genus=Intestinibacter/data_0.parquet": {
+      "checksum": "0b79cf3dd15c3e3644c9bc3e9d62c24c"
+    },
+    "data/parquet_by_genus/Genus=Intestinibaculum/data_0.parquet": {
+      "checksum": "da68b1ebb3cb94dc3a400d94204f5fa6"
+    },
+    "data/parquet_by_genus/Genus=Intestinimonas/data_0.parquet": {
+      "checksum": "36fe65f3732c88252eb7090330515dc4"
+    },
+    "data/parquet_by_genus/Genus=Irregularibacter/data_0.parquet": {
+      "checksum": "f5f255f1e5ab0d9059e9f2290ead64a6"
+    },
+    "data/parquet_by_genus/Genus=JAAVLZ01/data_0.parquet": {
+      "checksum": "b3220621d00e74ea580ab28c447ba8ec"
+    },
+    "data/parquet_by_genus/Genus=JACCES01/data_0.parquet": {
+      "checksum": "e3f5a2c32ecc2af846efba3d9f2ecba0"
+    },
+    "data/parquet_by_genus/Genus=JAFBIO01/data_0.parquet": {
+      "checksum": "8cbf69fa2e394d59ded7abcddf3a5b71"
+    },
+    "data/parquet_by_genus/Genus=JAFBIX01/data_0.parquet": {
+      "checksum": "eb7543553ddc9c81cb39a6eee7c0d508"
+    },
+    "data/parquet_by_genus/Genus=JAFBIY01/data_0.parquet": {
+      "checksum": "1735aa5fe48b205fc4d0ee3d5817dda3"
+    },
+    "data/parquet_by_genus/Genus=JAGOAJ01/data_0.parquet": {
+      "checksum": "c66e4358bbc41ae57de8ce4c79174a09"
+    },
+    "data/parquet_by_genus/Genus=Jannaschia/data_0.parquet": {
+      "checksum": "0d3025b8d3db3b775bd3f34f64e6a1a7"
+    },
+    "data/parquet_by_genus/Genus=Janthinobacterium/data_0.parquet": {
+      "checksum": "05fbaae51d7d7272e3f9a617ee0443cd"
+    },
+    "data/parquet_by_genus/Genus=Janthinobacterium/data_1.parquet": {
+      "checksum": "e687bdb947391b277913b0c45a38c9d1"
+    },
+    "data/parquet_by_genus/Genus=Jatrophihabitans/data_0.parquet": {
+      "checksum": "9b52804086986e3b580d7583cbed0967"
+    },
+    "data/parquet_by_genus/Genus=Jeotgalicoccus_A/data_0.parquet": {
+      "checksum": "f0844eabe2f1aba79aab671783e806ca"
+    },
+    "data/parquet_by_genus/Genus=Jeotgalicoccus/data_0.parquet": {
+      "checksum": "bb853cbd3efef878010b532d2ba3da2a"
+    },
+    "data/parquet_by_genus/Genus=Jonquetella/data_0.parquet": {
+      "checksum": "994ef9ebccb6aa864954f8033551aa5b"
+    },
+    "data/parquet_by_genus/Genus=JSC-12/data_0.parquet": {
+      "checksum": "3e4719e4b1c5e04376b095c8bbf0a09e"
+    },
+    "data/parquet_by_genus/Genus=KA00134/data_0.parquet": {
+      "checksum": "85a3451864567930412308d087849511"
+    },
+    "data/parquet_by_genus/Genus=KA00274/data_0.parquet": {
+      "checksum": "cd1bdf485b92ddf4d8f57f66a14b4c45"
+    },
+    "data/parquet_by_genus/Genus=Kaistella/data_0.parquet": {
+      "checksum": "52f63e560394a3e7c89a5b91bd2ef513"
+    },
+    "data/parquet_by_genus/Genus=Kaistia/data_0.parquet": {
+      "checksum": "fb89fff9c46a0d7e7bb6ec20295b20c1"
+    },
+    "data/parquet_by_genus/Genus=Kandleria/data_0.parquet": {
+      "checksum": "b18f09e6fe3f81c2b20c9341d03dca1d"
+    },
+    "data/parquet_by_genus/Genus=Kibdelosporangium/data_0.parquet": {
+      "checksum": "bc00cf53dd23f31a1bd42c6f49f1e1e5"
+    },
+    "data/parquet_by_genus/Genus=Kinneretia/data_0.parquet": {
+      "checksum": "87435e107361774de0166f6ff4c7e989"
+    },
+    "data/parquet_by_genus/Genus=Kitasatospora/data_0.parquet": {
+      "checksum": "3f704e52700496085de6f605c7a95e2e"
+    },
+    "data/parquet_by_genus/Genus=KLE1615/data_0.parquet": {
+      "checksum": "85420b7ba0778462f17e22be19386dee"
+    },
+    "data/parquet_by_genus/Genus=Klebsiella/data_0.parquet": {
+      "checksum": "aa603301e47cc21db99dcf88c85bf9b0"
+    },
+    "data/parquet_by_genus/Genus=Kluyvera/data_0.parquet": {
+      "checksum": "10cce436c7eb56b3ff6a7ac032344dba"
+    },
+    "data/parquet_by_genus/Genus=Kluyvera/data_1.parquet": {
+      "checksum": "c680266848fbaabcb23533b591f6a85f"
+    },
+    "data/parquet_by_genus/Genus=Kocuria/data_0.parquet": {
+      "checksum": "80f042756f7dc39d38e5e7a85fb1452e"
+    },
+    "data/parquet_by_genus/Genus=Kosakonia/data_0.parquet": {
+      "checksum": "4a718d09c389dc719e488973609fc1c5"
+    },
+    "data/parquet_by_genus/Genus=Kurthia/data_0.parquet": {
+      "checksum": "d3852e540e18a1acba6a116199762112"
+    },
+    "data/parquet_by_genus/Genus=Lachnoanaerobaculum/data_0.parquet": {
+      "checksum": "3bdebbf9f061eefd0fabb93143d4a4f5"
+    },
+    "data/parquet_by_genus/Genus=Lachnobacterium/data_0.parquet": {
+      "checksum": "f5d33bc81e39cb6217f6252b01923166"
+    },
+    "data/parquet_by_genus/Genus=Lachnoclostridium_A/data_0.parquet": {
+      "checksum": "ef3873491e95817080d8dd1440db5f08"
+    },
+    "data/parquet_by_genus/Genus=Lachnoclostridium_B/data_0.parquet": {
+      "checksum": "2ffc7d95675d7ab3f6db38a4aed59018"
+    },
+    "data/parquet_by_genus/Genus=Lachnospira/data_0.parquet": {
+      "checksum": "b55497cac6968d32baf9330a482fe8fc"
+    },
+    "data/parquet_by_genus/Genus=Lacinutrix/data_0.parquet": {
+      "checksum": "bcc88fc7805759d52a95762c49aa776c"
+    },
+    "data/parquet_by_genus/Genus=Lacrimispora/data_0.parquet": {
+      "checksum": "f3ef019631dd4b93f3db3b0dddb74fcd"
+    },
+    "data/parquet_by_genus/Genus=Lacticaseibacillus/data_0.parquet": {
+      "checksum": "8f19af390322ef900974cf195235a38e"
+    },
+    "data/parquet_by_genus/Genus=Lactiplantibacillus/data_0.parquet": {
+      "checksum": "7d139c05d7dc34d93f8d535286c7dbd0"
+    },
+    "data/parquet_by_genus/Genus=Lactobacillus/data_0.parquet": {
+      "checksum": "72e956664fbfce4df68bdc1565477a9e"
+    },
+    "data/parquet_by_genus/Genus=Lactococcus_A/data_0.parquet": {
+      "checksum": "ff6945cc471082eda5096f4db97a1164"
+    },
+    "data/parquet_by_genus/Genus=Lactococcus/data_0.parquet": {
+      "checksum": "76d25bed745fb74c877cf569cdee0efd"
+    },
+    "data/parquet_by_genus/Genus=Lactonifactor/data_0.parquet": {
+      "checksum": "c72accccc2986a4a3609b54d24f1c427"
+    },
+    "data/parquet_by_genus/Genus=Lamprocystis/data_0.parquet": {
+      "checksum": "f332a4cbc80aeb9bee34893ff2ecbe5f"
+    },
+    "data/parquet_by_genus/Genus=Lampropedia/data_0.parquet": {
+      "checksum": "fdbbacfbfb50007be7afad7c963a5ba9"
+    },
+    "data/parquet_by_genus/Genus=Laribacter/data_0.parquet": {
+      "checksum": "a814e8a514c27d94c5daf80efc9962fa"
+    },
+    "data/parquet_by_genus/Genus=Latilactobacillus/data_0.parquet": {
+      "checksum": "ad5cb9f1570e34df90210ca870215095"
+    },
+    "data/parquet_by_genus/Genus=Lawsonibacter/data_0.parquet": {
+      "checksum": "18a3840d6bf65b54f66a865bf316b143"
+    },
+    "data/parquet_by_genus/Genus=Lawsonibacter/data_1.parquet": {
+      "checksum": "0d5103c7602bff096cfeb07a93fe5758"
+    },
+    "data/parquet_by_genus/Genus=Leclercia/data_0.parquet": {
+      "checksum": "d8dfc656cfd78abb8ee57d8858cd779d"
+    },
+    "data/parquet_by_genus/Genus=Leclercia/data_1.parquet": {
+      "checksum": "d5cece15172e9040126a1ca2759ce6eb"
+    },
+    "data/parquet_by_genus/Genus=Legionella_C/data_0.parquet": {
+      "checksum": "073bf5b56eedb5071f0d7107babf7cfc"
+    },
+    "data/parquet_by_genus/Genus=Legionella/data_0.parquet": {
+      "checksum": "225bddc31a29b7c49983ee705a0a8374"
+    },
+    "data/parquet_by_genus/Genus=Leisingera/data_0.parquet": {
+      "checksum": "39490eb01836277c2b1a2a8580b12627"
+    },
+    "data/parquet_by_genus/Genus=Lelliottia/data_0.parquet": {
+      "checksum": "ddad9da0b240884c35784cd7cf492107"
+    },
+    "data/parquet_by_genus/Genus=Lelliottia/data_1.parquet": {
+      "checksum": "1efa604a96035391fb8b544e589c259c"
+    },
+    "data/parquet_by_genus/Genus=Lentihominibacter/data_0.parquet": {
+      "checksum": "c32b0e078a774ccefe923beb501e678e"
+    },
+    "data/parquet_by_genus/Genus=Lentzea/data_0.parquet": {
+      "checksum": "fdcf24d3f0b661e995dcd66494bd35ab"
+    },
+    "data/parquet_by_genus/Genus=Leptospira_A/data_0.parquet": {
+      "checksum": "507bcb5419a6a4b62d8797311df4d779"
+    },
+    "data/parquet_by_genus/Genus=Leptospira/data_0.parquet": {
+      "checksum": "45a068933a7bee7aecc0383189660682"
+    },
+    "data/parquet_by_genus/Genus=Leptospira/data_1.parquet": {
+      "checksum": "5ffe36eb9100b1901b00d9c05c2c1201"
+    },
+    "data/parquet_by_genus/Genus=Leptotrichia/data_0.parquet": {
+      "checksum": "3cbfd9755a7abf0f9d2ef0ab3c71c911"
+    },
+    "data/parquet_by_genus/Genus=Leucobacter/data_0.parquet": {
+      "checksum": "f38690fd8ef13ae6934abe73ed89fa14"
+    },
+    "data/parquet_by_genus/Genus=Leuconostoc/data_0.parquet": {
+      "checksum": "e27718cc38da6e19d412fca0fb4abef3"
+    },
+    "data/parquet_by_genus/Genus=Levilactobacillus/data_0.parquet": {
+      "checksum": "a5c3568c527abe1829ee9ae558a4fbaf"
+    },
+    "data/parquet_by_genus/Genus=Ligilactobacillus/data_0.parquet": {
+      "checksum": "5d75f6bd194637cbb8034e5414d25de2"
+    },
+    "data/parquet_by_genus/Genus=Limivivens/data_0.parquet": {
+      "checksum": "a33acd28aace6f4f2243e76de9c535bd"
+    },
+    "data/parquet_by_genus/Genus=Limosilactobacillus/data_0.parquet": {
+      "checksum": "94de46a864d01898d793afef4db427b8"
+    },
+    "data/parquet_by_genus/Genus=Limousia/data_0.parquet": {
+      "checksum": "a9867907417465e9f94ea0bbfdee636c"
+    },
+    "data/parquet_by_genus/Genus=Listeria/data_0.parquet": {
+      "checksum": "192c8215aaaced227543f148d9b8e0ca"
+    },
+    "data/parquet_by_genus/Genus=Litchfieldia/data_0.parquet": {
+      "checksum": "7455df39c9ab4dc93a8695ce2c5a3971"
+    },
+    "data/parquet_by_genus/Genus=Litorimicrobium/data_0.parquet": {
+      "checksum": "49f870bf4decd1f013de2c1b60b38045"
+    },
+    "data/parquet_by_genus/Genus=Longicatena/data_0.parquet": {
+      "checksum": "d16ddd76aae96dd77ca4ffc9d002ce4d"
+    },
+    "data/parquet_by_genus/Genus=Luoshenia/data_0.parquet": {
+      "checksum": "8d26ccb06d383cb9dbfa303630e27abd"
+    },
+    "data/parquet_by_genus/Genus=Luteibacter/data_0.parquet": {
+      "checksum": "d4ed317a18f9e687cd5c9a86bddb8b25"
+    },
+    "data/parquet_by_genus/Genus=Lysinibacillus/data_0.parquet": {
+      "checksum": "471c9451a7e67884d6f075834de16dfd"
+    },
+    "data/parquet_by_genus/Genus=Lysinibacillus/data_1.parquet": {
+      "checksum": "14659fdcf8ff690c75e9749b756a536f"
+    },
+    "data/parquet_by_genus/Genus=Lysobacter_B/data_0.parquet": {
+      "checksum": "a3fcba1479e02f0da707a0c1e0af5435"
+    },
+    "data/parquet_by_genus/Genus=Macrococcus_B/data_0.parquet": {
+      "checksum": "664738e037d6a4db91f6d126e5e6cb78"
+    },
+    "data/parquet_by_genus/Genus=Macrococcus_B/data_1.parquet": {
+      "checksum": "ac521519a584edd86f93de1d805dd932"
+    },
+    "data/parquet_by_genus/Genus=Macrococcus/data_0.parquet": {
+      "checksum": "ab994964dccc7c0c4704f98b5760e991"
+    },
+    "data/parquet_by_genus/Genus=Magnetospirillum/data_0.parquet": {
+      "checksum": "bf31788cafc74da6ec47d546aa8f4deb"
+    },
+    "data/parquet_by_genus/Genus=Mammaliicoccus/data_0.parquet": {
+      "checksum": "8aec09539580151d281af03e1e5062d3"
+    },
+    "data/parquet_by_genus/Genus=Mannheimia/data_0.parquet": {
+      "checksum": "529bede8b655440eff3cd85ead67d6e3"
+    },
+    "data/parquet_by_genus/Genus=Mannheimia/data_1.parquet": {
+      "checksum": "151ca2a4eac227d82189062102478e16"
+    },
+    "data/parquet_by_genus/Genus=Maribacter/data_0.parquet": {
+      "checksum": "6563d6013d8d620525443d05ecb3b177"
+    },
+    "data/parquet_by_genus/Genus=Marichromatium/data_0.parquet": {
+      "checksum": "6f46d91d222a8e8a3d9576d9a1dc3886"
+    },
+    "data/parquet_by_genus/Genus=Marinobacter/data_0.parquet": {
+      "checksum": "24ded56cbc5f90dfa2c70102171c3a05"
+    },
+    "data/parquet_by_genus/Genus=Marinobacterium/data_0.parquet": {
+      "checksum": "f093d1ece7ecf4c01c48116f53cf2061"
+    },
+    "data/parquet_by_genus/Genus=Marinomonas/data_0.parquet": {
+      "checksum": "21d097499682d1eb29b1bd902589f73a"
+    },
+    "data/parquet_by_genus/Genus=Marithrix/data_0.parquet": {
+      "checksum": "8a0514a1b5fb03f1930c3fd227045a1d"
+    },
+    "data/parquet_by_genus/Genus=Marortus/data_0.parquet": {
+      "checksum": "b522e2640291a2ee2e3fffdad4271483"
+    },
+    "data/parquet_by_genus/Genus=Massilimicrobiota/data_0.parquet": {
+      "checksum": "9f3a806dff6f4acebe08135f8f17abeb"
+    },
+    "data/parquet_by_genus/Genus=Massilioclostridium/data_0.parquet": {
+      "checksum": "5a3858b21e8f476b81e1cc26e48b9ba5"
+    },
+    "data/parquet_by_genus/Genus=Mediterranea/data_0.parquet": {
+      "checksum": "c90787389a42effe1491edaef1b666a3"
+    },
+    "data/parquet_by_genus/Genus=Mediterraneibacter/data_0.parquet": {
+      "checksum": "b149c171e5c8e6bf7ad6fb118c09afaa"
+    },
+    "data/parquet_by_genus/Genus=Megamonas/data_0.parquet": {
+      "checksum": "7ec6139ea0e6dc377c1656b3b1139d82"
+    },
+    "data/parquet_by_genus/Genus=Megasphaera/data_0.parquet": {
+      "checksum": "b0ea89bf876ad37a0d83e899d83c3a9b"
+    },
+    "data/parquet_by_genus/Genus=Meiothermus_B/data_0.parquet": {
+      "checksum": "5f07f1dba8bb105e42cd8513141d86e4"
+    },
+    "data/parquet_by_genus/Genus=Melissococcus/data_0.parquet": {
+      "checksum": "49aae9862b42aeeed411bce2aa8f17d7"
+    },
+    "data/parquet_by_genus/Genus=Merdimonas/data_0.parquet": {
+      "checksum": "791d526690c4cb06f9154907a662f858"
+    },
+    "data/parquet_by_genus/Genus=Merdisoma/data_0.parquet": {
+      "checksum": "fabe719dd039332d2637a2f7f9bbff9e"
+    },
+    "data/parquet_by_genus/Genus=Mesomycoplasma/data_0.parquet": {
+      "checksum": "7d28ac57c9665127285d117687b79a7f"
+    },
+    "data/parquet_by_genus/Genus=Mesorhizobium_F/data_0.parquet": {
+      "checksum": "08144041e5e58a414c79428ef53ffb83"
+    },
+    "data/parquet_by_genus/Genus=Mesorhizobium/data_0.parquet": {
+      "checksum": "5aae54c0cc108dbc3b767ccfe871cf94"
+    },
+    "data/parquet_by_genus/Genus=Mesorhizobium/data_1.parquet": {
+      "checksum": "7c33f7fc800d0404cf7c408eb7958bd2"
+    },
+    "data/parquet_by_genus/Genus=Metabacillus/data_0.parquet": {
+      "checksum": "8074e740df24633c6504c58f42e00ace"
+    },
+    "data/parquet_by_genus/Genus=Metamycoplasma/data_0.parquet": {
+      "checksum": "9c2bac532eb5be3ff351e76ac2f2dab4"
+    },
+    "data/parquet_by_genus/Genus=Metamycoplasma/data_1.parquet": {
+      "checksum": "40488907d2fae6f352f0b52be9e00ab4"
+    },
+    "data/parquet_by_genus/Genus=Methylobacterium/data_0.parquet": {
+      "checksum": "c148d7f1e08ac9756076366f4821165a"
+    },
+    "data/parquet_by_genus/Genus=Methylocystis/data_0.parquet": {
+      "checksum": "f29650396236096046e50aae03d0aa45"
+    },
+    "data/parquet_by_genus/Genus=Microbacterium/data_0.parquet": {
+      "checksum": "2f638c3f50a605f0e13ebf1146b9a40e"
+    },
+    "data/parquet_by_genus/Genus=Microbacterium/data_1.parquet": {
+      "checksum": "6533631b402aaac894f4b644ccfe13ed"
+    },
+    "data/parquet_by_genus/Genus=Microbispora/data_0.parquet": {
+      "checksum": "319d3c279b047761c8bac9e9fad1a8f3"
+    },
+    "data/parquet_by_genus/Genus=Micrococcus/data_0.parquet": {
+      "checksum": "1854d8b6655cdec06ff458ad0503e35d"
+    },
+    "data/parquet_by_genus/Genus=Micrococcus/data_1.parquet": {
+      "checksum": "830c0add37903be5c339c6f367f4b500"
+    },
+    "data/parquet_by_genus/Genus=Microlunatus/data_0.parquet": {
+      "checksum": "a8bb5bd14836eae066a9329b89cba93a"
+    },
+    "data/parquet_by_genus/Genus=Micromonospora_E/data_0.parquet": {
+      "checksum": "dd3a6eb6ff6b187bf928bb0ad9c79b4b"
+    },
+    "data/parquet_by_genus/Genus=Micromonospora/data_0.parquet": {
+      "checksum": "02e93c72597e4499db6a4692ad52a563"
+    },
+    "data/parquet_by_genus/Genus=Mitsuaria/data_0.parquet": {
+      "checksum": "18a14fd5cf45c3862ff76f93a69f739a"
+    },
+    "data/parquet_by_genus/Genus=Mitsuokella/data_0.parquet": {
+      "checksum": "09d9aea7cb92f5af04e9ebab8af80078"
+    },
+    "data/parquet_by_genus/Genus=Mixta/data_0.parquet": {
+      "checksum": "b086bdee6375c841eb10551cd3dea41d"
+    },
+    "data/parquet_by_genus/Genus=Mobilitalea/data_0.parquet": {
+      "checksum": "ed4d173ce2a3c0da1d9429b2d030dc05"
+    },
+    "data/parquet_by_genus/Genus=Mobiluncus/data_0.parquet": {
+      "checksum": "91caf3416d4a0ac9cb9ce9a3857f04bf"
+    },
+    "data/parquet_by_genus/Genus=Moellerella/data_0.parquet": {
+      "checksum": "a1aaca8709059a85bf43c504d05f91c4"
+    },
+    "data/parquet_by_genus/Genus=Monoglobus/data_0.parquet": {
+      "checksum": "5e1054cf141ffe80e32d981af5ad829d"
+    },
+    "data/parquet_by_genus/Genus=Moraxella_A/data_0.parquet": {
+      "checksum": "146706e3b0b53a5877252e390ad5496b"
+    },
+    "data/parquet_by_genus/Genus=Moraxella/data_0.parquet": {
+      "checksum": "b2a69e7126041ed60dc04cea17ae038c"
+    },
+    "data/parquet_by_genus/Genus=Morganella/data_0.parquet": {
+      "checksum": "f3dae48475d49f1f31354b30f01e3bae"
+    },
+    "data/parquet_by_genus/Genus=MR-S7/data_0.parquet": {
+      "checksum": "1436d03d7e5a13fee3efa03015478d0e"
+    },
+    "data/parquet_by_genus/Genus=Muribaculum/data_0.parquet": {
+      "checksum": "3cd3aeddc27b0c99ba18570f8f03f0c5"
+    },
+    "data/parquet_by_genus/Genus=Muricomes/data_0.parquet": {
+      "checksum": "89c7e44868529825130a8649aeb1a156"
+    },
+    "data/parquet_by_genus/Genus=Mycobacterium/data_0.parquet": {
+      "checksum": "5e82fd46e4a44090a9ad65263d8fed16"
+    },
+    "data/parquet_by_genus/Genus=Mycoplana/data_0.parquet": {
+      "checksum": "db5901f481676e75504adf0a35ca404e"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasma/data_0.parquet": {
+      "checksum": "4179736d3517b4d05c0bf95a938b3d8a"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasma/data_1.parquet": {
+      "checksum": "96b7f12cf4fb1df249f58d085a286b19"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasmoides/data_0.parquet": {
+      "checksum": "34850ff9da1ce7c7a69a4687b5557052"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasmoides/data_1.parquet": {
+      "checksum": "a6155794af7961e332acf07fecb1a93e"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasmopsis_A/data_0.parquet": {
+      "checksum": "e23a8d7126d5bae4a05d11ecfe4ef05e"
+    },
+    "data/parquet_by_genus/Genus=Mycoplasmopsis/data_0.parquet": {
+      "checksum": "673ebb34e231c60cad948b2a7847e2a8"
+    },
+    "data/parquet_by_genus/Genus=Myxococcus/data_0.parquet": {
+      "checksum": "b352abdbb4dcf3139def1f482afa5d2c"
+    },
+    "data/parquet_by_genus/Genus=Myxococcus/data_1.parquet": {
+      "checksum": "b51437634be8c71d21597b59c3e7ecae"
+    },
+    "data/parquet_by_genus/Genus=Nakamurella/data_0.parquet": {
+      "checksum": "cb9dfde90230a998c61e30d4ddeb2479"
+    },
+    "data/parquet_by_genus/Genus=Neisseria/data_0.parquet": {
+      "checksum": "5b98974b87471ef4a6f5213a8129787a"
+    },
+    "data/parquet_by_genus/Genus=Neisseria/data_1.parquet": {
+      "checksum": "1e23f260aac9af26912cfde23d3ff46b"
+    },
+    "data/parquet_by_genus/Genus=Neisseria/data_2.parquet": {
+      "checksum": "d8c8e98eb30c62296af287493c072578"
+    },
+    "data/parquet_by_genus/Genus=Neisseria/data_3.parquet": {
+      "checksum": "1a583c4897115754de737fab1e5567da"
+    },
+    "data/parquet_by_genus/Genus=Neobacillus/data_0.parquet": {
+      "checksum": "10a8fd0b65ccad8f65445122a9b9c676"
+    },
+    "data/parquet_by_genus/Genus=Niallia/data_0.parquet": {
+      "checksum": "f994585bca0808853bdfb8d33cf4c4fd"
+    },
+    "data/parquet_by_genus/Genus=Nitrosomonas/data_0.parquet": {
+      "checksum": "21e72496b5221d3d32a4eb927b4adb3b"
+    },
+    "data/parquet_by_genus/Genus=Nitrosospira/data_0.parquet": {
+      "checksum": "0b8bbd0383138b4cd456f3185610caf5"
+    },
+    "data/parquet_by_genus/Genus=Niveispirillum/data_0.parquet": {
+      "checksum": "1c065e87c494f779e3b873a6e3ad14de"
+    },
+    "data/parquet_by_genus/Genus=Nocardia/data_0.parquet": {
+      "checksum": "a22eac14a1e6daf76e198e0a63b3be64"
+    },
+    "data/parquet_by_genus/Genus=Nocardia/data_1.parquet": {
+      "checksum": "d7e44be68ee321a9548989ea223cfcfb"
+    },
+    "data/parquet_by_genus/Genus=Nocardioides/data_0.parquet": {
+      "checksum": "5a9b9ed82351996f7b70989e18e23918"
+    },
+    "data/parquet_by_genus/Genus=Nocardiopsis/data_0.parquet": {
+      "checksum": "f27eb829b75609832f00d6f5ad09199f"
+    },
+    "data/parquet_by_genus/Genus=Nodularia/data_0.parquet": {
+      "checksum": "546e410e452a0d539d631d27da47ad2f"
+    },
+    "data/parquet_by_genus/Genus=Nonomuraea/data_0.parquet": {
+      "checksum": "e074a21ec63e3ee603ce161fb704bce8"
+    },
+    "data/parquet_by_genus/Genus=Nosocomiicoccus/data_0.parquet": {
+      "checksum": "c359b12da1633b62a262717ab5c10365"
+    },
+    "data/parquet_by_genus/Genus=Novosphingobium/data_0.parquet": {
+      "checksum": "f820cd476201d7f5bbaba52e8bfec600"
+    },
+    "data/parquet_by_genus/Genus=Oceanihabitans/data_0.parquet": {
+      "checksum": "37e2315aea77aa683114217c7cd94bc0"
+    },
+    "data/parquet_by_genus/Genus=Oceanobacillus/data_0.parquet": {
+      "checksum": "c138710a65ed1acf6e65d07910333da6"
+    },
+    "data/parquet_by_genus/Genus=Ochrobactrum_A/data_0.parquet": {
+      "checksum": "95cf5791a7c0095fcb1cf0c539d8fde6"
+    },
+    "data/parquet_by_genus/Genus=Ochrobactrum_C/data_0.parquet": {
+      "checksum": "0bd542078c455d279e1243216595fac3"
+    },
+    "data/parquet_by_genus/Genus=Ochrobactrum/data_0.parquet": {
+      "checksum": "1b18ff99fe483d3a594037ceb6c28ada"
+    },
+    "data/parquet_by_genus/Genus=Ochrobactrum/data_1.parquet": {
+      "checksum": "eb60a1b95c3ac17b7e96c1bc6be9bdd5"
+    },
+    "data/parquet_by_genus/Genus=Odoribacter/data_0.parquet": {
+      "checksum": "73361eb4c9a0ea4ef8b75fdb63e6a2d6"
+    },
+    "data/parquet_by_genus/Genus=Odoribacter/data_1.parquet": {
+      "checksum": "2a9a715053ebf1222b6403738cd7fff9"
+    },
+    "data/parquet_by_genus/Genus=Oleidesulfovibrio/data_0.parquet": {
+      "checksum": "bf5b20b2b55337cae3e767b335436b71"
+    },
+    "data/parquet_by_genus/Genus=Oligella/data_0.parquet": {
+      "checksum": "fba838f054321e594e362d3885270112"
+    },
+    "data/parquet_by_genus/Genus=Oliverpabstia/data_0.parquet": {
+      "checksum": "703267ef6a130d4e83cc8b67d9f82edb"
+    },
+    "data/parquet_by_genus/Genus=Olsenella_F/data_0.parquet": {
+      "checksum": "a79bc5ec3fd4847036169c4892d7e5ad"
+    },
+    "data/parquet_by_genus/Genus=Olsenella_G/data_0.parquet": {
+      "checksum": "4bc1ffcf41f2a919119a909bc8746696"
+    },
+    "data/parquet_by_genus/Genus=Oribacterium/data_0.parquet": {
+      "checksum": "f92e34018ce280aaeb81b90d0bebb26f"
+    },
+    "data/parquet_by_genus/Genus=Ornithobacterium/data_0.parquet": {
+      "checksum": "d1e0d993a58d7f353814727959bb8987"
+    },
+    "data/parquet_by_genus/Genus=Ornithobacterium/data_1.parquet": {
+      "checksum": "bf29c51a9f78e313fd8c2195a0bf7087"
+    },
+    "data/parquet_by_genus/Genus=Orrella/data_0.parquet": {
+      "checksum": "1c59a5775f578153e6e6470e8017294e"
+    },
+    "data/parquet_by_genus/Genus=Oryzisolibacter/data_0.parquet": {
+      "checksum": "f297bff9e5a868c19f22792adb25f751"
+    },
+    "data/parquet_by_genus/Genus=Paenalcaligenes/data_0.parquet": {
+      "checksum": "a843d84166a06837890e99371e50a5ec"
+    },
+    "data/parquet_by_genus/Genus=Paenarthrobacter/data_0.parquet": {
+      "checksum": "ca435c8c189b7920593321d5f554f024"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_B/data_0.parquet": {
+      "checksum": "d863795ea52580f89d7696f00c812fdc"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_F/data_0.parquet": {
+      "checksum": "162066c662ea279aa22c1bf604e939f4"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_F/data_1.parquet": {
+      "checksum": "c9de34ca1c2bb8556128dd1e47166a29"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_G/data_0.parquet": {
+      "checksum": "1236016eb1ccdc0fdc2b262cad9d41fa"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_H/data_0.parquet": {
+      "checksum": "a37a96a586a2d29687fb7015d1be3e68"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus_Z/data_0.parquet": {
+      "checksum": "ba727d3016e77600818dbf8e2284970f"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus/data_0.parquet": {
+      "checksum": "a6e9f00b6bb0f9f57c3789f6fd931919"
+    },
+    "data/parquet_by_genus/Genus=Paenibacillus/data_1.parquet": {
+      "checksum": "19f0c0a568688a42c2ec10f618bfef16"
+    },
+    "data/parquet_by_genus/Genus=Paenochrobactrum/data_0.parquet": {
+      "checksum": "f612118ff3627717f4597c8f5d4bb831"
+    },
+    "data/parquet_by_genus/Genus=Pandoraea/data_0.parquet": {
+      "checksum": "39c186972c097669b0c999e151786d3d"
+    },
+    "data/parquet_by_genus/Genus=Pandoraea/data_1.parquet": {
+      "checksum": "77a3892a6c90fb91bc66ee062358d4b4"
+    },
+    "data/parquet_by_genus/Genus=Pannonibacter/data_0.parquet": {
+      "checksum": "a080fd833ec63c871516cbb1b3f42ade"
+    },
+    "data/parquet_by_genus/Genus=Pantoea/data_0.parquet": {
+      "checksum": "781e7c6ff50b9723fa21a169567f14f2"
+    },
+    "data/parquet_by_genus/Genus=Pantoea/data_1.parquet": {
+      "checksum": "269565abe314fad735366f31e665b42b"
+    },
+    "data/parquet_by_genus/Genus=Parabacteroides/data_0.parquet": {
+      "checksum": "61c46092d8893a67f934f2d65ae4c15e"
+    },
+    "data/parquet_by_genus/Genus=Parabacteroides/data_1.parquet": {
+      "checksum": "285f97fe9699c36fabfa36a3b6dfb9f5"
+    },
+    "data/parquet_by_genus/Genus=Paraburkholderia/data_0.parquet": {
+      "checksum": "e980c715aef8969bf4620b2b30471bff"
+    },
+    "data/parquet_by_genus/Genus=Paraclostridium/data_0.parquet": {
+      "checksum": "a6aaa897a5ac7de501587bd80bed8770"
+    },
+    "data/parquet_by_genus/Genus=Paracoccus/data_0.parquet": {
+      "checksum": "8c9093dab55522d90f6ea4c9d7a83d36"
+    },
+    "data/parquet_by_genus/Genus=Paracoccus/data_1.parquet": {
+      "checksum": "7f8b720ead9ef6182c35bca59ae2caf5"
+    },
+    "data/parquet_by_genus/Genus=Paradevosia/data_0.parquet": {
+      "checksum": "26a25d348089df2efdc84dbe922f8936"
+    },
+    "data/parquet_by_genus/Genus=Parafannyhessea/data_0.parquet": {
+      "checksum": "ad7d5d3cb03fcd4a92e39b8a2de34a17"
+    },
+    "data/parquet_by_genus/Genus=Paralachnospira/data_0.parquet": {
+      "checksum": "c403df9a3d774cbe86b72c8edb15451b"
+    },
+    "data/parquet_by_genus/Genus=Parapedobacter/data_0.parquet": {
+      "checksum": "5558f4a152f9dedd3805f39fdd666b7b"
+    },
+    "data/parquet_by_genus/Genus=Paraprevotella/data_0.parquet": {
+      "checksum": "dc7c7ee0bb1b2fb5f4e9755dee9deb45"
+    },
+    "data/parquet_by_genus/Genus=Parasutterella/data_0.parquet": {
+      "checksum": "3ce347e95c9a6b8109ef888b85d68488"
+    },
+    "data/parquet_by_genus/Genus=Paratractidigestivibacter/data_0.parquet": {
+      "checksum": "1085c1a57389ec3a9ae917581a8b5bd6"
+    },
+    "data/parquet_by_genus/Genus=Parvimonas/data_0.parquet": {
+      "checksum": "65be2589f71fc9209520ec79fe49f0a5"
+    },
+    "data/parquet_by_genus/Genus=Pasteurella/data_0.parquet": {
+      "checksum": "abf80a2af35dcf789781ac3dd12383a8"
+    },
+    "data/parquet_by_genus/Genus=Pauljensenia/data_0.parquet": {
+      "checksum": "a091ff9f46c676017af4dc39b0add397"
+    },
+    "data/parquet_by_genus/Genus=Pauljensenia/data_1.parquet": {
+      "checksum": "e8db764ed9802d5aefd4feff834ea424"
+    },
+    "data/parquet_by_genus/Genus=Pectobacterium/data_0.parquet": {
+      "checksum": "eaedfca987b9a44e8cd19dbbfa87cdbe"
+    },
+    "data/parquet_by_genus/Genus=Pediococcus/data_0.parquet": {
+      "checksum": "598e2c13b34ac7b63307a611a6589a5c"
+    },
+    "data/parquet_by_genus/Genus=Pediococcus/data_1.parquet": {
+      "checksum": "86ec805cbe4b5840712d71ff51b17579"
+    },
+    "data/parquet_by_genus/Genus=Pedobacter/data_0.parquet": {
+      "checksum": "0b58d343f05288d82432e5652a66186f"
+    },
+    "data/parquet_by_genus/Genus=Pedobacter/data_1.parquet": {
+      "checksum": "986a3f5f689be78caf650b71ac52cec2"
+    },
+    "data/parquet_by_genus/Genus=Pelagibacter_A/data_0.parquet": {
+      "checksum": "53e38e45d4224e2d9c4743fd56875d24"
+    },
+    "data/parquet_by_genus/Genus=Pelobium/data_0.parquet": {
+      "checksum": "28c408c1a1e15d378e121ae6b655ff77"
+    },
+    "data/parquet_by_genus/Genus=Peptacetobacter/data_0.parquet": {
+      "checksum": "575f784f8d39509f4c13d3d1f6f34f66"
+    },
+    "data/parquet_by_genus/Genus=Peptoanaerobacter/data_0.parquet": {
+      "checksum": "de282a7d82df1f672516f2c633e71648"
+    },
+    "data/parquet_by_genus/Genus=Peptoniphilus_A/data_0.parquet": {
+      "checksum": "344165e38ce978b4af7232dc673d3977"
+    },
+    "data/parquet_by_genus/Genus=Peptoniphilus_C/data_0.parquet": {
+      "checksum": "b3407b2288bbeb2204f27bc7a18e74c0"
+    },
+    "data/parquet_by_genus/Genus=Peptoniphilus_E/data_0.parquet": {
+      "checksum": "42f3010ab8029167ba6eb800ea6b0f9e"
+    },
+    "data/parquet_by_genus/Genus=Peptostreptococcus/data_0.parquet": {
+      "checksum": "377c2123e8aa48c29d30b89a724231ef"
+    },
+    "data/parquet_by_genus/Genus=Peribacillus/data_0.parquet": {
+      "checksum": "2b91c35fa26086a109b0825eda6d678f"
+    },
+    "data/parquet_by_genus/Genus=Peribacillus/data_1.parquet": {
+      "checksum": "daad3c5db0ee08cebc20d24d7de05e05"
+    },
+    "data/parquet_by_genus/Genus=Petrimonas/data_0.parquet": {
+      "checksum": "788b8b7090409fc1cd727d05f8429a53"
+    },
+    "data/parquet_by_genus/Genus=Phaeobacter/data_0.parquet": {
+      "checksum": "f441feee888c960074d09ce913d29d2d"
+    },
+    "data/parquet_by_genus/Genus=Phascolarctobacterium/data_0.parquet": {
+      "checksum": "de3e01f21d0c67651712f73576271821"
+    },
+    "data/parquet_by_genus/Genus=Phocaeicola_A/data_0.parquet": {
+      "checksum": "8c9bad215b09333e178e2c860114a521"
+    },
+    "data/parquet_by_genus/Genus=Phocaeicola/data_0.parquet": {
+      "checksum": "c7d608116ef608d0e675f388055435e9"
+    },
+    "data/parquet_by_genus/Genus=Phocea/data_0.parquet": {
+      "checksum": "c9208c9f116f63a6b98b08a6264b1b03"
+    },
+    "data/parquet_by_genus/Genus=Photobacterium/data_0.parquet": {
+      "checksum": "d7777b934e11af3729f5c7601ae89d21"
+    },
+    "data/parquet_by_genus/Genus=Phyllobacterium/data_0.parquet": {
+      "checksum": "43484b8257620e11ba5df87dacdae6b9"
+    },
+    "data/parquet_by_genus/Genus=Phytobacter/data_0.parquet": {
+      "checksum": "874ffc62640c12f33f47597e589f0336"
+    },
+    "data/parquet_by_genus/Genus=Phytobacter/data_1.parquet": {
+      "checksum": "cd633b95f686344e097380a0637a4a01"
+    },
+    "data/parquet_by_genus/Genus=Pigmentiphaga/data_0.parquet": {
+      "checksum": "e24ae98e145775e8b92e295f3ea02b96"
+    },
+    "data/parquet_by_genus/Genus=Planctopirus/data_0.parquet": {
+      "checksum": "fc0336927e1283c78c5b6e67d4a2eb66"
+    },
+    "data/parquet_by_genus/Genus=Planobacterium/data_0.parquet": {
+      "checksum": "892512e7f4fc25bc87cfb72cc7f07a94"
+    },
+    "data/parquet_by_genus/Genus=Plesiomonas/data_0.parquet": {
+      "checksum": "dd174354302d44b5fe1e07decc50f688"
+    },
+    "data/parquet_by_genus/Genus=Plesiomonas/data_1.parquet": {
+      "checksum": "33afe79c5b685e165297f945e37b0c1e"
+    },
+    "data/parquet_by_genus/Genus=Pluralibacter/data_0.parquet": {
+      "checksum": "32281e2c71eddbbe4bab37dc4d89c805"
+    },
+    "data/parquet_by_genus/Genus=Pluralibacter/data_1.parquet": {
+      "checksum": "e82ac4b287dbb49c21a690a10abdebe9"
+    },
+    "data/parquet_by_genus/Genus=Polaromonas/data_0.parquet": {
+      "checksum": "c4772db74f1c3db5ad18e7834ae1dff2"
+    },
+    "data/parquet_by_genus/Genus=Porphyromonas_A/data_0.parquet": {
+      "checksum": "ac9dc1532bc957a825d83783d959a60d"
+    },
+    "data/parquet_by_genus/Genus=Porphyromonas/data_0.parquet": {
+      "checksum": "c2fdfc8873ca37fe0974657cd41b2cdc"
+    },
+    "data/parquet_by_genus/Genus=Prauserella_A/data_0.parquet": {
+      "checksum": "bd3946cf1909290ed1effe90a8369306"
+    },
+    "data/parquet_by_genus/Genus=Prevotella/data_0.parquet": {
+      "checksum": "08ce592a0ba1fe6074da360146106743"
+    },
+    "data/parquet_by_genus/Genus=Prevotella/data_1.parquet": {
+      "checksum": "a0f81ada7a083e6ff2267b415365beeb"
+    },
+    "data/parquet_by_genus/Genus=Priestia/data_0.parquet": {
+      "checksum": "55abdfd42ed457a7aadfabdd0b1ad57b"
+    },
+    "data/parquet_by_genus/Genus=Priestia/data_1.parquet": {
+      "checksum": "ab9c9d0f433673496042c3984e9c155c"
+    },
+    "data/parquet_by_genus/Genus=Pristimantibacillus/data_0.parquet": {
+      "checksum": "cfb47876d7fc3ddf99d6329d400f2f21"
+    },
+    "data/parquet_by_genus/Genus=Promicromonospora/data_0.parquet": {
+      "checksum": "67c5e35a4a3c112e784fb89db93b800e"
+    },
+    "data/parquet_by_genus/Genus=Propionibacterium/data_0.parquet": {
+      "checksum": "65d483f133ec85bd50ef73d47eaa7817"
+    },
+    "data/parquet_by_genus/Genus=Propionimicrobium/data_0.parquet": {
+      "checksum": "60773a5f3a7ba827c84f03d73908490e"
+    },
+    "data/parquet_by_genus/Genus=Proteiniclasticum/data_0.parquet": {
+      "checksum": "9311829ce0e6beb1732753c24fb15439"
+    },
+    "data/parquet_by_genus/Genus=Proteus/data_0.parquet": {
+      "checksum": "715599ba192599a930903a9312bc3194"
+    },
+    "data/parquet_by_genus/Genus=Providencia_C/data_0.parquet": {
+      "checksum": "13cbcfb236f89164b2e24471adb46b0c"
+    },
+    "data/parquet_by_genus/Genus=Providencia_C/data_1.parquet": {
+      "checksum": "4feff248e24235b747953a20f944d39a"
+    },
+    "data/parquet_by_genus/Genus=Providencia/data_0.parquet": {
+      "checksum": "fd5e5d955db4993cc4cbc40654a464fe"
+    },
+    "data/parquet_by_genus/Genus=Pseudaminobacter/data_0.parquet": {
+      "checksum": "0229223837ecbafcd2717df20900cbee"
+    },
+    "data/parquet_by_genus/Genus=Pseudescherichia/data_0.parquet": {
+      "checksum": "a59d6c3607672510ea2cd522f19c5d83"
+    },
+    "data/parquet_by_genus/Genus=Pseudidiomarina/data_0.parquet": {
+      "checksum": "986a7c21d2ee55fd228a42b9b703340e"
+    },
+    "data/parquet_by_genus/Genus=Pseudoalteromonas/data_0.parquet": {
+      "checksum": "3179fcdd750109e30c714d0763c2aac6"
+    },
+    "data/parquet_by_genus/Genus=Pseudobacteroides/data_0.parquet": {
+      "checksum": "96aa08219e53966184d68edf310ab9ab"
+    },
+    "data/parquet_by_genus/Genus=Pseudobutyrivibrio/data_0.parquet": {
+      "checksum": "6783602c0254c8a9eccf748e5e0b14e2"
+    },
+    "data/parquet_by_genus/Genus=Pseudochrobactrum/data_0.parquet": {
+      "checksum": "3d7cccb5d5ba2af1f80e556bcfd59b8c"
+    },
+    "data/parquet_by_genus/Genus=Pseudocitrobacter/data_0.parquet": {
+      "checksum": "e7bb013fcc2c3fea7b5c6cfaab566fb7"
+    },
+    "data/parquet_by_genus/Genus=Pseudocitrobacter/data_1.parquet": {
+      "checksum": "d6ccdefc18f34e08a003cce9a657681e"
+    },
+    "data/parquet_by_genus/Genus=Pseudoflavonifractor_A/data_0.parquet": {
+      "checksum": "e3e1ff87a21818eb1ddfd349ea29e36b"
+    },
+    "data/parquet_by_genus/Genus=Pseudoflavonifractor/data_0.parquet": {
+      "checksum": "5b341d906a708dd2fd657b2b66e305c8"
+    },
+    "data/parquet_by_genus/Genus=Pseudoglutamicibacter/data_0.parquet": {
+      "checksum": "c5a5fb4dea8ff34b6cee2b9327bbb63f"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas_B/data_0.parquet": {
+      "checksum": "30bf077a1d5ea429db64e6ef71062fdd"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas_B/data_1.parquet": {
+      "checksum": "daa2bd4baf13d6e1308cba7b4d6372f4"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas_E/data_0.parquet": {
+      "checksum": "7af4cb2c13047c93b717d97d89de9e3c"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas_F/data_0.parquet": {
+      "checksum": "0e688caa8fad4e098468fd22003a597c"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas_F/data_1.parquet": {
+      "checksum": "50d85c28a93191704c2aa9b127347845"
+    },
+    "data/parquet_by_genus/Genus=Pseudomonas/data_0.parquet": {
+      "checksum": "eade234beeef6514508f51584d482ee6"
+    },
+    "data/parquet_by_genus/Genus=Pseudoneobacillus/data_0.parquet": {
+      "checksum": "8c9fefef37ac2326acd4660cea0cd121"
+    },
+    "data/parquet_by_genus/Genus=Pseudonocardia/data_0.parquet": {
+      "checksum": "83f73ceeb173bbd2d461e666a896d450"
+    },
+    "data/parquet_by_genus/Genus=Pseudooceanicola/data_0.parquet": {
+      "checksum": "b84a0608ad3b8d7292f1e8b7a10833f3"
+    },
+    "data/parquet_by_genus/Genus=Pseudooctadecabacter/data_0.parquet": {
+      "checksum": "1d1e2742a1a1fba694f33f31fafaf4e3"
+    },
+    "data/parquet_by_genus/Genus=Pseudorhodoferax/data_0.parquet": {
+      "checksum": "88d0eb5b6742c16ee1da67a6146d5cf5"
+    },
+    "data/parquet_by_genus/Genus=Pseudovibrio/data_0.parquet": {
+      "checksum": "3c59b21c053e0b47a2ded03d895bb65b"
+    },
+    "data/parquet_by_genus/Genus=Pseudoxanthomonas_A/data_0.parquet": {
+      "checksum": "f3ed2201c2a36c999560381b2eef2bd7"
+    },
+    "data/parquet_by_genus/Genus=Pseudoxanthomonas/data_0.parquet": {
+      "checksum": "518602e6678436be4b76088b86f25b13"
+    },
+    "data/parquet_by_genus/Genus=Psychrobacter/data_0.parquet": {
+      "checksum": "5444626926c65b06a511e854ce4608d4"
+    },
+    "data/parquet_by_genus/Genus=Psychrobacter/data_1.parquet": {
+      "checksum": "60267292fa87cebc7c011e935c59cbae"
+    },
+    "data/parquet_by_genus/Genus=Psychromonas/data_0.parquet": {
+      "checksum": "79b75272909049935c24ad43450d2ea3"
+    },
+    "data/parquet_by_genus/Genus=Pullulanibacillus/data_0.parquet": {
+      "checksum": "47f8ec73a0ddce2e749455f8a75824b4"
+    },
+    "data/parquet_by_genus/Genus=Pusillimonas_B/data_0.parquet": {
+      "checksum": "8c42614ef96f5bdae10cf525faec3231"
+    },
+    "data/parquet_by_genus/Genus=Qipengyuania/data_0.parquet": {
+      "checksum": "682815a9db2f255b06402427c2ddd632"
+    },
+    "data/parquet_by_genus/Genus=Qipengyuania/data_1.parquet": {
+      "checksum": "cad17877e8d05cad72b5451a5df0ee2e"
+    },
+    "data/parquet_by_genus/Genus=Quadrisphaera/data_0.parquet": {
+      "checksum": "4d2f58ded143dbf324c8f68aa080be48"
+    },
+    "data/parquet_by_genus/Genus=Rahnella/data_0.parquet": {
+      "checksum": "4373b292fb43146dcfc5a64ef315bcf8"
+    },
+    "data/parquet_by_genus/Genus=Rahnella/data_1.parquet": {
+      "checksum": "5885ee91522ffd2b1e6679a71e9a3b45"
+    },
+    "data/parquet_by_genus/Genus=Ralstonia/data_0.parquet": {
+      "checksum": "402afdd1e769f5119fc3725ad45a2a2c"
+    },
+    "data/parquet_by_genus/Genus=Rarobacter/data_0.parquet": {
+      "checksum": "f09bd8f761af14e6eaa0ae31621c5be7"
+    },
+    "data/parquet_by_genus/Genus=Rathayibacter/data_0.parquet": {
+      "checksum": "923f0c72fbbd9df9b1f4dd5b7e2a4201"
+    },
+    "data/parquet_by_genus/Genus=Reichenbachiella/data_0.parquet": {
+      "checksum": "529568a81e3e88f06b413e6a1bd8e86b"
+    },
+    "data/parquet_by_genus/Genus=RHBSTW-00994/data_0.parquet": {
+      "checksum": "7aaa47c07b98dc56eb98155be40bb32e"
+    },
+    "data/parquet_by_genus/Genus=Rheinheimera/data_0.parquet": {
+      "checksum": "0962819a660edafefd8e5a6d1088fe1e"
+    },
+    "data/parquet_by_genus/Genus=Rhizobium/data_0.parquet": {
+      "checksum": "b00cbd75ae9a0913b2b27e407c5cd3e8"
+    },
+    "data/parquet_by_genus/Genus=Rhodobacter/data_0.parquet": {
+      "checksum": "8d135423aed5edb23ecd8dc056af47fa"
+    },
+    "data/parquet_by_genus/Genus=Rhodobium/data_0.parquet": {
+      "checksum": "e6bc2e8af0ee2716e4d6054d2707d756"
+    },
+    "data/parquet_by_genus/Genus=Rhodoblastus/data_0.parquet": {
+      "checksum": "1b719bdc449f3233a896d2f3f2c89ae8"
+    },
+    "data/parquet_by_genus/Genus=Rhodococcus/data_0.parquet": {
+      "checksum": "43b16330f7e51f445839e6e3ed3c950c"
+    },
+    "data/parquet_by_genus/Genus=Rhodococcus/data_1.parquet": {
+      "checksum": "6b3a86f5580c4a4470ae91a571eeeac1"
+    },
+    "data/parquet_by_genus/Genus=Rhodoferax/data_0.parquet": {
+      "checksum": "696e2dcf5f16bd1de1bbc6d945182287"
+    },
+    "data/parquet_by_genus/Genus=Rhodomicrobium/data_0.parquet": {
+      "checksum": "83022b1185bcda178b69e5042f1c58e3"
+    },
+    "data/parquet_by_genus/Genus=Rhodoplanes/data_0.parquet": {
+      "checksum": "4058a0984803887d10d1e1afdbdbe08a"
+    },
+    "data/parquet_by_genus/Genus=Rhodoplanes/data_1.parquet": {
+      "checksum": "54c871c2b168dd39645e20521f6fcfa5"
+    },
+    "data/parquet_by_genus/Genus=Rhodopseudomonas/data_0.parquet": {
+      "checksum": "652c1908c28b996c314bad493b27b6e7"
+    },
+    "data/parquet_by_genus/Genus=Rhodopseudomonas/data_1.parquet": {
+      "checksum": "e25064e1db6c8e2ecf7d4a3d3561b1ed"
+    },
+    "data/parquet_by_genus/Genus=Rhodothalassium/data_0.parquet": {
+      "checksum": "e6a7cfd282e6f9152493c7a224232f4c"
+    },
+    "data/parquet_by_genus/Genus=Rhodovastum/data_0.parquet": {
+      "checksum": "eef7bb1aed99a8f941dc7f24005806f3"
+    },
+    "data/parquet_by_genus/Genus=Rhodovibrio/data_0.parquet": {
+      "checksum": "27b4645b2ac80191d1737779652c762e"
+    },
+    "data/parquet_by_genus/Genus=Rhodovulum/data_0.parquet": {
+      "checksum": "04cf72d9d347c2d84636b2cbc7de6ef9"
+    },
+    "data/parquet_by_genus/Genus=Riemerella/data_0.parquet": {
+      "checksum": "95275cb058a35adf7638d8e66e6377ab"
+    },
+    "data/parquet_by_genus/Genus=Riemerella/data_1.parquet": {
+      "checksum": "67d13982e67dd34868cc90508436b77e"
+    },
+    "data/parquet_by_genus/Genus=Rivicola/data_0.parquet": {
+      "checksum": "dcf8bba3414eb8bdbafe68c06928785a"
+    },
+    "data/parquet_by_genus/Genus=Romboutsia_D/data_0.parquet": {
+      "checksum": "4f14219b5a1acc212b25641cafade3f3"
+    },
+    "data/parquet_by_genus/Genus=Roseburia/data_0.parquet": {
+      "checksum": "45b72a4dfc977ce2823508ad9c948969"
+    },
+    "data/parquet_by_genus/Genus=Roseburia/data_1.parquet": {
+      "checksum": "ba70083f380f7690b2ca1c696eaf8437"
+    },
+    "data/parquet_by_genus/Genus=Roseibium/data_0.parquet": {
+      "checksum": "936de5a78aadf0d8262f754ff84aa287"
+    },
+    "data/parquet_by_genus/Genus=Roseimicrobium/data_0.parquet": {
+      "checksum": "2ee60ec11ed4bacb1899ab87acdeac75"
+    },
+    "data/parquet_by_genus/Genus=Roseivivax/data_0.parquet": {
+      "checksum": "3620df86ddf1e272b0e250f2cf0f5c2f"
+    },
+    "data/parquet_by_genus/Genus=Roseococcus/data_0.parquet": {
+      "checksum": "788cf76b1b83ba6b75a616fc9bc59f8b"
+    },
+    "data/parquet_by_genus/Genus=Roseovarius/data_0.parquet": {
+      "checksum": "f67c60cf11e6d595b820551ec7b3dd9a"
+    },
+    "data/parquet_by_genus/Genus=Rothia/data_0.parquet": {
+      "checksum": "531693f578e568c5ad3772d1d8489962"
+    },
+    "data/parquet_by_genus/Genus=Rothia/data_1.parquet": {
+      "checksum": "ac1baf5d7741626b60b31280f084b791"
+    },
+    "data/parquet_by_genus/Genus=Rubneribacter/data_0.parquet": {
+      "checksum": "082c6877fc1f858f4cad4ac03637a673"
+    },
+    "data/parquet_by_genus/Genus=Rubrivivax/data_0.parquet": {
+      "checksum": "f4cdf4306eab3db866aa33747ff52750"
+    },
+    "data/parquet_by_genus/Genus=Rubrivivax/data_1.parquet": {
+      "checksum": "042029ff177218a6da821082d2135344"
+    },
+    "data/parquet_by_genus/Genus=Ruegeria_B/data_0.parquet": {
+      "checksum": "97a56d385e445bf7c8b1903af4fe7053"
+    },
+    "data/parquet_by_genus/Genus=Ruegeria/data_0.parquet": {
+      "checksum": "69ef0c70fb6c0d6b0838d701fdcce25d"
+    },
+    "data/parquet_by_genus/Genus=Ruminiclostridium_E/data_0.parquet": {
+      "checksum": "4f4d030a72c13a12d1ee8dd65aee4016"
+    },
+    "data/parquet_by_genus/Genus=Ruminococcus_B/data_0.parquet": {
+      "checksum": "68ae992e81c06f8897576977fa94df20"
+    },
+    "data/parquet_by_genus/Genus=Ruminococcus_D/data_0.parquet": {
+      "checksum": "750d1867d51f26bb27b656752fa2d4b9"
+    },
+    "data/parquet_by_genus/Genus=Ruminococcus_E/data_0.parquet": {
+      "checksum": "8822d1c2c36b9ba082e2ef76f657dd4b"
+    },
+    "data/parquet_by_genus/Genus=Ruminococcus_G/data_0.parquet": {
+      "checksum": "fbebaecb94224ec8c1a2e6223cbcda08"
+    },
+    "data/parquet_by_genus/Genus=Ruthenibacterium/data_0.parquet": {
+      "checksum": "e7f880bdddb73278e61b0d6758c9b5ab"
+    },
+    "data/parquet_by_genus/Genus=S5-A14a/data_0.parquet": {
+      "checksum": "78afb9c20e28603df1792a9f488af91b"
+    },
+    "data/parquet_by_genus/Genus=Saccharibacter/data_0.parquet": {
+      "checksum": "5b5c9a2823ac40bff40575a53e0dfe6c"
+    },
+    "data/parquet_by_genus/Genus=Saccharopolyspora_D/data_0.parquet": {
+      "checksum": "29de8bf705c8b45f185e88c0fe238dea"
+    },
+    "data/parquet_by_genus/Genus=Saccharopolyspora_D/data_1.parquet": {
+      "checksum": "308d4ede3d129c68bda456f6bd9b654b"
+    },
+    "data/parquet_by_genus/Genus=Saccharopolyspora/data_0.parquet": {
+      "checksum": "105c1926abfe62382de2a1e49453fa4b"
+    },
+    "data/parquet_by_genus/Genus=Saccharospirillum/data_0.parquet": {
+      "checksum": "a499c75cb7b760f044bc7e0f162005a0"
+    },
+    "data/parquet_by_genus/Genus=Salinicoccus/data_0.parquet": {
+      "checksum": "ef498353058226119d9e56cd1e0b6792"
+    },
+    "data/parquet_by_genus/Genus=Salipaludibacillus/data_0.parquet": {
+      "checksum": "c12471df64414f5204cf498bb18fcb51"
+    },
+    "data/parquet_by_genus/Genus=Salipiger/data_0.parquet": {
+      "checksum": "fe7ee98050d54c34f60ed95955cb2e7e"
+    },
+    "data/parquet_by_genus/Genus=Salisediminibacterium/data_0.parquet": {
+      "checksum": "15a29e857c97a0553b92d656c0e466af"
+    },
+    "data/parquet_by_genus/Genus=Salmonella/data_0.parquet": {
+      "checksum": "8b6355f50c4e0f3308713458aabea793"
+    },
+    "data/parquet_by_genus/Genus=Sarcina/data_0.parquet": {
+      "checksum": "03f2543bbbfaa287e9acd20385163b04"
+    },
+    "data/parquet_by_genus/Genus=Scandinavium/data_0.parquet": {
+      "checksum": "10399733775fd8df8331035b3383d561"
+    },
+    "data/parquet_by_genus/Genus=Schaedlerella/data_0.parquet": {
+      "checksum": "9472474a1cef50849a12251ddb0387ed"
+    },
+    "data/parquet_by_genus/Genus=Schlegelella/data_0.parquet": {
+      "checksum": "907c31a203e6be7f103c01539aa437f2"
+    },
+    "data/parquet_by_genus/Genus=Schleiferilactobacillus/data_0.parquet": {
+      "checksum": "86a4249c81cadbccb5dd8712f31527dc"
+    },
+    "data/parquet_by_genus/Genus=Sciscionella/data_0.parquet": {
+      "checksum": "18c063939ce927301f5b8d5bfadb6e12"
+    },
+    "data/parquet_by_genus/Genus=Secundilactobacillus/data_0.parquet": {
+      "checksum": "b38621b00a06e5955d86410e8a3fb64d"
+    },
+    "data/parquet_by_genus/Genus=Sediminispirochaeta/data_0.parquet": {
+      "checksum": "f4015ad92161c6a1e7206c877d758cea"
+    },
+    "data/parquet_by_genus/Genus=Selenomonas_A/data_0.parquet": {
+      "checksum": "41d0bd9da3a0d1cdd45582002e3a1747"
+    },
+    "data/parquet_by_genus/Genus=Sellimonas/data_0.parquet": {
+      "checksum": "596cd0a428695152263a77e37c06a8b1"
+    },
+    "data/parquet_by_genus/Genus=Serratia_A/data_0.parquet": {
+      "checksum": "ac4b692cff90f53b4b97952de6a7b794"
+    },
+    "data/parquet_by_genus/Genus=Serratia_B/data_0.parquet": {
+      "checksum": "e9d3e813e731a2ee70a18d9db487fee6"
+    },
+    "data/parquet_by_genus/Genus=Serratia_B/data_1.parquet": {
+      "checksum": "7b8f3777fb8eef73c57c3ac116e7b9c8"
+    },
+    "data/parquet_by_genus/Genus=Serratia_F/data_0.parquet": {
+      "checksum": "16e929b89cada48f186d55c98e9642f2"
+    },
+    "data/parquet_by_genus/Genus=Serratia_J/data_0.parquet": {
+      "checksum": "7bc43df2e5bcd27f6f18468d73e53dd7"
+    },
+    "data/parquet_by_genus/Genus=Serratia_J/data_1.parquet": {
+      "checksum": "ec7b0d9f98e94b1a55cbeff3114c8b3d"
+    },
+    "data/parquet_by_genus/Genus=Serratia/data_0.parquet": {
+      "checksum": "28699b662db857ea75dcdbf72ca3f3c1"
+    },
+    "data/parquet_by_genus/Genus=Shewanella/data_0.parquet": {
+      "checksum": "04fab7f48693b7346340c4844fb50854"
+    },
+    "data/parquet_by_genus/Genus=Shinella/data_0.parquet": {
+      "checksum": "e0edccad3eb2aba96c90f90f773627db"
+    },
+    "data/parquet_by_genus/Genus=Silicimonas/data_0.parquet": {
+      "checksum": "fc19a536e2927110aaf6f93fe7ef8faf"
+    },
+    "data/parquet_by_genus/Genus=Siminovitchia/data_0.parquet": {
+      "checksum": "d9e2f74e6424080269945df17f50a931"
+    },
+    "data/parquet_by_genus/Genus=Sinimarinibacterium/data_0.parquet": {
+      "checksum": "3380d63204de1ef0a9e0dc3b38938e5d"
+    },
+    "data/parquet_by_genus/Genus=Sinomonas/data_0.parquet": {
+      "checksum": "8518fe9b70b438c601b14fd9c098adf5"
+    },
+    "data/parquet_by_genus/Genus=Sinorhizobium/data_0.parquet": {
+      "checksum": "951ff791ff7975da635c508841b503e4"
+    },
+    "data/parquet_by_genus/Genus=Slackia_A/data_0.parquet": {
+      "checksum": "e4512fa3266268f1b462d2ab5bb7e602"
+    },
+    "data/parquet_by_genus/Genus=Smaragdicoccus/data_0.parquet": {
+      "checksum": "cb4a2f12c4c9b8bafab132a73e492b6f"
+    },
+    "data/parquet_by_genus/Genus=Solibaculum/data_0.parquet": {
+      "checksum": "d9caa1147e12a0ea2bbddb83773770bf"
+    },
+    "data/parquet_by_genus/Genus=Solirubrobacter/data_0.parquet": {
+      "checksum": "4e56a0eac0516bd5c2c12a39549843e7"
+    },
+    "data/parquet_by_genus/Genus=Sphaerotilus/data_0.parquet": {
+      "checksum": "2c0419b5b8ac866d95b85ceb8739ff4f"
+    },
+    "data/parquet_by_genus/Genus=Sphingobacterium/data_0.parquet": {
+      "checksum": "2a0fdc817dc7626d72c9260cdcff318e"
+    },
+    "data/parquet_by_genus/Genus=Sphingobium/data_0.parquet": {
+      "checksum": "9d388ad0c0df422a39b7b7c801fe0cb7"
+    },
+    "data/parquet_by_genus/Genus=Sphingobium/data_1.parquet": {
+      "checksum": "09eb57c58a52202a25ac2ee88ce2c8c2"
+    },
+    "data/parquet_by_genus/Genus=Sphingomonas_E/data_0.parquet": {
+      "checksum": "0135caa505c4bb85ee6d8de4605a9e5f"
+    },
+    "data/parquet_by_genus/Genus=Sphingomonas/data_0.parquet": {
+      "checksum": "1026ed0f85fe4dbe11bd3fca6e865c74"
+    },
+    "data/parquet_by_genus/Genus=Sphingopyxis/data_0.parquet": {
+      "checksum": "5c94ba7db73122784c7ab22d9ead5c60"
+    },
+    "data/parquet_by_genus/Genus=Spirabiliibacterium/data_0.parquet": {
+      "checksum": "5699d763cafb2f7033f3f0316be04a90"
+    },
+    "data/parquet_by_genus/Genus=Spirillospora/data_0.parquet": {
+      "checksum": "ea463c7d6105ac4c386bbd26c9515045"
+    },
+    "data/parquet_by_genus/Genus=Spiroplasma_D/data_0.parquet": {
+      "checksum": "f336ca68abaec1f771228f505f078127"
+    },
+    "data/parquet_by_genus/Genus=Spirosoma/data_0.parquet": {
+      "checksum": "f9e8f4ee6859b19770c1b5964c4fb175"
+    },
+    "data/parquet_by_genus/Genus=Spongiibacter/data_0.parquet": {
+      "checksum": "128783b1e12507fe1eb326015664e031"
+    },
+    "data/parquet_by_genus/Genus=Sporotomaculum/data_0.parquet": {
+      "checksum": "a496fe88377ee196faffe419b4fed6a5"
+    },
+    "data/parquet_by_genus/Genus=Staphylococcus/data_0.parquet": {
+      "checksum": "50c3a4b3345ac4239c4a60b3c2c3202b"
+    },
+    "data/parquet_by_genus/Genus=Stenotrophomonas/data_0.parquet": {
+      "checksum": "b3bd59b5d6d1b137a401b008bac4ac90"
+    },
+    "data/parquet_by_genus/Genus=Stomatobaculum/data_0.parquet": {
+      "checksum": "99ef85b1acc406efb6de734b8ad80531"
+    },
+    "data/parquet_by_genus/Genus=Streptacidiphilus/data_0.parquet": {
+      "checksum": "8e748be715dcf02b50d4ea5c8095463e"
+    },
+    "data/parquet_by_genus/Genus=Streptoalloteichus/data_0.parquet": {
+      "checksum": "815213e2e9022fe28fd237d20adb6942"
+    },
+    "data/parquet_by_genus/Genus=Streptococcus/data_0.parquet": {
+      "checksum": "06dc48d2b602e374382489fb5e883b05"
+    },
+    "data/parquet_by_genus/Genus=Streptomyces_A/data_0.parquet": {
+      "checksum": "5822761edf6bc20b94ec4979726bdfa3"
+    },
+    "data/parquet_by_genus/Genus=Streptomyces_D/data_0.parquet": {
+      "checksum": "1186f3a8c7fba7fa70a63366edac94af"
+    },
+    "data/parquet_by_genus/Genus=Streptomyces/data_0.parquet": {
+      "checksum": "65c6f09a376088d24ebecf1272c53356"
+    },
+    "data/parquet_by_genus/Genus=Streptomyces/data_1.parquet": {
+      "checksum": "46b3af8bc3d6bd8f2e051b258e84f5a5"
+    },
+    "data/parquet_by_genus/Genus=Streptosporangium/data_0.parquet": {
+      "checksum": "b4e4a6475fa633a466885ed55c7386b2"
+    },
+    "data/parquet_by_genus/Genus=Stutzerimonas/data_0.parquet": {
+      "checksum": "393925cf2be70bfa686cf18756cab55c"
+    },
+    "data/parquet_by_genus/Genus=Succiniclasticum/data_0.parquet": {
+      "checksum": "93f86e10949a9687ae926f7e60ba53a0"
+    },
+    "data/parquet_by_genus/Genus=Succinivibrio/data_0.parquet": {
+      "checksum": "48eed5feba7af8e84736291eda1856e7"
+    },
+    "data/parquet_by_genus/Genus=Sutterella/data_0.parquet": {
+      "checksum": "2d2bd016b2b5850ee11b643af67a054f"
+    },
+    "data/parquet_by_genus/Genus=Synechococcus/data_0.parquet": {
+      "checksum": "bd52efb9cb835c6cdc78d139b86603a8"
+    },
+    "data/parquet_by_genus/Genus=Synechococcus/data_1.parquet": {
+      "checksum": "a7cab9613086acf72ab9c2e8f6de5a70"
+    },
+    "data/parquet_by_genus/Genus=Synechocystis/data_0.parquet": {
+      "checksum": "3de82f2eec9f10f70c4ca9e0e1eaced2"
+    },
+    "data/parquet_by_genus/Genus=Tannerella/data_0.parquet": {
+      "checksum": "4d991bcba5e26cec0fb7c637beebdc2b"
+    },
+    "data/parquet_by_genus/Genus=Tenacibaculum/data_0.parquet": {
+      "checksum": "f74dc325d9cf01f9b1c8fc4c56ca9047"
+    },
+    "data/parquet_by_genus/Genus=Tepidanaerobacter/data_0.parquet": {
+      "checksum": "de2980f5b9f828d7ca533d7ebc2fc9f6"
+    },
+    "data/parquet_by_genus/Genus=Tepidimonas/data_0.parquet": {
+      "checksum": "d38c09a0434922538ab64cc6bac54693"
+    },
+    "data/parquet_by_genus/Genus=Teredinibacter/data_0.parquet": {
+      "checksum": "526f7c47ffab8d96ddbfaf20a275d413"
+    },
+    "data/parquet_by_genus/Genus=Terrisporobacter/data_0.parquet": {
+      "checksum": "1fed966b228a80645e6d2a655cdd1320"
+    },
+    "data/parquet_by_genus/Genus=Thalassobacillus/data_0.parquet": {
+      "checksum": "1898d01a22813c5c688aeb858375707f"
+    },
+    "data/parquet_by_genus/Genus=Thalassobacter/data_0.parquet": {
+      "checksum": "2bc7bd014c489d80b34eff6bd29bde6a"
+    },
+    "data/parquet_by_genus/Genus=Thalassospira/data_0.parquet": {
+      "checksum": "071340b03074d0e5da9c39ca7c867d11"
+    },
+    "data/parquet_by_genus/Genus=Thermoactinomyces/data_0.parquet": {
+      "checksum": "cf666e078dbe5e0e4ec260c5ef5d2f3e"
+    },
+    "data/parquet_by_genus/Genus=Thermoanaerobacter/data_0.parquet": {
+      "checksum": "22b57272b30d9c7b6076681bf3663891"
+    },
+    "data/parquet_by_genus/Genus=Thermoanaerobacterium/data_0.parquet": {
+      "checksum": "f101fc8124e82276c22f00d536c4fc48"
+    },
+    "data/parquet_by_genus/Genus=Thermochromatium/data_0.parquet": {
+      "checksum": "46723c970bdedfced307d61c79631519"
+    },
+    "data/parquet_by_genus/Genus=Thermophilibacter/data_0.parquet": {
+      "checksum": "2ae6c39718ba468e1f7559b17aef75ac"
+    },
+    "data/parquet_by_genus/Genus=Thermus/data_0.parquet": {
+      "checksum": "a8b069ed7f2f1add7ebb7847ac1843cd"
+    },
+    "data/parquet_by_genus/Genus=Thermus/data_1.parquet": {
+      "checksum": "0470a4b5bf35dfc4efd58901f42c8d06"
+    },
+    "data/parquet_by_genus/Genus=Thiobacillus/data_0.parquet": {
+      "checksum": "d5211f1d9b3900371aef4393c80a0635"
+    },
+    "data/parquet_by_genus/Genus=Thiocapsa/data_0.parquet": {
+      "checksum": "629d52a359355075391fba3283fdf91b"
+    },
+    "data/parquet_by_genus/Genus=Thiomonas/data_0.parquet": {
+      "checksum": "22fc5101830b4bf9401bfb5d8efeac7e"
+    },
+    "data/parquet_by_genus/Genus=Thiopseudomonas/data_0.parquet": {
+      "checksum": "29d1c22e4c61d7f45819b92e8a7bcca9"
+    },
+    "data/parquet_by_genus/Genus=Thomasclavelia/data_0.parquet": {
+      "checksum": "5a4234f74811b6ad7a3bb643acdc1867"
+    },
+    "data/parquet_by_genus/Genus=Tidjanibacter/data_0.parquet": {
+      "checksum": "51a1f7d16863a53c303641926fd55297"
+    },
+    "data/parquet_by_genus/Genus=Trabulsiella/data_0.parquet": {
+      "checksum": "722f1eb0d1dabf93ea4c4ea555f34f22"
+    },
+    "data/parquet_by_genus/Genus=Tractidigestivibacter/data_0.parquet": {
+      "checksum": "7af5e7b278b1632384b45953cfe6a72a"
+    },
+    "data/parquet_by_genus/Genus=Treponema_B/data_0.parquet": {
+      "checksum": "e8b3e4afe185c7764934ee1dedc925cb"
+    },
+    "data/parquet_by_genus/Genus=Treponema_D/data_0.parquet": {
+      "checksum": "417ab788cd77651e2de94f4225fc6bbd"
+    },
+    "data/parquet_by_genus/Genus=Treponema/data_0.parquet": {
+      "checksum": "6ba381413d26b86fca59363e422e1676"
+    },
+    "data/parquet_by_genus/Genus=Trinickia/data_0.parquet": {
+      "checksum": "3f2124c3764d2a1c19c4b44017a6da37"
+    },
+    "data/parquet_by_genus/Genus=Tropicibacter/data_0.parquet": {
+      "checksum": "d8b6eadd5bc994666be0b717bb45cfd2"
+    },
+    "data/parquet_by_genus/Genus=Trueperella/data_0.parquet": {
+      "checksum": "40ee20c5b6c905c34d45c10f36ec28f0"
+    },
+    "data/parquet_by_genus/Genus=Tumebacillus/data_0.parquet": {
+      "checksum": "f15be33b32c02c4731d44c099e36f0ad"
+    },
+    "data/parquet_by_genus/Genus=Turicibacter/data_0.parquet": {
+      "checksum": "b051c529e17bec14fcf6cc5454ea91f7"
+    },
+    "data/parquet_by_genus/Genus=Turicibacter/data_1.parquet": {
+      "checksum": "621d44edd10db362cddea62c54aeb967"
+    },
+    "data/parquet_by_genus/Genus=UBA1417/data_0.parquet": {
+      "checksum": "60cff100e20ff23b4ea448c9d932b277"
+    },
+    "data/parquet_by_genus/Genus=UBA1712/data_0.parquet": {
+      "checksum": "49cd11ce5547a12ef8db3bd998bc246e"
+    },
+    "data/parquet_by_genus/Genus=UBA3282/data_0.parquet": {
+      "checksum": "d6e4aaf1c00d843aad1ec4bd4a90d156"
+    },
+    "data/parquet_by_genus/Genus=UBA3402/data_0.parquet": {
+      "checksum": "9205e1f273f5160638fe3b380c982ec8"
+    },
+    "data/parquet_by_genus/Genus=UBA7109/data_0.parquet": {
+      "checksum": "1f75a2d8f2eff0eed55783cc6ad31366"
+    },
+    "data/parquet_by_genus/Genus=UBA7173/data_0.parquet": {
+      "checksum": "a258fa8374f3067516bfcee22d4bddc7"
+    },
+    "data/parquet_by_genus/Genus=UBA7405/data_0.parquet": {
+      "checksum": "88ef570f1a569fea10c59fe4fed71a33"
+    },
+    "data/parquet_by_genus/Genus=UBA7405/data_1.parquet": {
+      "checksum": "9e7596fe16ad645a9d6e90a214b7f100"
+    },
+    "data/parquet_by_genus/Genus=UBA866/data_0.parquet": {
+      "checksum": "061b75644886672672ddb7066cc7b27a"
+    },
+    "data/parquet_by_genus/Genus=Undibacterium/data_0.parquet": {
+      "checksum": "c6de0f0a63f65b1c8b41635ce4a97158"
+    },
+    "data/parquet_by_genus/Genus=Ureibacillus/data_0.parquet": {
+      "checksum": "db3bad9b02df1ed8d2fb718a900df9d9"
+    },
+    "data/parquet_by_genus/Genus=Urinicoccus/data_0.parquet": {
+      "checksum": "fc43dc5f15a3170eb0a11f29e0ca2b1d"
+    },
+    "data/parquet_by_genus/Genus=Vagococcus_A/data_0.parquet": {
+      "checksum": "99f9c7d61053c3ca3843f0c5170c4a03"
+    },
+    "data/parquet_by_genus/Genus=Vagococcus_B/data_0.parquet": {
+      "checksum": "459870700cbdc03b7345d0a60f43270a"
+    },
+    "data/parquet_by_genus/Genus=Vagococcus_C/data_0.parquet": {
+      "checksum": "28706a0cb5e4b2c0ce4915964a92c730"
+    },
+    "data/parquet_by_genus/Genus=Vagococcus/data_0.parquet": {
+      "checksum": "64b99a2e88634fd1e26f812808ad1391"
+    },
+    "data/parquet_by_genus/Genus=Varibaculum/data_0.parquet": {
+      "checksum": "28c40859ba4e91fc2a80c20cfa1bf457"
+    },
+    "data/parquet_by_genus/Genus=Variovorax/data_0.parquet": {
+      "checksum": "9c85eedb9f471af2e2a36dda76d58b3d"
+    },
+    "data/parquet_by_genus/Genus=Veillonella_A/data_0.parquet": {
+      "checksum": "7155d4220079a907910f19a2f4308ff9"
+    },
+    "data/parquet_by_genus/Genus=Veillonella/data_0.parquet": {
+      "checksum": "2de7873a96c1f841eddb8ef5ac300e14"
+    },
+    "data/parquet_by_genus/Genus=Ventrimonas/data_0.parquet": {
+      "checksum": "d26f0137cff9e78c2ade2e771975e8ad"
+    },
+    "data/parquet_by_genus/Genus=Vibrio/data_0.parquet": {
+      "checksum": "bc09b3bc1c3f09a1ba1a12e344f9df9c"
+    },
+    "data/parquet_by_genus/Genus=Victivallis/data_0.parquet": {
+      "checksum": "fa4f25c62e3b75bf2568437f255b2212"
+    },
+    "data/parquet_by_genus/Genus=VUNA01/data_0.parquet": {
+      "checksum": "2cdcd21a3641941c58877a77127c32f5"
+    },
+    "data/parquet_by_genus/Genus=Wagnerdoeblera/data_0.parquet": {
+      "checksum": "9128adf2c38011eb4bb34d875f7266b9"
+    },
+    "data/parquet_by_genus/Genus=Weeksella/data_0.parquet": {
+      "checksum": "e3145b2fa6f7ad37db2d496531a4fdb3"
+    },
+    "data/parquet_by_genus/Genus=Weissella/data_0.parquet": {
+      "checksum": "7b2d7c2b0cefbf70b17d7db2ac7e1fd6"
+    },
+    "data/parquet_by_genus/Genus=Weizmannia/data_0.parquet": {
+      "checksum": "573b1c923574f92696b8b2f4cbfb5eab"
+    },
+    "data/parquet_by_genus/Genus=Williamsia/data_0.parquet": {
+      "checksum": "b3f3f3676077a8d0dee299f7b62fd348"
+    },
+    "data/parquet_by_genus/Genus=Winkia/data_0.parquet": {
+      "checksum": "153fe0225e16e5f306d405e2750d9b32"
+    },
+    "data/parquet_by_genus/Genus=Wohlfahrtiimonas/data_0.parquet": {
+      "checksum": "b5fb31ffaeaf80070cfb79845e5df1ac"
+    },
+    "data/parquet_by_genus/Genus=Wohlfahrtiimonas/data_1.parquet": {
+      "checksum": "94a89386a4cd8a42451e53f8ade6a22b"
+    },
+    "data/parquet_by_genus/Genus=Xanthobacter/data_0.parquet": {
+      "checksum": "fba8f4dca43383a79606bb6c95694392"
+    },
+    "data/parquet_by_genus/Genus=Xanthomonas_A/data_0.parquet": {
+      "checksum": "dd6b62674586caa854db0cbf62aa3293"
+    },
+    "data/parquet_by_genus/Genus=Xanthomonas/data_0.parquet": {
+      "checksum": "ddac41cbe101ebf11b2f6ffa1ab17aff"
+    },
+    "data/parquet_by_genus/Genus=Xylella/data_0.parquet": {
+      "checksum": "cb4dd8099d75ea8e7ef232d6b6b27f96"
+    },
+    "data/parquet_by_genus/Genus=Yersinia/data_0.parquet": {
+      "checksum": "b4f64ef306b57351f3822ddba3fdc286"
+    },
+    "data/parquet_by_genus/Genus=Yokenella/data_0.parquet": {
+      "checksum": "9704be1150a26ac3d07d3c24e41c7724"
+    },
+    "data/parquet_by_genus/Genus=Yuhushiella/data_0.parquet": {
+      "checksum": "44e8ee644c7feaba2a084ec491942271"
+    },
+    "data/parquet_by_genus/Genus=Zhenpiania/data_0.parquet": {
+      "checksum": "fab85a14b31546478c370199ba282356"
+    },
+    "data/parquet_by_genus/Genus=Zobellella_D/data_0.parquet": {
+      "checksum": "ae130367bf3f518867ff3347bb8dc730"
+    },
+    "data/parquet_by_genus/Genus=Zobellia/data_0.parquet": {
+      "checksum": "cdd13036dde7085d7f2d11c905f83956"
+    },
+    "DESCRIPTION": {
+      "checksum": "fab7ef09daa9d28ba08581dc3857dc96"
+    },
     "pages/core_gene_genus.R": {
-      "checksum": "8f84427f8e62c39415da1e7d3ed8b2e0"
+      "checksum": "41861b207f91ec2e9ece3c60c0d56bfc"
     },
     "pages/core_gene_species.R": {
-      "checksum": "3c1c5f6d315c1769fe9a387ddf6217c2"
+      "checksum": "577ed64fc9b61f90e58c4eba2c4edef3"
     },
     "pages/gene_by_species.R": {
-      "checksum": "2a280baf7feb35d6f289c062f94ef186"
+      "checksum": "e780b2ed8b962c714107ebef689e813b"
+    },
+    "README.md": {
+      "checksum": "2a4fabac6877288c1ab3f174f8a933e7"
     },
     "renv.lock": {
-      "checksum": "5793fbe0af566e3c4b26d08fb5711019"
+      "checksum": "43c92e78e8ec791cb09d23b4a4ffa75f"
+    },
+    "requirements.R": {
+      "checksum": "5a57b02daef89f46aeebc34a2c905c4a"
+    },
+    "src/download_functions.R": {
+      "checksum": "f5b9f52d2e8bbaa534dcf199bc5a44f4"
+    },
+    "www/custom.css": {
+      "checksum": "a7b86ba482671584eee1e3838529a33a"
     }
   },
   "users": null

@@ -1,0 +1,23 @@
+Package: myshinyapp
+Type: Package
+Title: My Shiny App
+Version: 0.0.1
+Authors@R: 
+    person(given = "YourFirstName",
+           family = "YourLastName",
+           role = c("aut", "cre"),
+           email = "you@example.com")
+Description: A Shiny application that uses duckdb with tidyverse components.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.2.0)
+Imports:
+    shiny,
+    duckdb,
+    tidyverse,
+    dplyr,
+    bslib,
+    DBI,
+    ggplot2,
+    readr
