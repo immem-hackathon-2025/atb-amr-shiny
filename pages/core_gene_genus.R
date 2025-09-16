@@ -16,8 +16,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     summarise(n = n(), .groups = "drop") 
   
   genus_counts <- afp %>%
-    distinct(Name, Species, Genus) %>%                  # unique sample-species pairs
-    group_by(Species, Genus) %>%
+    distinct(Species, Genus) %>%                  # unique sample-species pairs
+    group_by(Genus) %>%
     summarise(nspp = n(), .groups = "drop") %>%
     filter(nspp >= 10) %>%
     left_join(genus_counts, by="Genus") %>%
@@ -27,7 +27,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
   names(genus_list) <- paste(
     genus_counts$Genus,
     " (n=", genus_counts$n,
-    " in ", n_per_genus$nspp,
+    " in ", genus_counts$nspp,
     " species)",
     sep = ""
   )
@@ -76,7 +76,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     ### TODO: allow user to select node instead of gene, as the unit of measurement
     # gene frequency per species
-    afp_this_genus <- afp_this_genus %>% 
+    afp_this_genus <- afp_this_genus %>%
+      filter(!is.na(`Gene symbol`)) %>% 
       distinct(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>%
       group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>%
       count() %>% 

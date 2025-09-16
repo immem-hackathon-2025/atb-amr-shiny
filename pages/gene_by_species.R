@@ -8,7 +8,8 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
       n = n(),
       nspp = n_distinct(Species)
     ) %>%
-    arrange(desc(n))
+    arrange(desc(n)) %>%
+    filter(!is.na(`Gene symbol`))
   
   n_per_gene <- gene_counts_lazy %>%
     collect()
@@ -82,9 +83,8 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
       mutate(freq=n/nspp) %>%
       filter(freq>=!!input$min_freq) %>%
       filter(n>!!input$min_genomes_per_species) %>%
+      mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
       collect()
-    
-    print(afp_this_gene)
     
     afp_this_gene
     
@@ -106,7 +106,7 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     
     validate(need(nrow(df) > 0, "No species with this gene pass current thresholds."))
     
-    ggplot(df, aes(x=freq, y=Species)) +
+    ggplot(df, aes(x=freq, y=label)) +
       geom_col(fill="navy") + 
       theme_bw() +
       theme(axis.text.y=element_text(size=10)) + 

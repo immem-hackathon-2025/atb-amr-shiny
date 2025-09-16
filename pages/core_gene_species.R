@@ -82,6 +82,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     gene_freq_tbl <- spp_tbl %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence`  >= !!id_min) %>%
+      filter(!is.na(`Gene symbol`)) %>%
       distinct(Name, `Gene symbol`, Class, Subclass) %>%        # unique sample-gene combos
       group_by(`Gene symbol`, Class, Subclass) %>%
       summarise(n = n(), .groups = "drop") %>%
