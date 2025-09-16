@@ -11,6 +11,10 @@ library(shiny)
 library(tidyverse)
 library(dplyr)
 library(bslib)
+library(DBI)
+library(duckdb)
+library(ggplot2)
+library(readr)
 
 
 source("pages/core_gene_species.R")
@@ -48,7 +52,7 @@ ui <- page_navbar(
 server <- function(input, output) {
     # Render pages
     output$core_genes_species <- renderUI({
-        coreGenesForSpeciesPage(afp, input, output)
+        coreGenesForSpeciesPage(input, output)
     })
     output$core_genes_genus <- renderUI({
         coreGenesForGenusPage(afp, input, output)
