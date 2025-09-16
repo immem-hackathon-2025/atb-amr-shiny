@@ -8,7 +8,8 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     count() %>% distinct() %>% ungroup() %>% 
     group_by(Species) %>% 
     summarise(nspp=n()) %>% 
-    arrange(-nspp)
+    arrange(-nspp) %>% 
+    filter(nspp>=10) # hard code to only show species with at least n=10 members
   
   species_list <- n_per_species$Species
   names(species_list) <- paste(n_per_species$Species, " (n=",n_per_species$nspp,")", sep="")
@@ -55,7 +56,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
       geom_col() + 
       theme_bw() +
       theme(axis.text.y=element_text(size=10)) + 
-      labs(y="", x="Gene frequency", title=paste0("Genes with freq between ",input$core_threshold[1]," and ", input$core_threshold[2]," in ", input$selected_species))
+      labs(y="", x="Gene frequency", title=paste0("Genes with frequency in the range [",input$core_threshold[1],"-", input$core_threshold[2],"] in ", input$selected_species))
       
   }) 
   
