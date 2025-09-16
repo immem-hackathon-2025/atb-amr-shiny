@@ -47,6 +47,16 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "Select a minimum gene frequency per species, to include the species in the plot:",
           min=0,max=1,value=0.01
         ),
+        sliderInput(
+          "identity_threshold",
+          "Minimum nucleotide identity:",
+          min = 0.5, max = 1.0, value = 0.9
+        ),
+        sliderInput(
+          "coverage_threshold",
+          "Minimum coverage:",
+          min = 0.5, max = 1.0, value = 0.9
+        ),
         #setting button options
         circle = TRUE,
         status = "warning", 
@@ -65,9 +75,15 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   geneAcrossSpecies <- reactive({
     # for a single species, plot candidate core genes
     
-    req(input$selected_gene, input$min_genomes_per_species, input$min_freq)
+    req(input$selected_gene, input$min_genomes_per_species, input$min_freq, input$identity_threshold, input$coverage_threshold)
     
-    afp_this_gene <- afp %>% filter(`Gene symbol` == !!input$selected_gene)
+    # Convert proportions [0,1] to percentages [0,100] to match the AFP columns
+    id_min  <- input$identity_threshold  * 100
+    cov_min <- input$coverage_threshold  * 100
+    
+    afp_this_gene <- afp %>% filter(`Gene symbol` == !!input$selected_gene) %>%
+      filter(`% Coverage of reference sequence` >= !!cov_min) %>%
+      filter(`% Identity to reference sequence` >= !!id_min) 
     
     # total number per species
     species_counts <- afp %>%

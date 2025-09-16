@@ -25,8 +25,6 @@ source("src/download_functions.R")
 
 
 # read in raw data, this has a merge of AFP and the species call + HQ
-### TODO: REPLACE WITH INTERNAL DATA OBJECT
-### IDEA: could remove filter to AMR, so we can plot the same info for virulence genes etc reported by AMRfp
 # Connect (single per-page)
 con <- dbConnect(duckdb())
 

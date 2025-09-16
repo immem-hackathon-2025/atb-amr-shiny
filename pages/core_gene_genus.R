@@ -53,6 +53,16 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Select a minimum number of genomes per species, to include the species in the plot:",
           min=5,max=100,value=10
         ),
+        sliderInput(
+          "identity_threshold",
+          "Minimum nucleotide identity:",
+          min = 0.5, max = 1.0, value = 0.9
+        ),
+        sliderInput(
+          "coverage_threshold",
+          "Minimum coverage:",
+          min = 0.5, max = 1.0, value = 0.9
+        ),
           ),
           mainPanel(
             plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)"),
@@ -64,9 +74,15 @@ coreGenesForGenusPage <- function(afp, input, output) {
   geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
     
-    req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species)
+    req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species, input$identity_threshold, input$coverage_threshold)
     
-    afp_this_genus <- afp %>% filter(Genus == !!input$selected_genus)
+    # Convert proportions [0,1] to percentages [0,100] to match the AFP columns
+    id_min  <- input$identity_threshold  * 100
+    cov_min <- input$coverage_threshold  * 100
+    
+    afp_this_genus <- afp %>% filter(Genus == !!input$selected_genus) %>%
+      filter(`% Coverage of reference sequence` >= !!cov_min) %>%
+      filter(`% Identity to reference sequence` >= !!id_min) 
     
     # total number per species
     species_counts <- afp %>%
@@ -95,7 +111,6 @@ coreGenesForGenusPage <- function(afp, input, output) {
     IconButton("downloadGeneCountPerSpp", "data_dl", "Download")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(
-    #filename = "gene_count_per_spp.tsv",
     filename = paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep=""),
     content = function(file) {
       write_tsv(geneCountPerSpp(), file)

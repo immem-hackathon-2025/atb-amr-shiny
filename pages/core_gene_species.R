@@ -37,12 +37,12 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
         # sliders are proportions (0..1); converted below to percent to match columns
         sliderInput(
           "identity_threshold",
-          "Minimum nucleotide identity (proportion):",
+          "Minimum nucleotide identity:",
           min = 0.5, max = 1.0, value = 0.9
         ),
         sliderInput(
           "coverage_threshold",
-          "Minimum coverage (proportion):",
+          "Minimum coverage:",
           min = 0.5, max = 1.0, value = 0.9
         ),
         #setting button options
@@ -90,7 +90,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     gene_freq_tbl <- spp_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence`  >= !!id_min) %>%
+      filter(`% Identity to reference sequence` >= !!id_min) %>%
       filter(!is.na(`Gene symbol`)) %>%
       distinct(Name, `Gene symbol`, Class, Subclass) %>%        # unique sample-gene combos
       group_by(`Gene symbol`, Class, Subclass) %>%
