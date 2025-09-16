@@ -17,6 +17,8 @@ source("pages/core_gene_species.R")
 source("pages/core_gene_genus.R")
 source("pages/gene_by_species.R")
 
+source("src/download_functions.R")
+
 
 # read in raw data, this has a merge of AFP and the species call + HQ
 ### TODO: REPLACE WITH INTERNAL DATA OBJECT
