@@ -3,6 +3,7 @@
 geneAcrossSpeciesPage <- function(afp, input, output) {
   
   gene_counts_lazy <- afp %>%
+    filter(`Element%20type`==!!input$element_type)%>%
     group_by(`Gene symbol`) %>%
     summarise(
       n = n(),
@@ -14,8 +15,8 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   n_per_gene <- gene_counts_lazy %>%
     collect()
   
-  gene_list <- n_per_gene$`Gene symbol`
-  names(gene_list) <- paste(
+  output$gene_list <- n_per_gene$`Gene symbol`
+  names(output$gene_list) <- paste(
     n_per_gene$`Gene symbol`,
     " (n=", n_per_gene$n,
     " in ", n_per_gene$nspp,
@@ -26,6 +27,15 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
+        
+        # filter for AMR/STRESS/VIRULENCE
+        checkboxGroupButtons(
+          inputId = "element_type",
+          label = "Determinant(s) of interest",
+          choices = c("AMR", "Virulence", "Stress"), 
+          selected= c("AMR"),
+        ),
+        
         
         selectizeInput(
           "selected_gene",
@@ -80,8 +90,8 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   updateSelectizeInput(
     session = getDefaultReactiveDomain(),
     inputId = "selected_gene",
-    choices = gene_list,
-    selected = if (length(gene_list)) gene_list[[1]] else NULL,
+    choices = output$gene_list,
+    selected = if (length(output$gene_list)) output$gene_list[[1]] else NULL,
     server = TRUE
   )
 
@@ -96,7 +106,8 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     
     afp_this_gene <- afp %>% filter(`Gene symbol` == !!input$selected_gene) %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence` >= !!id_min) 
+      filter(`% Identity to reference sequence` >= !!id_min) %>%
+      filter(`Element%20type` == !!input$element_type)
     
     # total number per species
     species_counts <- afp %>%
