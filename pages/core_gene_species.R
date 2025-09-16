@@ -19,11 +19,14 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
-        selectInput(
+        selectizeInput(
           "selected_species",
           "Choose a species to explore its gene frequency:",
-          choices = species_choices,
-          selected = if (length(species_choices)) species_counts$Species[[1]] else NULL
+          choices = NULL,
+          options = list(
+            placeholder = 'Select a species...',
+            onInitialize = I('function() { this.setValue(""); }')
+          )
         ),
         # Settings button
         dropdownButton(
@@ -58,6 +61,15 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     )
   )
   
+  # Server-side selectize for species choices
+  updateSelectizeInput(
+    session = getDefaultReactiveDomain(),
+    inputId = "selected_species",
+    choices = species_choices,
+    selected = if (length(species_choices)) species_counts$Species[[1]] else NULL,
+    server = TRUE
+  )
+
   # Reactive data for selected species and thresholds
   coreGeneSpecies <- reactive({
     req(input$selected_species, input$core_threshold, input$identity_threshold, input$coverage_threshold)

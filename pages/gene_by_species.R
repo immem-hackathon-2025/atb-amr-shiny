@@ -26,10 +26,14 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     sidebarLayout(
       sidebarPanel(
         
-        selectInput(
+        selectizeInput(
           "selected_gene",
           "Choose a gene to explore its frequency across species:",
-          gene_list
+          choices = NULL,
+          options = list(
+            placeholder = 'Select a gene...',
+            onInitialize = I('function() { this.setValue(""); }')
+          )
         ),
         # Settings button
         dropdownButton(
@@ -61,6 +65,15 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     )
   )
   
+  # Server-side selectize for gene choices
+  updateSelectizeInput(
+    session = getDefaultReactiveDomain(),
+    inputId = "selected_gene",
+    choices = gene_list,
+    selected = if (length(gene_list)) gene_list[[1]] else NULL,
+    server = TRUE
+  )
+
   geneAcrossSpecies <- reactive({
     # for a single species, plot candidate core genes
     

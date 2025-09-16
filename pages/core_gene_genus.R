@@ -36,10 +36,14 @@ coreGenesForGenusPage <- function(afp, input, output) {
       sidebarLayout(
           sidebarPanel(
         # select Genus for core_gene_species plot
-        selectInput(
+        selectizeInput(
           "selected_genus",
           "Choose a genus to explore gene frequencies across its member species:",
-          genus_list
+          choices = NULL,
+          options = list(
+            placeholder = 'Select a genus...',
+            onInitialize = I('function() { this.setValue(""); }')
+          )
         ),
         # select core gene threshold for core_gene_species plot
         sliderInput(
@@ -61,6 +65,15 @@ coreGenesForGenusPage <- function(afp, input, output) {
       )
   )
   
+  # Server-side selectize for genus choices
+  updateSelectizeInput(
+    session = getDefaultReactiveDomain(),
+    inputId = "selected_genus",
+    choices = genus_list,
+    selected = if (length(genus_list)) genus_list[[1]] else NULL,
+    server = TRUE
+  )
+
   geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
     
