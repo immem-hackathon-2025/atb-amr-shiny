@@ -15,7 +15,7 @@ library(DBI)
 library(duckdb)
 library(ggplot2)
 library(readr)
-
+library(shinyWidgets)
 
 source("pages/core_gene_species.R")
 source("pages/core_gene_genus.R")
