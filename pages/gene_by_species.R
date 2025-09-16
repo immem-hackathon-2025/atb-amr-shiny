@@ -29,13 +29,12 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
       # Show a plot of the generated distribution
       mainPanel(
         plotOutput("geneAcrossSpeciesPlot", height = "calc(100vh - 200px)"),
+        shiny::uiOutput("geneAcrossSpeciesDownloadButton"),
       )
     )
   )
   
-  
-  output$geneAcrossSpeciesPlot <- renderPlot({
-    
+  geneAcrossSpecies <- reactive({
     # for a single species, plot candidate core genes
     afp_this_gene <- afp %>% filter(`Gene symbol`==input$selected_gene)
     #n_this_spp <- length(unique(afp_this_spp$Name))
@@ -55,7 +54,21 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
       count() %>% 
       left_join(n_per_species, by="Species") %>% 
       mutate(freq=n/nspp) %>%
-      filter(freq>=input$min_freq & n>input$min_genomes_per_species) %>% 
+      filter(freq>=input$min_freq & n>input$min_genomes_per_species)
+  })
+  
+  output$geneAcrossSpeciesDownloadButton <- renderUI({
+    IconButton("downloadGeneAcrossSpecies", "data_dl", "Download")
+  })
+  output$downloadGeneAcrossSpecies <- downloadHandler(
+    filename = "genes_by_species.tsv",
+    content = function(file) {
+      write_tsv(geneAcrossSpecies(), file)
+    }
+  )
+  
+  output$geneAcrossSpeciesPlot <- renderPlot({
+    geneAcrossSpecies() %>% 
       ggplot(aes(x=freq, y=Species)) +
       geom_col(fill="navy") + 
       theme_bw() +

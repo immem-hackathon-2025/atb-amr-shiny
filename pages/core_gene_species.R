@@ -70,7 +70,6 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   output$downloadCoreGeneSpecies <- downloadHandler(
     filename = "core_gene_species.tsv",
     content = function(file) {
-      d <- coreGeneSpecies()
       write_tsv(coreGeneSpecies(), file)
     }
   )
