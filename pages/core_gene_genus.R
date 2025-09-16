@@ -36,10 +36,14 @@ coreGenesForGenusPage <- function(afp, input, output) {
       sidebarLayout(
           sidebarPanel(
         # select Genus for core_gene_species plot
-        selectInput(
+        selectizeInput(
           "selected_genus",
           "Choose a genus to explore gene frequencies across its member species:",
-          genus_list
+          choices = NULL,
+          options = list(
+            placeholder = 'Select a genus...',
+            onInitialize = I('function() { this.setValue(""); }')
+          )
         ),
         dropdownButton(
           tags$h3("Settings"),
@@ -81,6 +85,15 @@ coreGenesForGenusPage <- function(afp, input, output) {
       )
   )
   
+  # Server-side selectize for genus choices
+  updateSelectizeInput(
+    session = getDefaultReactiveDomain(),
+    inputId = "selected_genus",
+    choices = genus_list,
+    selected = if (length(genus_list)) genus_list[[1]] else NULL,
+    server = TRUE
+  )
+
   genus_tbl <- reactive({
     afp %>% filter(Genus == !!input$selected_genus)
   })
@@ -141,9 +154,11 @@ coreGenesForGenusPage <- function(afp, input, output) {
     IconButton("downloadGeneCountPerSpp", "data_dl", "Gene count")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(
-    filename = paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep=""),
+    filename = function(){
+      paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep="")
+    },
     content = function(file) {
-      write_tsv(geneCountPerSpp() %>% collect(), file)
+      write_tsv(geneCountPerSpp(), file)
     }
   )
 
