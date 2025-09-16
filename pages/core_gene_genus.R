@@ -7,24 +7,25 @@ coreGenesForGenusPage <- function(afp, input, output) {
   
   # get list of genera to select from
   # total number per genus
-  n_per_genus <- afp %>% 
-    group_by(Name, Genus) %>% 
-    count() %>% distinct() %>% ungroup() %>% 
-    group_by(Genus) %>% 
-    count() %>% 
-    arrange(-n)
+  genus_counts_lazy <- afp %>%
+    group_by(Genus) %>%
+    summarise(
+      n = n(),
+      nspp = n_distinct(Species)
+    ) %>%
+    arrange(desc(n))
   
-  # add total species per genus
-  n_per_genus <- afp %>% 
-    group_by(Genus, Species) %>% 
-    count() %>% distinct() %>% ungroup() %>% 
-    group_by(Genus) %>% 
-    summarise(nspp=n()) %>% 
-    left_join(n_per_genus, by = "Genus") %>%
-    arrange(-nspp) 
+  n_per_genus <- genus_counts_lazy %>%
+    collect()
   
   genus_list <- n_per_genus$Genus
-  names(genus_list) <- paste(n_per_genus$Genus, " (n=",n_per_genus$n," in ", n_per_genus$nspp," species)", sep="")
+  names(genus_list) <- paste(
+    n_per_genus$Genus,
+    " (n=", n_per_genus$n,
+    " in ", n_per_genus$nspp,
+    " species)",
+    sep = ""
+  )
   
   ui <- fluidPage(
       sidebarLayout(

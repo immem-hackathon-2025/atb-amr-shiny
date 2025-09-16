@@ -1,7 +1,6 @@
 # plot gene frequencies for a selected species and frequency range
 coreGenesForSpeciesPage <- function(afp, input, output) {
 
-   
   # --- Build species list from distinct samples (Name) per Species ---
   # Only include species with at least 10 unique samples
   species_counts <- afp %>%
