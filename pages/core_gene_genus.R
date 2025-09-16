@@ -20,7 +20,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
     count() %>% distinct() %>% ungroup() %>% 
     group_by(Genus) %>% 
     summarise(nspp=n()) %>% 
-    left_join(n_per_genus) %>%
+    left_join(n_per_genus, by = "Genus") %>%
     arrange(-nspp) 
   
   genus_list <- n_per_genus$Genus
@@ -49,14 +49,13 @@ coreGenesForGenusPage <- function(afp, input, output) {
         ),
           ),
           mainPanel(
-      plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)")
+            plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)"),
+            shiny::uiOutput("geneCountPerSppDownloadButton"),
           )
       )
   )
-
-
-  output$coreGeneGenusPlot <- renderPlot({
-    
+  
+  geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
     #afp <- afp %>% filter(grepl(input$selected_genus, Species))
     afp_this_genus <- afp %>% filter(Genus==input$selected_genus)
@@ -71,7 +70,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     ### TODO: allow user to select node instead of gene, as the unit of measurement
     # gene frequency per species
-    gene_count_per_spp <- afp_this_genus %>% 
+    afp_this_genus %>% 
       group_by(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
       count() %>% distinct() %>% ungroup() %>% 
       group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
@@ -81,9 +80,22 @@ coreGenesForGenusPage <- function(afp, input, output) {
       filter(nspp>input$min_genomes_per_species & freq>input$core_threshold2) %>%
       mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
       arrange(-nspp) 
+  })
+  
+  output$geneCountPerSppDownloadButton <- renderUI({
+    IconButton("downloadGeneCountPerSpp", "data_dl")
+  })
+  output$downloadGeneCountPerSpp <- downloadHandler(
+    filename = "gene_count_per_spp.tsv",
+    content = function(file) {
+      write_tsv(geneCountPerSpp(), file)
+    }
+  )
+
+  output$coreGeneGenusPlot <- renderPlot({
     
-    if (nrow(gene_count_per_spp) > 0) {
-      gene_count_per_spp %>%
+    if (nrow(geneCountPerSpp()) > 0) {
+      geneCountPerSpp() %>%
       ggplot(aes(y=label, x=freq)) + 
       geom_col(position='dodge', fill="navy") + 
       facet_wrap(~`Gene symbol`) + 
@@ -107,6 +119,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     }
       
   }) 
+  
+  
 
   return(ui)
 
