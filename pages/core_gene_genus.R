@@ -86,7 +86,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     IconButton("downloadGeneCountPerSpp", "data_dl", "Download")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(
-    filename = "gene_count_per_spp.tsv",
+    #filename = "gene_count_per_spp.tsv",
+    filename = paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep=""),
     content = function(file) {
       write_tsv(geneCountPerSpp(), file)
     }
