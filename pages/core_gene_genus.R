@@ -8,19 +8,19 @@ coreGenesForGenusPage <- function(afp, input, output) {
         # select Genus for core_gene_species plot
         selectInput(
           "selected_genus",
-          "Choose a genus to explore gene frequency across its species:",
+          "Choose a genus to explore gene frequencies across its member species:",
           list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
         ),
         # select core gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold",
-          "Select a minimum frequency threshold for genes to plot:",
+          "Select a minimum gene frequency, to include the gene in the plot:",
           min=0,max=1,value=0.9
         ),
         # select core gene threshold for core_gene_species plot
         sliderInput(
           "min_genomes_per_species",
-          "Select a minimum number of genomes per species, to include in plot:",
+          "Select a minimum number of genomes per species, to include the species in the plot:",
           min=5,max=100,value=10
         ),
           ),
