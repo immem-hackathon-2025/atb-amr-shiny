@@ -16,7 +16,7 @@ IconButton <- function(outputId, type, ...) {
     target='_blank',
     download=NA,
     icon,
-    '',
+    'Download',
     ...
   )
 }
