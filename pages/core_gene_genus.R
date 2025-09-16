@@ -78,8 +78,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     # gene frequency per species
     afp_this_genus <- afp_this_genus %>%
       filter(!is.na(`Gene symbol`)) %>% 
-      distinct(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>%
-      group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>%
+      distinct(Name, `Gene symbol`, Class, Subclass, Species) %>%
+      group_by(`Gene symbol`, Class, Subclass, Species) %>%
       count() %>% 
       left_join(species_counts, by="Species") %>% 
       mutate(freq=n/nspp) %>% 
