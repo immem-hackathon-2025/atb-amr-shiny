@@ -2,7 +2,7 @@
 
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
-  # total number per species
+  # get species list
   n_per_species <- afp %>% 
     group_by(Name, Species) %>% 
     count() %>% distinct() %>% ungroup() %>% 
@@ -21,13 +21,24 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
             "selected_species",
             "Choose a species to explore its gene frequency:",
             species_list
-            #list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
           ),
           # select gene threshold for core_gene_species plot
           sliderInput(
             "core_threshold",
             "Select a minimum frequency threshold for genes to include:",
             min=0,max=1,value=c(0.6, 1)
+          ),
+          # select minimum identity threshold for gene hits
+          sliderInput(
+            "identity_threshold",
+            "Select a minimum nucleotide identity threshold to call a hit:",
+            min=0.5,max=1,value=0.9
+          ),
+          # select minimum coverage threshold for gene hits
+          sliderInput(
+            "coverage_threshold",
+            "Select a minimum coverage threshold to call a hit:",
+            min=0.5,max=1,value=0.9
           )
         ),
         
@@ -47,6 +58,8 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     n_this_spp <- length(unique(afp_this_spp$Name))
   
     afp_this_spp %>%
+      filter(`% Coverage of reference sequence` >= input$coverage_threshold) %>%
+      filter(`% Identity to reference sequence` >= input$identity_threshold) %>%
       group_by(Name, `Gene symbol`, Class, Subclass) %>% 
       count() %>% distinct() %>% ungroup() %>% 
       group_by(`Gene symbol`, Class, Subclass) %>% 

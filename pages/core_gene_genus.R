@@ -37,7 +37,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
         ),
         # select core gene threshold for core_gene_species plot
         sliderInput(
-          "core_threshold",
+          "core_threshold2",
           "Select a minimum gene frequency, to include the gene in the plot:",
           min=0,max=1,value=0.9
         ),
@@ -78,7 +78,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
       count() %>% 
       left_join(n_per_species, by="Species") %>% 
       mutate(freq=n/nspp) %>% 
-      filter(nspp>input$min_genomes_per_species & freq>input$core_threshold) %>%
+      filter(nspp>input$min_genomes_per_species & freq>input$core_threshold2) %>%
       mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
       arrange(-nspp) 
     
@@ -93,7 +93,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     else {
       ggplot() +
-        # Add a text annotation to the plot area
+        # Print a message to the plot area
         annotate(
           "text", 
           x = 0.5, 
