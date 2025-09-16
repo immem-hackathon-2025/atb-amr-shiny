@@ -1,0 +1,88 @@
+---
+title: "ATB_preprocessing_perspecies"
+output: html_document
+date: "2025-09-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dev = 'png', echo = TRUE, message = FALSE, warning = FALSE,
+                      cache = FALSE, fig.align = 'center')
+knitr::opts_knit$set(root.dir = getwd())
+
+library(tidyverse)
+library(readr)
+
+```
+
+# REQUIRES the following files (in the AllTheBacteria folder) that were too large to put into GitHub but can be downloaded from AllTheBacteria:
+# ATB_AMRFP_status.tsv.gz (AMRfp completion status)
+# ATB_species_calls.tsv.gz (AMRfp species calls with quality call)
+# AMRFP_results.tsv.gz (AMRfp results)
+
+# atb_amrfp_filter_by_taxa: Extract specific taxa from the AllTheBacteria
+# AMRFinderPlus (AMRFP) data (from https://osf.io/zgexh, accessed 15/09/25)
+# (via browser, click three dots, download)
+
+```{r }
+
+atb_amrfp_filter_by_taxa <- function(user_taxa=c("Salmonella"), atb_armfp_results_path="AllTheBacteria/AMRFP_results.tsv.gz", atb_armfp_qc_status_path="AllTheBacteria/ATB_AMRFP_status.tsv.gz", atb_species_results_path="AllTheBacteria/ATB_species_calls.tsv.gz"){
+  
+  # load files
+  atb_species_results <- read_tsv(atb_species_results_path)
+  atb_armfp_qc_status <- read_tsv(atb_armfp_qc_status_path)
+    
+  # create an empty vector for sample accessions
+  combined_sample_accessions <- NULL
+  
+  # get complete list of all relevant sample accessions
+  for (taxa in user_taxa){
+    
+    # Get sample accessions for all taxa
+    temp_sample_accessions <- atb_species_results %>%
+      filter(grepl(taxa, Species)) %>%
+      select(Sample) %>%
+      unique() %>%
+      pull()
+    
+    # Add accessions to character vector
+    combined_sample_accessions <- c(temp_sample_accessions, combined_sample_accessions)
+  }
+  
+   # nested callback function to read in only those lines containing selected taxa (for chunking)
+  f <- function(x, pos) subset(x, Name %in% combined_sample_accessions)
+  
+  # read lines for selected taxa  
+  selected_atb_amrfp <- read_tsv_chunked(file=atb_armfp_results_path, callback=DataFrameCallback$new(f), chunk_size = 10000)
+  
+  selected_atb_amrfp <- selected_atb_amrfp %>%
+    left_join(atb_species_results, by=c("Name"="Sample")) %>% 
+    left_join(atb_armfp_qc_status, by=c("Name"="sample"))
+  
+  # return data frame for selected taxa
+  return(selected_atb_amrfp)
+}
+
+```
+
+# extract AMRfp data for a given species
+``` {r}
+# for a given species:
+# extract amrfp results
+# report number of rows, number of samples
+# write out file
+getAMRfp <- function(species) {
+  amrfp <- atb_amrfp_filter_by_taxa(user_taxa=species, atb_armfp_results_path="AllTheBacteria/AMRFP_results.tsv.gz")
+  # filtering amrfp columns
+  amrfp <- amrfp %>%
+    filter(`HQ` == TRUE) %>%
+    filter(`status`== "PASS") %>%
+    select(`Name`,`Gene symbol`, `Hierarchy node`, `Element type`, `Element subtype`, `% Coverage of reference sequence`, `% Identity to reference sequence`, `Method`, `Class`, `Subclass`, `Species`) 
+  write_tsv(amrfp, file=paste0("AllTheBacteria/ATB_",species,"_AFP_preprocessed.tsv.gz"))
+
+}
+```
+
+``` {r}
+getAMRfp("Enterobacter")
+getAMRfp("Edwardsiella")
+```
