@@ -2,25 +2,25 @@
 
 geneAcrossSpeciesPage <- function(afp, input, output) {
   
-  # total number per gene
-  n_per_gene <- afp %>% 
-    group_by(Name, `Gene symbol`) %>% 
-    count() %>% distinct() %>% ungroup() %>% 
-    group_by(`Gene symbol`) %>% 
-    summarise(n=n()) 
+  gene_counts_lazy <- afp %>%
+    group_by(`Gene symbol`) %>%
+    summarise(
+      n = n(),
+      nspp = n_distinct(Species)
+    ) %>%
+    arrange(desc(n))
   
-  # add total species per gene
-  n_per_gene <- afp %>% 
-    group_by(`Gene symbol`, Species) %>% 
-    count() %>% distinct() %>% ungroup() %>% 
-    group_by(`Gene symbol`) %>% 
-    summarise(nspp=n()) %>% 
-    left_join(n_per_gene) %>%
-    arrange(-n) 
+  n_per_gene <- gene_counts_lazy %>%
+    collect()
   
   gene_list <- n_per_gene$`Gene symbol`
-  names(gene_list) <- paste(n_per_gene$`Gene symbol`, " (n=",n_per_gene$n," in ",n_per_gene$nspp," species)", sep="")
-  
+  names(gene_list) <- paste(
+    n_per_gene$`Gene symbol`,
+    " (n=", n_per_gene$n,
+    " in ", n_per_gene$nspp,
+    " species)",
+    sep = ""
+  )
   
   ui <- fluidPage(
     sidebarLayout(
@@ -56,32 +56,39 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   
   geneAcrossSpecies <- reactive({
     # for a single species, plot candidate core genes
-    afp_this_gene <- afp %>% filter(`Gene symbol`==input$selected_gene)
-    #n_this_spp <- length(unique(afp_this_spp$Name))
+    
+    req(input$selected_gene, input$min_genomes_per_species, input$min_freq)
+    
+    afp_this_gene <- afp %>% filter(`Gene symbol` == !!input$selected_gene)
     
     # total number per species
-    n_per_species <- afp %>% 
-      group_by(Name, Species) %>% 
-      count() %>% distinct() %>% ungroup() %>% 
-      group_by(Species) %>% 
-      summarise(nspp=n()) %>% 
-      arrange(-nspp)
+    species_counts <- afp %>%
+      distinct(Name, Species) %>%                  # unique sample-species pairs
+      group_by(Species) %>%
+      summarise(nspp = n(), .groups = "drop")
     
-    afp_this_gene %>%
-      group_by(Name, Species, Class, Subclass) %>% 
-      count() %>% distinct() %>% ungroup() %>% 
-      group_by(Species, Class, Subclass) %>% 
-      count() %>% 
-      left_join(n_per_species, by="Species") %>% 
+    print(species_counts)
+    
+    afp_this_gene <- afp_this_gene %>%
+      distinct(Name, Species, Class, Subclass) %>%
+      group_by(Species, Class, Subclass) %>%
+      count() %>%
+      left_join(species_counts, by="Species") %>%
       mutate(freq=n/nspp) %>%
-      filter(freq>=input$min_freq & n>input$min_genomes_per_species)
+      filter(freq>=!!input$min_freq) %>%
+      filter(n>!!input$min_genomes_per_species) %>%
+      collect()
+    
+    print(afp_this_gene)
+    
+    afp_this_gene
+    
   })
   
   output$geneAcrossSpeciesDownloadButton <- renderUI({
     IconButton("downloadGeneAcrossSpecies", "data_dl", "Download")
   })
   output$downloadGeneAcrossSpecies <- downloadHandler(
-    #filename = "genes_by_species.tsv",
     filename = paste0(input$selected_gene, "_distribution.tsv", sep=""),
     content = function(file) {
       write_tsv(geneAcrossSpecies(), file)
@@ -89,8 +96,12 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
   )
   
   output$geneAcrossSpeciesPlot <- renderPlot({
-    geneAcrossSpecies() %>% 
-      ggplot(aes(x=freq, y=Species)) +
+    
+    df <- geneAcrossSpecies()
+    
+    validate(need(nrow(df) > 0, "No species with this gene pass current thresholds."))
+    
+    ggplot(df, aes(x=freq, y=Species)) +
       geom_col(fill="navy") + 
       theme_bw() +
       theme(axis.text.y=element_text(size=10)) + 
