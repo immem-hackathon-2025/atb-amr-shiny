@@ -31,6 +31,7 @@ ui <- page_navbar(
   title = "AllTheBacteria AMR Explorer",
   theme = bs_theme(preset = "lumen"),
   tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
     tags$style(HTML("
         html, body {
           height: 100vh !important;

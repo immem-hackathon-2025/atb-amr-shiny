@@ -36,9 +36,11 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           shiny::fluidRow( 
             align = "center",
             shiny::column(
-              width = 12,
-              h3("Core genes by species"),
-              uiOutput("coreGeneSpeciesDownloadButton")
+              width = 12, class = "centered-items-row",
+              h4("Core genes by species"),
+              div(style='margin-right:8px;',
+                  shiny::uiOutput("coreGeneSpeciesDownloadButton"),
+              ),
             ),
           ),
           plotOutput("coreGeneSpeciesPlot", height = "calc(100vh - 200px)"),
