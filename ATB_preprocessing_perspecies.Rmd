@@ -14,6 +14,11 @@ library(readr)
 
 ```
 
+# REQUIRES the following files (in the AllTheBacteria folder) that were too large to put into GitHub but can be downloaded from AllTheBacteria:
+# ATB_AMRFP_status.tsv.gz (AMRfp completion status)
+# ATB_species_calls.tsv.gz (AMRfp species calls with quality call)
+# AMRFP_results.tsv.gz (AMRfp results)
+
 # atb_amrfp_filter_by_taxa: Extract specific taxa from the AllTheBacteria
 # AMRFinderPlus (AMRFP) data (from https://osf.io/zgexh, accessed 15/09/25)
 # (via browser, click three dots, download)
