@@ -56,17 +56,25 @@ coreGenesForGenusPage <- function(afp, input, output) {
           ),
           mainPanel(
             plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)"),
-            shiny::uiOutput("geneCountPerSppDownloadButton"),
+            div(
+              class = "centered-items-row",
+              div(uiOutput("filteredDataGenusDownloadButton")),
+              div(uiOutput("geneCountPerSppDownloadButton")),
+            )
           )
       )
   )
+  
+  genus_tbl <- reactive({
+    afp %>% filter(Genus == !!input$selected_genus)
+  })
   
   geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
     
     req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species)
     
-    afp_this_genus <- afp %>% filter(Genus == !!input$selected_genus)
+    afp_this_genus <- genus_tbl()
     
     # total number per species
     species_counts <- afp %>%
@@ -91,14 +99,29 @@ coreGenesForGenusPage <- function(afp, input, output) {
     afp_this_genus
   })
   
+  
+  # Download data
+  # Filtered data
+  output$filteredDataGenusDownloadButton <- renderUI({
+    IconButton("downloadfilteredDataGenus", "data_dl", 
+               paste(input$selected_genus, "data"))
+  })
+  output$downloadfilteredDataGenus <- downloadHandler(
+    filename = function() {
+      paste0(gsub("\\s+", "_", input$selected_genus), "_AFP_data.tsv")
+    },
+    content = function(file) {
+      write_tsv(genus_tbl() %>% collect(), file)
+    }
+  )
+  # frequencies
   output$geneCountPerSppDownloadButton <- renderUI({
-    IconButton("downloadGeneCountPerSpp", "data_dl", "Download")
+    IconButton("downloadGeneCountPerSpp", "data_dl", "Gene count")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(
-    #filename = "gene_count_per_spp.tsv",
-    filename = paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep=""),
+    filename = paste0("gene_count_per_", input$selected_genus, ".tsv", sep=""),
     content = function(file) {
-      write_tsv(geneCountPerSpp(), file)
+      write_tsv(geneCountPerSpp() %>% collect(), file)
     }
   )
 
