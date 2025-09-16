@@ -2,13 +2,25 @@
 
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
+  # total number per species
+  n_per_species <- afp %>% 
+    group_by(Name, Species) %>% 
+    count() %>% distinct() %>% ungroup() %>% 
+    group_by(Species) %>% 
+    summarise(nspp=n()) %>% 
+    arrange(-nspp)
+  
+  species_list <- n_per_species$Species
+  names(species_list) <- paste(n_per_species$Species, " (n=",n_per_species$nspp,")", sep="")
+
   ui <- fluidPage(
       sidebarLayout(
         sidebarPanel(
           selectInput(
             "selected_species",
             "Choose a species to explore its gene frequency:",
-            list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
+            species_list
+            #list("Enterobacter cloacae"="Enterobacter cloacae", "Enterobacter hormaechei"="Enterobacter hormaechei")
           ),
           # select gene threshold for core_gene_species plot
           sliderInput(
