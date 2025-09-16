@@ -41,6 +41,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Choose a genus to explore gene frequencies across its member species:",
           genus_list
         ),
+        dropdownButton(
+          tags$h3("Settings"),
         # select core gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold2",
@@ -53,6 +55,10 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Select a minimum number of genomes per species, to include the species in the plot:",
           min=5,max=100,value=10
         ),
+        circle = TRUE,
+        status = "warning", 
+        icon = icon("gear"), width = "300px",
+        tooltip = tooltipOptions(title = "Click to change settings"))
           ),
           mainPanel(
             plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)"),
