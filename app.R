@@ -54,8 +54,6 @@ ui <- page_navbar(
 
 # Define server logic required to draw a core gene plot for a selected species
 server <- function(input, output) {
-  
-
     # Render pages
     output$core_genes_species <- renderUI({
         coreGenesForSpeciesPage(afp, input, output)
