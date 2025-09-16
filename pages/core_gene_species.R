@@ -37,7 +37,8 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
         )
       )
   )
-
+  
+  
 
   output$coreGeneSpeciesPlot <- renderPlot({
     
