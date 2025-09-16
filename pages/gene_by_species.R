@@ -14,13 +14,13 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
         
         sliderInput(
           "min_genomes_per_species",
-          "Select a minimum number of genomes per species, to include in the plot:",
+          "Select a minimum number of genomes per species, to include the species in the plot:",
           min=5,max=100,value=10
         ),
         
         sliderInput(
           "min_freq",
-          "Select a minimum gene frequency to include a species in the plot:",
+          "Select a minimum gene frequency per species, to include the species in the plot:",
           min=0,max=1,value=0.01
         )
         
