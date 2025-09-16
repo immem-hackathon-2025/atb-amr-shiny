@@ -2,26 +2,31 @@
 
 coreGenesForGenusPage <- function(afp, input, output) {
   
-  afp <- afp %>% 
-    separate(col = Species, into = c("Genus", "species_name"), sep = " ", remove=F)
+  afp <- afp %>%
+    mutate(
+      Genus = sql("substr(Species, 1, instr(Species, ' ') - 1)"),
+      species_name = sql("substr(Species, instr(Species, ' ') + 1)")
+    )
   
   # get list of genera to select from
   # total number per genus
-  genus_counts_lazy <- afp %>%
+  genus_counts <- afp %>%
+    distinct(Name, Genus) %>%                  # unique sample-species pairs
     group_by(Genus) %>%
-    summarise(
-      n = n(),
-      nspp = n_distinct(Species)
-    ) %>%
-    arrange(desc(n))
+    summarise(n = n(), .groups = "drop") 
   
-  n_per_genus <- genus_counts_lazy %>%
-    collect()
+  genus_counts <- afp %>%
+    distinct(Name, Species, Genus) %>%                  # unique sample-species pairs
+    group_by(Species, Genus) %>%
+    summarise(nspp = n(), .groups = "drop") %>%
+    filter(nspp >= 10) %>%
+    left_join(genus_counts, by="Genus") %>%
+    arrange(desc(nspp)) %>% collect()
   
-  genus_list <- n_per_genus$Genus
+  genus_list <- genus_counts$Genus
   names(genus_list) <- paste(
-    n_per_genus$Genus,
-    " (n=", n_per_genus$n,
+    genus_counts$Genus,
+    " (n=", genus_counts$n,
     " in ", n_per_genus$nspp,
     " species)",
     sep = ""
@@ -58,29 +63,31 @@ coreGenesForGenusPage <- function(afp, input, output) {
   
   geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
-    #afp <- afp %>% filter(grepl(input$selected_genus, Species))
-    afp_this_genus <- afp %>% filter(Genus==input$selected_genus)
+    
+    req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species)
+    
+    afp_this_genus <- afp %>% filter(Genus == !!input$selected_genus)
     
     # total number per species
-    n_per_species <- afp_this_genus %>% 
-      group_by(Name, Species) %>% 
-      count() %>% distinct() %>% ungroup() %>% 
-      group_by(Species) %>% 
-      summarise(nspp=n()) %>% 
-      arrange(-nspp)
+    species_counts <- afp %>%
+      distinct(Name, Species) %>%                  # unique sample-species pairs
+      group_by(Species) %>%
+      summarise(nspp = n(), .groups = "drop")
     
     ### TODO: allow user to select node instead of gene, as the unit of measurement
     # gene frequency per species
-    afp_this_genus %>% 
-      group_by(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
-      count() %>% distinct() %>% ungroup() %>% 
-      group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
+    afp_this_genus <- afp_this_genus %>% 
+      distinct(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>%
+      group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>%
       count() %>% 
-      left_join(n_per_species, by="Species") %>% 
+      left_join(species_counts, by="Species") %>% 
       mutate(freq=n/nspp) %>% 
-      filter(nspp>input$min_genomes_per_species & freq>input$core_threshold2) %>%
+      filter(nspp>!!input$min_genomes_per_species, freq>!!input$core_threshold2) %>%
       mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
-      arrange(-nspp) 
+      arrange(-nspp) %>% 
+      collect()
+    
+    afp_this_genus
   })
   
   output$geneCountPerSppDownloadButton <- renderUI({
@@ -96,29 +103,32 @@ coreGenesForGenusPage <- function(afp, input, output) {
 
   output$coreGeneGenusPlot <- renderPlot({
     
-    if (nrow(geneCountPerSpp()) > 0) {
-      geneCountPerSpp() %>%
-      ggplot(aes(y=label, x=freq)) + 
+    df <- geneCountPerSpp()
+    
+    validate(need(nrow(df) > 0, "No species with this gene pass current thresholds."))
+    
+    #if (nrow(geneCountPerSpp()) > 0) {
+      ggplot(df, aes(y=label, x=freq)) + 
       geom_col(position='dodge', fill="navy") + 
       facet_wrap(~`Gene symbol`) + 
       theme_bw() +
       theme(legend.position="bottom")
-    }
+    #}
     
-    else {
-      ggplot() +
-        # Print a message to the plot area
-        annotate(
-          "text", 
-          x = 0.5, 
-          y = 0.5, 
-          label = "No data passess current filters, try again",
-          size = 6, 
-          color = "gray40"
-        ) +
-        # Remove axes and labels to make the plot completely blank
-        theme_void()
-    }
+    # else {
+    #   ggplot() +
+    #     # Print a message to the plot area
+    #     annotate(
+    #       "text", 
+    #       x = 0.5, 
+    #       y = 0.5, 
+    #       label = "No data passess current filters, try again",
+    #       size = 6, 
+    #       color = "gray40"
+    #     ) +
+    #     # Remove axes and labels to make the plot completely blank
+    #     theme_void()
+    # }
       
   }) 
   

@@ -74,8 +74,6 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
       group_by(Species) %>%
       summarise(nspp = n(), .groups = "drop")
     
-    print(species_counts)
-    
     afp_this_gene <- afp_this_gene %>%
       distinct(Name, Species, Class, Subclass) %>%
       group_by(Species, Class, Subclass) %>%
