@@ -1,17 +1,7 @@
 # plot gene frequencies for a selected species and frequency range
-coreGenesForSpeciesPage <- function(input, output, session = shiny::getDefaultReactiveDomain()) {
+coreGenesForSpeciesPage <- function(afp, input, output) {
 
-  # Connect (single per-page)
-  con <- dbConnect(duckdb())
-  
-  # Auto-close on session end
-  session$onSessionEnded(function() {
-    try(dbDisconnect(con, shutdown = TRUE), silent = TRUE)
-  })
-  
-  # Point to your Parquet dataset (Hive-style partitioned by Genus)
-  afp <- tbl(con, "read_parquet('data/parquet_by_genus/**/*.parquet', hive_partitioning = true)")
-  
+   
   # --- Build species list from distinct samples (Name) per Species ---
   # Only include species with at least 10 unique samples
   species_counts <- afp %>%

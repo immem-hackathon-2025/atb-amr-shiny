@@ -27,7 +27,11 @@ source("src/download_functions.R")
 # read in raw data, this has a merge of AFP and the species call + HQ
 ### TODO: REPLACE WITH INTERNAL DATA OBJECT
 ### IDEA: could remove filter to AMR, so we can plot the same info for virulence genes etc reported by AMRfp
-afp <-read_tsv("ATB_Enterobacter_AFP.tsv.gz") %>% filter(HQ) %>% filter(`Element subtype`=="AMR")
+# Connect (single per-page)
+con <- dbConnect(duckdb())
+
+# Point to your Parquet dataset (Hive-style partitioned by Genus)
+afp <- tbl(con, "read_parquet('data/parquet_by_genus/**/*.parquet', hive_partitioning = true)")
 
 
 # Define UI for application that draws a histogram
@@ -49,10 +53,14 @@ ui <- page_navbar(
 )
 
 # Define server logic required to draw a core gene plot for a selected species
-server <- function(input, output) {
+server <- function(input, output, session) {
+    # Auto-close on session end
+    session$onSessionEnded(function() {
+      try(dbDisconnect(con, shutdown = TRUE), silent = TRUE)
+    })
     # Render pages
     output$core_genes_species <- renderUI({
-        coreGenesForSpeciesPage(input, output)
+        coreGenesForSpeciesPage(afp, input, output)
     })
     output$core_genes_genus <- renderUI({
         coreGenesForGenusPage(afp, input, output)
