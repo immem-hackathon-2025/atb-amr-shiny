@@ -2,6 +2,26 @@
 
 geneAcrossSpeciesPage <- function(afp, input, output) {
   
+  # total number per gene
+  n_per_gene <- afp %>% 
+    group_by(Name, `Gene symbol`) %>% 
+    count() %>% distinct() %>% ungroup() %>% 
+    group_by(`Gene symbol`) %>% 
+    summarise(n=n()) 
+  
+  # add total species per gene
+  n_per_gene <- afp %>% 
+    group_by(`Gene symbol`, Species) %>% 
+    count() %>% distinct() %>% ungroup() %>% 
+    group_by(`Gene symbol`) %>% 
+    summarise(nspp=n()) %>% 
+    left_join(n_per_gene) %>%
+    arrange(-n) 
+  
+  gene_list <- n_per_gene$`Gene symbol`
+  names(gene_list) <- paste(n_per_gene$`Gene symbol`, " (n=",n_per_gene$n," in ",n_per_gene$nspp," species)", sep="")
+  
+  
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
@@ -9,7 +29,7 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
         selectInput(
           "selected_gene",
           "Choose a gene to explore its frequency across species:",
-          list("oqxA"="oqxA", "qnrB1"="qnrB1")
+          gene_list
         ),
         
         sliderInput(
