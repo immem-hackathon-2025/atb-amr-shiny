@@ -2,6 +2,9 @@
 
 A Shiny app developped at the 12th Microbial Bioinformatics Hackathon (IMMEM XIV)!
 
+## Apps
+Posit.cloud - https://019951b4-d347-4380-eef2-4a7b10d7909b.share.connect.posit.cloud/  
+Shinylive - https://immem-hackathon-2025.github.io/atb-amr-shiny/
 
 ## AllTheBacteria Preprocessing
 
