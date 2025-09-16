@@ -11,7 +11,7 @@ IconButton <- function(outputId, type, text = '', ...) {
   aTag <- tags$a(
     id=outputId,
     class=paste('btn btn-default', s.class),
-    style='padding: 2px 4px; font-weight: normal;',
+    style='padding: 2px 4px; font-weight: normal; text-transform: none !important;',
     href='',
     target='_blank',
     download=NA,
