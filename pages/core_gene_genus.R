@@ -2,6 +2,30 @@
 
 coreGenesForGenusPage <- function(afp, input, output) {
   
+  afp <- afp %>% 
+    separate(col = Species, into = c("Genus", "species_name"), sep = " ", remove=F)
+  
+  # get list of genera to select from
+  # total number per genus
+  n_per_genus <- afp %>% 
+    group_by(Name, Genus) %>% 
+    count() %>% distinct() %>% ungroup() %>% 
+    group_by(Genus) %>% 
+    count() %>% 
+    arrange(-n)
+  
+  # add total species per genus
+  n_per_genus <- afp %>% 
+    group_by(Genus, Species) %>% 
+    count() %>% distinct() %>% ungroup() %>% 
+    group_by(Genus) %>% 
+    summarise(nspp=n()) %>% 
+    left_join(n_per_genus) %>%
+    arrange(-nspp) 
+  
+  genus_list <- n_per_genus$Genus
+  names(genus_list) <- paste(n_per_genus$Genus, " (n=",n_per_genus$n," in ", n_per_genus$nspp," species)", sep="")
+  
   ui <- fluidPage(
       sidebarLayout(
           sidebarPanel(
@@ -9,7 +33,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
         selectInput(
           "selected_genus",
           "Choose a genus to explore gene frequencies across its member species:",
-          list("Enterobacter"="Enterobacter", "Enterobacter hormaechei"="Enterobacter hormaechei")
+          genus_list
         ),
         # select core gene threshold for core_gene_species plot
         sliderInput(
@@ -34,10 +58,11 @@ coreGenesForGenusPage <- function(afp, input, output) {
   output$coreGeneGenusPlot <- renderPlot({
     
     # for a single species, plot candidate core genes
-    afp <- afp %>% filter(grepl(input$selected_genus, Species))
-  
+    #afp <- afp %>% filter(grepl(input$selected_genus, Species))
+    afp_this_genus <- afp %>% filter(Genus==input$selected_genus)
+    
     # total number per species
-    n_per_species <- afp %>% 
+    n_per_species <- afp_this_genus %>% 
       group_by(Name, Species) %>% 
       count() %>% distinct() %>% ungroup() %>% 
       group_by(Species) %>% 
@@ -46,23 +71,40 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     ### TODO: allow user to select node instead of gene, as the unit of measurement
     # gene frequency per species
-    gene_count_per_spp <- afp %>% 
+    gene_count_per_spp <- afp_this_genus %>% 
       group_by(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
       count() %>% distinct() %>% ungroup() %>% 
       group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>% 
       count() %>% 
       left_join(n_per_species, by="Species") %>% 
-      mutate(freq=n/nspp)
-    
-    # extract core genes and display freq per species
-    gene_count_per_spp %>% filter(nspp>input$min_genomes_per_species & freq>input$core_threshold) %>%
+      mutate(freq=n/nspp) %>% 
+      filter(nspp>input$min_genomes_per_species & freq>input$core_threshold) %>%
       mutate(label=paste0(Species, " (n=", nspp, ")")) %>%
-      arrange(-nspp) %>%
+      arrange(-nspp) 
+    
+    if (nrow(gene_count_per_spp) > 0) {
+      gene_count_per_spp %>%
       ggplot(aes(y=label, x=freq)) + 
       geom_col(position='dodge', fill="navy") + 
       facet_wrap(~`Gene symbol`) + 
       theme_bw() +
       theme(legend.position="bottom")
+    }
+    
+    else {
+      ggplot() +
+        # Add a text annotation to the plot area
+        annotate(
+          "text", 
+          x = 0.5, 
+          y = 0.5, 
+          label = "No data passess current filters, try again",
+          size = 6, 
+          color = "gray40"
+        ) +
+        # Remove axes and labels to make the plot completely blank
+        theme_void()
+    }
       
   }) 
 

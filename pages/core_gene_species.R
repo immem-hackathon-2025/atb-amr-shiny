@@ -1,4 +1,4 @@
-# plot gene frequency for a selected species and core threshold
+# plot gene frequencies for a selected species and frequency range
 
 coreGenesForSpeciesPage <- function(afp, input, output) {
   
