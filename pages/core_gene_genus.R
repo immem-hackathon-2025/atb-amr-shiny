@@ -41,6 +41,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Choose a genus to explore gene frequencies across its member species:",
           genus_list
         ),
+        dropdownButton(
+          tags$h3("Settings"),
         # select core gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold2",
@@ -63,13 +65,25 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Minimum coverage:",
           min = 0.5, max = 1.0, value = 0.9
         ),
+        circle = TRUE,
+        status = "warning", 
+        icon = icon("gear"), width = "300px",
+        tooltip = tooltipOptions(title = "Click to change settings"))
           ),
           mainPanel(
             plotOutput("coreGeneGenusPlot", height = "calc(100vh - 200px)"),
-            shiny::uiOutput("geneCountPerSppDownloadButton"),
+            div(
+              class = "centered-items-row",
+              div(uiOutput("filteredDataGenusDownloadButton")),
+              div(uiOutput("geneCountPerSppDownloadButton")),
+            )
           )
       )
   )
+  
+  genus_tbl <- reactive({
+    afp %>% filter(Genus == !!input$selected_genus)
+  })
   
   geneCountPerSpp <- reactive({
     # for a single species, plot candidate core genes
@@ -80,7 +94,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
     id_min  <- input$identity_threshold  * 100
     cov_min <- input$coverage_threshold  * 100
     
-    afp_this_genus <- afp %>% filter(Genus == !!input$selected_genus) %>%
+    afp_this_genus <- genus_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence` >= !!id_min) 
     
@@ -94,8 +108,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     # gene frequency per species
     afp_this_genus <- afp_this_genus %>%
       filter(!is.na(`Gene symbol`)) %>% 
-      distinct(Name, `Gene symbol`, Class, Subclass, Species, `Element type`) %>%
-      group_by(`Gene symbol`, Class, Subclass, Species, `Element type`) %>%
+      distinct(Name, `Gene symbol`, Class, Subclass, Species) %>%
+      group_by(`Gene symbol`, Class, Subclass, Species) %>%
       count() %>% 
       left_join(species_counts, by="Species") %>% 
       mutate(freq=n/nspp) %>% 
@@ -107,13 +121,29 @@ coreGenesForGenusPage <- function(afp, input, output) {
     afp_this_genus
   })
   
+  
+  # Download data
+  # Filtered data
+  output$filteredDataGenusDownloadButton <- renderUI({
+    IconButton("downloadfilteredDataGenus", "data_dl", 
+               paste(input$selected_genus, "data"))
+  })
+  output$downloadfilteredDataGenus <- downloadHandler(
+    filename = function() {
+      paste0(gsub("\\s+", "_", input$selected_genus), "_AFP_data.tsv")
+    },
+    content = function(file) {
+      write_tsv(genus_tbl() %>% collect(), file)
+    }
+  )
+  # frequencies
   output$geneCountPerSppDownloadButton <- renderUI({
-    IconButton("downloadGeneCountPerSpp", "data_dl", "Download")
+    IconButton("downloadGeneCountPerSpp", "data_dl", "Gene count")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(
     filename = paste0("gene_count_per_", input$selected_genus, "_spp.tsv", sep=""),
     content = function(file) {
-      write_tsv(geneCountPerSpp(), file)
+      write_tsv(geneCountPerSpp() %>% collect(), file)
     }
   )
 
