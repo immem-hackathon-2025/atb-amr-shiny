@@ -44,7 +44,7 @@ ui <- page_navbar(
         }
       "))
   ),
-  nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("dna")),
+  nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("bacterium")),
   nav_panel("Gene view", uiOutput("gene_distribution"), icon = icon("dna")),
   nav_panel("Common genes by genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
 
