@@ -53,12 +53,22 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
       ),
       mainPanel(
         plotOutput("coreGeneSpeciesPlot", height = "calc(100vh - 200px)"),
-        shiny::uiOutput("coreGeneSpeciesDownloadButton")
+        div(
+          class = "centered-items-row",
+          div(uiOutput("filteredDataSpeciesDownloadButton")),
+          div(uiOutput("coreGeneSpeciesDownloadButton")),
+        )
       )
     )
   )
   
   # Reactive data for selected species and thresholds
+  spp_tbl <- reactive({
+    req(input$selected_species)
+    spp_tbl <- afp %>% filter(Species == !!input$selected_species)
+    spp_tbl
+  })
+  
   coreGeneSpecies <- reactive({
     req(input$selected_species, input$core_threshold, input$identity_threshold, input$coverage_threshold)
     
@@ -70,16 +80,15 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     # Then compute frequency = n / n_samples_for_species
     # Push everything to DuckDB, collect only the filtered result.
     # Column names with spaces or % need backticks.
-    spp_tbl <- afp %>% filter(Species == !!input$selected_species)
     
-    n_samples <- spp_tbl %>%
+    n_samples <- spp_tbl() %>%
       summarise(n = n_distinct(Name)) %>%
       collect() %>%
       pull(n)
     
     validate(need(n_samples > 0, paste0("No rows for species: ", input$selected_species)))
     
-    gene_freq_tbl <- spp_tbl %>%
+    gene_freq_tbl <- spp_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence`  >= !!id_min) %>%
       filter(!is.na(`Gene symbol`)) %>%
@@ -96,18 +105,29 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   })
   
   # Download button
-  output$coreGeneSpeciesDownloadButton <- renderUI({
-    # IconButton is assumed to be defined elsewhere in your app
-    IconButton("downloadCoreGeneSpecies", "data_dl", "Download")
+  # Filtered data
+  output$filteredDataSpeciesDownloadButton <- renderUI({
+    IconButton("downloadfilteredDataSpecies", "data_dl", 
+               paste(input$selected_species, "data"))
   })
-  
-  output$downloadCoreGeneSpecies <- downloadHandler(
+  output$downloadfilteredDataSpecies <- downloadHandler(
     filename = function() {
-      paste0("core_gene_species_", gsub("\\s+", "_", input$selected_species), ".tsv")
+      paste0(gsub("\\s+", "_", input$selected_species), "_AFP_data.tsv")
     },
     content = function(file) {
-      df <- coreGeneSpecies()
-      write_tsv(df, file)
+      write_tsv(spp_tbl() %>% collect(), file)
+    }
+  )
+  # Frequencies
+  output$coreGeneSpeciesDownloadButton <- renderUI({
+    IconButton("downloadCoreGeneSpecies", "data_dl", "Core gene frequencies")
+  })
+  output$downloadCoreGeneSpecies <- downloadHandler(
+    filename = function() {
+      paste0("core_genes_", gsub("\\s+", "_", input$selected_species), ".tsv")
+    },
+    content = function(file) {
+      write_tsv(coreGeneSpecies(), file)
     }
   )
   

@@ -1,7 +1,11 @@
 
 .centered-items-row {
     display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    align-items: left; 
+    justify-content: left; 
     margin: 8px 4px;
+}
+
+.centered-items-row > div {
+  margin-right: 16px; 
 }
