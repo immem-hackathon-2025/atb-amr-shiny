@@ -25,6 +25,9 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           choices = species_choices,
           selected = if (length(species_choices)) species_counts$Species[[1]] else NULL
         ),
+        # Settings button
+        dropdownButton(
+          tags$h3("Settings"),
         # select gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold",
@@ -41,7 +44,12 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           "coverage_threshold",
           "Minimum coverage (proportion):",
           min = 0.5, max = 1.0, value = 0.9
-        )
+        ),
+        #setting button options
+        circle = TRUE,
+        status = "warning", 
+        icon = icon("gear"), width = "300px",
+        tooltip = tooltipOptions(title = "Click to change settings"))
       ),
       mainPanel(
         plotOutput("coreGeneSpeciesPlot", height = "calc(100vh - 200px)"),

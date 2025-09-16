@@ -11,7 +11,7 @@
   },
   "environment": {
     "r": {
-      "requires": ">= 4.2.0"
+      "requires": "~=4.2.0"
     }
   },
   "packages": {
@@ -3807,7 +3807,7 @@
       "checksum": "d1338d8c9def1e19375faab06893dc2a"
     },
     ".Rprofile": {
-      "checksum": "ee67ebafc24849096271292e8ad90c21"
+      "checksum": "2ef471bfc5ef4bd0930d097162c999f9"
     },
     "AllTheBacteria/ATB_AFP_preprocessed_AMRonly.tsv.bz2": {
       "checksum": "b9e7541032790e61b1510775e91e079d"
@@ -3819,7 +3819,7 @@
       "checksum": "5177af127cc3392d6cbe1a40e6fd195b"
     },
     "app.R": {
-      "checksum": "2eee49bda8527c2b5d7a8ac8145b5e21"
+      "checksum": "cf9a996b28712b709aff56a2a360a982"
     },
     "ATB_Enterobacter_AFP.tsv.gz": {
       "checksum": "60ae79b4de78666800f99efbad54ded1"
@@ -6488,9 +6488,6 @@
     "data/parquet_by_genus/Genus=Zobellia/data_0.parquet": {
       "checksum": "cdd13036dde7085d7f2d11c905f83956"
     },
-    "DESCRIPTION": {
-      "checksum": "fab7ef09daa9d28ba08581dc3857dc96"
-    },
     "pages/core_gene_genus.R": {
       "checksum": "41861b207f91ec2e9ece3c60c0d56bfc"
     },
@@ -6505,9 +6502,6 @@
     },
     "renv.lock": {
       "checksum": "43c92e78e8ec791cb09d23b4a4ffa75f"
-    },
-    "requirements.R": {
-      "checksum": "5a57b02daef89f46aeebc34a2c905c4a"
     },
     "src/download_functions.R": {
       "checksum": "f5b9f52d2e8bbaa534dcf199bc5a44f4"

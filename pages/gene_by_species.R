@@ -31,6 +31,9 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "Choose a gene to explore its frequency across species:",
           gene_list
         ),
+        # Settings button
+        dropdownButton(
+          tags$h3("Settings"),
         
         sliderInput(
           "min_genomes_per_species",
@@ -42,8 +45,12 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "min_freq",
           "Select a minimum gene frequency per species, to include the species in the plot:",
           min=0,max=1,value=0.01
-        )
-        
+        ),
+        #setting button options
+        circle = TRUE,
+        status = "warning", 
+        icon = icon("gear"), width = "300px",
+        tooltip = tooltipOptions(title = "Click to change settings"))
       ),
       
       # Show a plot of the generated distribution
