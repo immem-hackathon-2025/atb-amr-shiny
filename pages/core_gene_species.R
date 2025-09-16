@@ -70,6 +70,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   )
 
   output$coreGeneSpeciesPlot <- renderPlot({
+    # for a single species, plot candidate core genes
     coreGeneSpecies() %>% 
       ggplot(aes(x=freq, y=`Gene symbol`, fill=Class)) +
       geom_col() + 
