@@ -65,7 +65,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   })
   
   output$coreGeneSpeciesDownloadButton <- renderUI({
-    IconButton("downloadCoreGeneSpecies", "data_dl")
+    IconButton("downloadCoreGeneSpecies", "data_dl", "Download")
   })
   output$downloadCoreGeneSpecies <- downloadHandler(
     filename = "core_gene_species.tsv",
