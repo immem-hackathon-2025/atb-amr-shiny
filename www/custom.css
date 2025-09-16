@@ -2,7 +2,7 @@
 .centered-items-row {
     display: flex; 
     align-items: left; 
-    justify-content: space-around; 
+    justify-content: left; 
     margin: 8px 4px;
 }
 
