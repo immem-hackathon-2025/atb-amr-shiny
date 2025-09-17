@@ -19,7 +19,7 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
     gene_data[[input$element_type]]$choices
   })
   
-  ui <- fluidPage(
+  ui <- page_fluid(
     sidebarLayout(
       sidebarPanel(
         

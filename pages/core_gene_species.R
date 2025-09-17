@@ -18,7 +18,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
     species_data[[input$element_type]]$choices
   })
   
-  ui <- fluidPage(
+  ui <- page_fluid(
     sidebarLayout(
       sidebarPanel(
         

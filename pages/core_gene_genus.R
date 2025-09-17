@@ -27,7 +27,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
     genus_data[[input$element_type]]$choices
   })
   
-  ui <- fluidPage(
+  ui <- page_fluid(
       sidebarLayout(
           sidebarPanel(
             # Select for AMR/VIRULENCE/STRESS
