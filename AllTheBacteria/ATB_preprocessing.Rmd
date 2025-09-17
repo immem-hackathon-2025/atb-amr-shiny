@@ -71,6 +71,25 @@ atb_amrfp_filtered %>% count(`Element type`)
 NROW(unique(atb_amrfp_filtered$Name)) 
 
 # write file
-write_tsv(atb_amrfp_filtered, file=("ATB_AFP_preprocessed.tsv.gz"))
+#write_tsv(atb_amrfp_filtered, file=("ATB_AFP_preprocessed.tsv.gz"))
   
+```
+
+```{r}
+# amr only
+
+atb_amrfp_filtered_amr <- atb_amrfp_filtered %>% 
+      filter(`Element type` == "AMR" | is.na(`Element type`)) 
+atb_amrfp_filtered_amr %>% count(`Element type`)
+write_tsv(atb_amrfp_filtered_amr, file=("ATB_AFP_preprocessed_AMR.tsv.gz"))
+
+atb_amrfp_filtered_vir <- atb_amrfp_filtered %>% 
+      filter(`Element type` == "VIRULENCE" | is.na(`Element type`)) 
+atb_amrfp_filtered_vir %>% count(`Element type`)
+write_tsv(atb_amrfp_filtered_vir, file=("ATB_AFP_preprocessed_VIRULENCE.tsv.gz"))
+
+atb_amrfp_filtered_stress <- atb_amrfp_filtered %>% 
+      filter(`Element type` == "STRESS" | is.na(`Element type`)) 
+atb_amrfp_filtered_stress %>% count(`Element type`)
+write_tsv(atb_amrfp_filtered_stress, file=("ATB_AFP_preprocessed_STRESS.tsv.gz"))
 ```
