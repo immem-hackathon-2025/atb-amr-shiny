@@ -44,26 +44,26 @@ ui <- page_navbar(
         }
       "))
   ),
-  nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("dna")),
+  nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("bacterium")),
   nav_panel("Gene view", uiOutput("gene_distribution"), icon = icon("dna")),
   nav_panel("Common genes by genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
-
+  
 )
 
 # Define server logic required to draw a core gene plot for a selected species
 server <- function(input, output) {
   
-
-    # Render pages
-    output$core_genes_species <- renderUI({
-        coreGenesForSpeciesPage(afp, input, output)
-    })
-    output$core_genes_genus <- renderUI({
-        coreGenesForGenusPage(afp, input, output)
-    })
-    output$gene_distribution <- renderUI({
-      geneAcrossSpeciesPage(afp, input, output)
-    })
+  
+  # Render pages
+  output$core_genes_species <- renderUI({
+    coreGenesForSpeciesPage(afp, input, output)
+  })
+  output$core_genes_genus <- renderUI({
+    coreGenesForGenusPage(afp, input, output)
+  })
+  output$gene_distribution <- renderUI({
+    geneAcrossSpeciesPage(afp, input, output)
+  })
 }
 
 # Run the application 
