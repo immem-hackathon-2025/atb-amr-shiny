@@ -35,6 +35,13 @@ coreGenesForGenusPage <- function(afp, input, output) {
   ui <- fluidPage(
       sidebarLayout(
           sidebarPanel(
+            # Select for AMR/VIRULENCE/STRESS
+            shinyWidgets::checkboxGroupButtons(
+              inputId = "element_type",
+              label = "Determinant(s) of interest",
+              choices = c("AMR", "VIRULENCE", "STRESS"), 
+              selected= c("AMR")
+            ),
         # select Genus for core_gene_species plot
         selectizeInput(
           "selected_genus",
@@ -45,6 +52,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
             onInitialize = I('function() { this.setValue(""); }')
           )
         ),
+        # Settings button
         dropdownButton(
           tags$h3("Settings"),
         # select core gene threshold for core_gene_species plot
@@ -120,7 +128,8 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     afp_this_genus <- genus_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence` >= !!id_min) 
+      filter(`% Identity to reference sequence` >= !!id_min) %>%
+      filter(`Element%20type` %in% !!input$element_type)
     
     if (input$exclude_partial) {
       afp_this_genus <- afp_this_genus %>% filter(!grepl("PARTIAL", Method))

@@ -19,6 +19,13 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
+        # Select for AMR/VIRULENCE/STRESS
+        shinyWidgets::checkboxGroupButtons(
+        inputId = "element_type",
+        label = "Determinant(s) of interest",
+        choices = c("AMR", "VIRULENCE", "STRESS"), 
+        selected= c("AMR")
+      ),
         selectizeInput(
           "selected_species",
           "Choose a species to explore its gene frequency:",
@@ -115,6 +122,7 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     gene_freq_tbl <- gene_freq_tbl %>% 
       filter(!is.na(`Gene symbol`)) %>%
+      filter(`Element%20type` %in% !!input$element_type) %>%
       distinct(Name, `Gene symbol`, Class, Subclass) %>%        # unique sample-gene combos
       group_by(`Gene symbol`, Class, Subclass) %>%
       summarise(n = n(), .groups = "drop") %>%
