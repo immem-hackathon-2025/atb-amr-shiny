@@ -48,48 +48,101 @@ combined_sample_accessions <- c(temp_sample_accessions, combined_sample_accessio
 f <- function(x, pos) subset(x, Name %in% combined_sample_accessions)
   
 # read lines of amrfp
-selected_atb_amrfp <- read_tsv_chunked(file="AllTheBacteria/AMRFP_results.tsv.gz", callback=DataFrameCallback$new(f), chunk_size = 10000)
+selected_atb_amrfp <- read_tsv_chunked(file="AMRFP_results.tsv.gz", callback=DataFrameCallback$new(f), chunk_size = 10000)
 
 # join amrfp with species and qc results 
-selected_atb_amrfp <- selected_atb_amrfp %>%
+selected_atb_amrfp_all <- selected_atb_amrfp %>%
     full_join(atb_species_results, by=c("Name"="Sample")) %>% 
     full_join(atb_armfp_qc_status, by=c("Name"="sample")) 
 
 # Make sure that final file includes same number of genomes as species call and status file (so that it includes genomes with no AMR determinants)
-NROW(unique(selected_atb_amrfp$Name)) 
+NROW(unique(selected_atb_amrfp_all$Name)) 
 
 # filtering amrfp  
-atb_amrfp_filtered <- 
-selected_atb_amrfp %>%
+selected_atb_amrfp_all <- 
+selected_atb_amrfp_all %>%
     filter(`HQ` == TRUE) %>%
     filter(`status`== "PASS") %>%
     select(`Name`,`Gene symbol`, `Hierarchy node`, `Element type`, `Element subtype`, `% Coverage of reference sequence`, `% Identity to reference sequence`, `Method`, `Class`, `Subclass`, `Species`) 
 
-atb_amrfp_filtered %>% count(`Element type`)
+selected_atb_amrfp_all %>% count(`Element type`)
 
 # Number of genomes in final file
-NROW(unique(atb_amrfp_filtered$Name)) 
+NROW(unique(selected_atb_amrfp_all$Name)) 
 
 # write file
-#write_tsv(atb_amrfp_filtered, file=("ATB_AFP_preprocessed.tsv.gz"))
+# write_tsv(selected_atb_amrfp_all, file=("ATB_AFP_preprocessed.tsv.gz"))
   
 ```
 
-```{r}
-# amr only
+```{r, amr_only}
 
-atb_amrfp_filtered_amr <- atb_amrfp_filtered %>% 
-      filter(`Element type` == "AMR" | is.na(`Element type`)) 
-atb_amrfp_filtered_amr %>% count(`Element type`)
-write_tsv(atb_amrfp_filtered_amr, file=("ATB_AFP_preprocessed_AMR.tsv.gz"))
+atb_amrfp_amr <- selected_atb_amrfp %>% 
+      filter(`Element type` == "AMR") 
 
-atb_amrfp_filtered_vir <- atb_amrfp_filtered %>% 
-      filter(`Element type` == "VIRULENCE" | is.na(`Element type`)) 
-atb_amrfp_filtered_vir %>% count(`Element type`)
-write_tsv(atb_amrfp_filtered_vir, file=("ATB_AFP_preprocessed_VIRULENCE.tsv.gz"))
+# join amrfp with species and qc results 
+atb_amrfp_amr_all <- atb_amrfp_amr %>%
+    full_join(atb_species_results, by=c("Name"="Sample")) %>% 
+    full_join(atb_armfp_qc_status, by=c("Name"="sample")) 
 
-atb_amrfp_filtered_stress <- atb_amrfp_filtered %>% 
-      filter(`Element type` == "STRESS" | is.na(`Element type`)) 
-atb_amrfp_filtered_stress %>% count(`Element type`)
-write_tsv(atb_amrfp_filtered_stress, file=("ATB_AFP_preprocessed_STRESS.tsv.gz"))
+atb_amrfp_amr_all_filt <- atb_amrfp_amr_all %>%
+    filter(`HQ` == TRUE) %>%
+    filter(`status`== "PASS") %>%
+    select(`Name`,`Gene symbol`, `Hierarchy node`, `Element type`, `Element subtype`, `% Coverage of reference sequence`, `% Identity to reference sequence`, `Method`, `Class`, `Subclass`, `Species`) 
+
+  atb_amrfp_amr_all_filt %>% count(`Element type`)
+  
+  # Number of genomes in final file
+NROW(unique(atb_amrfp_amr_all_filt$Name)) 
+
+write_tsv(atb_amrfp_amr_all_filt, file=("ATB_AFP_preprocessed_AMR.tsv.gz"))
+
+
+```
+
+```{r, virulence_only}
+atb_amrfp_vir <- selected_atb_amrfp %>% 
+      filter(`Element type` == "VIRULENCE") 
+
+# join amrfp with species and qc results 
+atb_amrfp_vir_all <- atb_amrfp_vir %>%
+    full_join(atb_species_results, by=c("Name"="Sample")) %>% 
+    full_join(atb_armfp_qc_status, by=c("Name"="sample")) 
+
+atb_amrfp_vir_all_filt <- atb_amrfp_vir_all %>%
+    filter(`HQ` == TRUE) %>%
+    filter(`status`== "PASS") %>%
+    select(`Name`,`Gene symbol`, `Hierarchy node`, `Element type`, `Element subtype`, `% Coverage of reference sequence`, `% Identity to reference sequence`, `Method`, `Class`, `Subclass`, `Species`) 
+
+  atb_amrfp_vir_all_filt %>% count(`Element type`)
+  
+  # Number of genomes in final file
+NROW(unique(atb_amrfp_vir_all_filt$Name)) 
+
+write_tsv(atb_amrfp_vir_all_filt, file=("ATB_AFP_preprocessed_VIRULENCE.tsv.gz"))
+
+```
+
+
+```{r, stress_only}
+atb_amrfp_stress <- selected_atb_amrfp %>% 
+      filter(`Element type` == "STRESS") 
+
+# join amrfp with species and qc results 
+atb_amrfp_stress_all <- atb_amrfp_stress %>%
+    full_join(atb_species_results, by=c("Name"="Sample")) %>% 
+    full_join(atb_armfp_qc_status, by=c("Name"="sample")) 
+
+atb_amrfp_stress_all_filt <- atb_amrfp_stress_all %>%
+    filter(`HQ` == TRUE) %>%
+    filter(`status`== "PASS") %>%
+    select(`Name`,`Gene symbol`, `Hierarchy node`, `Element type`, `Element subtype`, `% Coverage of reference sequence`, `% Identity to reference sequence`, `Method`, `Class`, `Subclass`, `Species`) 
+
+  atb_amrfp_stress_all_filt %>% count(`Element type`)
+  
+  # Number of genomes in final file
+NROW(unique(atb_amrfp_stress_all_filt$Name)) 
+
+write_tsv(atb_amrfp_stress_all_filt, file=("ATB_AFP_preprocessed_STRESS.tsv.gz"))
+
 ```
