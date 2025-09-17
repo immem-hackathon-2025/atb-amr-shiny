@@ -150,7 +150,9 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
     IconButton("downloadGeneAcrossSpecies", "data_dl", "Download")
   })
   output$downloadGeneAcrossSpecies <- downloadHandler(
-    filename = paste0(input$selected_gene, "_distribution.tsv", sep=""),
+    filename = function() {
+      paste0(input$selected_gene, "_distribution.tsv", sep="")
+    },
     content = function(file) {
       write_tsv(geneAcrossSpecies(), file)
     }
