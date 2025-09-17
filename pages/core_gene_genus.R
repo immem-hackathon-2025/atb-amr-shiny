@@ -158,6 +158,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   # Download data
   # Filtered data
   output$filteredDataGenusDownloadButton <- renderUI({
+    req(geneCountPerSpp())
     IconButton("downloadfilteredDataGenus", "data_dl", 
                paste(input$selected_genus, "data"))
   })
@@ -171,6 +172,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   )
   # frequencies
   output$geneCountPerSppDownloadButton <- renderUI({
+    req(geneCountPerSpp())
     IconButton("downloadGeneCountPerSpp", "data_dl", "Gene count")
   })
   output$downloadGeneCountPerSpp <- downloadHandler(

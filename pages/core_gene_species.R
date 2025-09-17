@@ -146,6 +146,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
   # Download button
   # Filtered data
   output$filteredDataSpeciesDownloadButton <- renderUI({
+    req(coreGeneSpecies())
     IconButton("downloadfilteredDataSpecies", "data_dl", 
                paste(input$selected_species, "data"))
   })
@@ -159,6 +160,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
   )
   # Frequencies
   output$coreGeneSpeciesDownloadButton <- renderUI({
+    req(coreGeneSpecies())
     IconButton("downloadCoreGeneSpecies", "data_dl", "Core gene frequencies")
   })
   output$downloadCoreGeneSpecies <- downloadHandler(

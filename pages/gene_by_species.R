@@ -147,6 +147,7 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
   })
   
   output$geneAcrossSpeciesDownloadButton <- renderUI({
+    req(geneAcrossSpecies())
     IconButton("downloadGeneAcrossSpecies", "data_dl", "Download")
   })
   output$downloadGeneAcrossSpecies <- downloadHandler(
