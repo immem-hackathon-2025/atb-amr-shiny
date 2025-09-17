@@ -2,8 +2,6 @@
 
 geneAcrossSpeciesPage <- function(afp, input, output) {
   
-  
-
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
@@ -16,7 +14,6 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           selected= c("AMR")
           ),
         
-        
         selectizeInput(
           "selected_gene",
           "Choose a gene to explore its frequency across species:",
@@ -26,6 +23,9 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
             onInitialize = I('function() { this.setValue(""); }')
           )
         ),
+        
+        
+        
         # Settings button
         dropdownButton(
           tags$h3("Settings"),
@@ -35,7 +35,6 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "Select a minimum number of genomes per species, to include the species in the plot:",
           min=5,max=100,value=10
         ),
-        
         sliderInput(
           "min_freq",
           "Select a minimum gene frequency per species, to include the species in the plot:",
@@ -56,11 +55,13 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "Exclude partial hits", 
           value = TRUE
         ),
+        
         #setting button options
         circle = TRUE,
         status = "warning", 
         icon = icon("gear"), width = "300px",
-        tooltip = tooltipOptions(title = "Click to change settings"))
+        tooltip = tooltipOptions(title = "Click to change settings")
+        )
       ),
       
       # Show a plot of the generated distribution
@@ -128,7 +129,7 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     cov_min <- input$coverage_threshold  * 100
     
     afp_this_gene <- afp %>% 
-      filter(`Element%20type` == !!input$element_type) %>%
+      filter(`Element%20type` %in% !!input$element_type) %>%
       filter(`Gene symbol` == !!input$selected_gene) %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence` >= !!id_min)

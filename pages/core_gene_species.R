@@ -168,9 +168,20 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     validate(need(nrow(df) > 0, "No genes in the selected frequency range with current thresholds."))
     
-    df %>%
+    basic_plot <- df %>%
       ggplot(aes(x = freq, y = reorder(`Gene symbol`, freq), fill = Class)) +
-      geom_col() +
+      geom_col()
+    
+    # if virulence only, set colour to navy
+    if (length(input$element_type)==1) {
+      if (input$element_type=="VIRULENCE") {
+        basic_plot <- df %>%
+          ggplot(aes(x = freq, y = reorder(`Gene symbol`, freq))) + 
+            geom_col(fill="navy")
+      }
+    }
+    
+    basic_plot <- basic_plot +
       theme_bw() +
       theme(axis.text.y = element_text(size = 10)) +
       labs(
@@ -182,6 +193,8 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           input$selected_species
         )
       )
+    
+    basic_plot
   })
   
   return(ui)
