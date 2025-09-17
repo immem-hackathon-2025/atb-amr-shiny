@@ -38,11 +38,6 @@ connections <- list(
   "VIRULENCE" = afp_virulence
 )
 
-connections <- list(
-  "AMR" = afp_amr,
-  "STRESS" = afp_stress,
-  "VIRULENCE" = afp_virulence
-)
 
 # Load precomputed data from cache files
 cache_dir <- "data"
