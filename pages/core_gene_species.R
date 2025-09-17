@@ -21,6 +21,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
+        
         # Select for AMR/VIRULENCE/STRESS
         shinyWidgets::radioGroupButtons(
           inputId = "element_type",
@@ -28,6 +29,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
           choices = c("AMR", "VIRULENCE", "STRESS"), 
           selected = "AMR"
         ),
+        
         selectizeInput(
           "selected_species",
           "Choose a species to explore its gene frequency:",
@@ -37,9 +39,11 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
             onInitialize = I('function() { this.setValue(""); }')
           )
         ),
+        
         # Settings button
         dropdownButton(
           tags$h3("Settings"),
+          
         # select gene threshold for core_gene_species plot
         sliderInput(
           "core_threshold",
@@ -66,7 +70,8 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
         circle = TRUE,
         status = "warning", 
         icon = icon("gear"), width = "300px",
-        tooltip = tooltipOptions(title = "Click to change settings"))
+        tooltip = tooltipOptions(title = "Click to change settings")
+        )
       ),
       mainPanel(
         plotOutput("coreGeneSpeciesPlot", height = "calc(100vh - 200px)"),

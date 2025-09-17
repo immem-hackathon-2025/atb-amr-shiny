@@ -41,8 +41,6 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
           )
         ),
         
-        
-        
         # Settings button
         dropdownButton(
           tags$h3("Settings"),
@@ -82,10 +80,17 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
       ),
       
       # Show a plot of the generated distribution
-      mainPanel(
-        plotOutput("geneAcrossSpeciesPlot", height = "calc(100vh - 200px)"),
-        shiny::uiOutput("geneAcrossSpeciesDownloadButton"),
-      )
+     # mainPanel(
+      #  plotOutput("geneAcrossSpeciesPlot", height = "calc(100vh - 200px)"),
+       # shiny::uiOutput("geneAcrossSpeciesDownloadButton"),
+      #)
+     mainPanel(
+       plotOutput("geneAcrossSpeciesPlot", height = "calc(100vh - 200px)"),
+       div(
+         class = "centered-items-row",
+         div(uiOutput("geneAcrossSpeciesDownloadButton"))
+       )
+     )
     )
   )
   
@@ -103,14 +108,13 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
 
   geneAcrossSpecies <- reactive({
     
-    
     # for a single species, plot candidate core genes
     
     req(input$selected_gene, input$min_genomes_per_species, input$min_freq, input$identity_threshold, input$coverage_threshold)
     
     # total number per species
     species_counts <- current_afp() %>%
-      distinct(Name, Species) %>%                  # unique sample-species pairs
+      distinct(Name, Species) %>% # unique sample-species pairs
       group_by(Species) %>%
       summarise(nspp = n(), .groups = "drop")
     

@@ -31,11 +31,11 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
       sidebarLayout(
           sidebarPanel(
             # Select for AMR/VIRULENCE/STRESS
-            shinyWidgets::checkboxGroupButtons(
+            shinyWidgets::radioGroupButtons(
               inputId = "element_type",
-              label = "Determinant(s) of interest",
+              label = "Determinant of interest",
               choices = c("AMR", "VIRULENCE", "STRESS"), 
-              selected= c("AMR")
+              selected = "AMR"
             ),
         # select Genus for core_gene_species plot
         selectizeInput(

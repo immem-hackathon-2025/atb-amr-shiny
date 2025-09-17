@@ -20,7 +20,6 @@ library(shinyWidgets)
 source("pages/core_gene_species.R")
 source("pages/core_gene_genus.R")
 source("pages/gene_by_species.R")
-
 source("src/download_functions.R")
 
 
@@ -82,10 +81,10 @@ if (file.exists(file.path(cache_dir, "metadata.rds"))) {
 
 message("Precomputed data loaded successfully!")
 
-# Define UI for application that draws a histogram
+# Define UI
 ui <- page_navbar(
   title = "AllTheBacteria AMR+ Explorer",
-  theme = bs_theme(preset = "lumen"),
+  theme = bslib::bs_theme(preset = "cosmo"),
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
     tags$style(HTML("
@@ -97,13 +96,10 @@ ui <- page_navbar(
   nav_panel("Species view", uiOutput("core_genes_species"), icon = icon("bacterium")),
   nav_panel("Gene view", uiOutput("gene_distribution"), icon = icon("dna")),
   nav_panel("Common genes by genus", uiOutput("core_genes_genus"), icon = icon("project-diagram"))
-  
 )
 
 # Define server logic required to draw a core gene plot for a selected species
 server <- function(input, output) {
-  
-  
   # Render pages
   output$core_genes_species <- renderUI({
     coreGenesForSpeciesPage(connections, species_data, input, output)
