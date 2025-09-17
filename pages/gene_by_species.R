@@ -61,6 +61,11 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
           "Minimum coverage:",
           min = 0.5, max = 1.0, value = 0.9
         ),
+        checkboxInput(
+          "exclude_partial", 
+          "Exclude partial hits", 
+          value = TRUE
+        ),
         #setting button options
         circle = TRUE,
         status = "warning", 
@@ -90,19 +95,23 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     
     req(input$selected_gene, input$min_genomes_per_species, input$min_freq, input$identity_threshold, input$coverage_threshold)
     
+    # total number per species
+    species_counts <- afp %>%
+      distinct(Name, Species) %>%                  # unique sample-species pairs
+      group_by(Species) %>%
+      summarise(nspp = n(), .groups = "drop")
+    
     # Convert proportions [0,1] to percentages [0,100] to match the AFP columns
     id_min  <- input$identity_threshold  * 100
     cov_min <- input$coverage_threshold  * 100
     
     afp_this_gene <- afp %>% filter(`Gene symbol` == !!input$selected_gene) %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence` >= !!id_min) 
+      filter(`% Identity to reference sequence` >= !!id_min)
     
-    # total number per species
-    species_counts <- afp %>%
-      distinct(Name, Species) %>%                  # unique sample-species pairs
-      group_by(Species) %>%
-      summarise(nspp = n(), .groups = "drop")
+    if (input$exclude_partial) {
+      afp_this_gene <- afp_this_gene %>% filter(!grepl("PARTIAL", Method))
+    }
     
     afp_this_gene <- afp_this_gene %>%
       distinct(Name, Species, Class, Subclass) %>%

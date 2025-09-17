@@ -48,6 +48,11 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
           "Minimum coverage:",
           min = 0.5, max = 1.0, value = 0.9
         ),
+        checkboxInput(
+          "exclude_partial", 
+          "Exclude partial hits", 
+          value = TRUE
+        ),
         #setting button options
         circle = TRUE,
         status = "warning", 
@@ -102,7 +107,13 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     gene_freq_tbl <- spp_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence` >= !!id_min) %>%
+      filter(`% Identity to reference sequence` >= !!id_min)
+      
+    if (input$exclude_partial) {
+      gene_freq_tbl <- gene_freq_tbl %>% filter(!grepl("PARTIAL", Method))
+    }
+    
+    gene_freq_tbl <- gene_freq_tbl %>% 
       filter(!is.na(`Gene symbol`)) %>%
       distinct(Name, `Gene symbol`, Class, Subclass) %>%        # unique sample-gene combos
       group_by(`Gene symbol`, Class, Subclass) %>%
@@ -149,7 +160,8 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     validate(need(nrow(df) > 0, "No genes in the selected frequency range with current thresholds."))
     
-    ggplot(df, aes(x = freq, y = reorder(`Gene symbol`, freq), fill = Class)) +
+    df %>%
+      ggplot(aes(x = freq, y = reorder(`Gene symbol`, freq), fill = Class)) +
       geom_col() +
       theme_bw() +
       theme(axis.text.y = element_text(size = 10)) +

@@ -69,6 +69,11 @@ coreGenesForGenusPage <- function(afp, input, output) {
           "Minimum coverage:",
           min = 0.5, max = 1.0, value = 0.9
         ),
+        checkboxInput(
+          "exclude_partial", 
+          "Exclude partial hits", 
+          value = TRUE
+        ),
         circle = TRUE,
         status = "warning", 
         icon = icon("gear"), width = "300px",
@@ -103,6 +108,12 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species, input$identity_threshold, input$coverage_threshold)
     
+    # total number per species
+    species_counts <- afp %>%
+      distinct(Name, Species) %>%                  # unique sample-species pairs
+      group_by(Species) %>%
+      summarise(nspp = n(), .groups = "drop")
+    
     # Convert proportions [0,1] to percentages [0,100] to match the AFP columns
     id_min  <- input$identity_threshold  * 100
     cov_min <- input$coverage_threshold  * 100
@@ -111,11 +122,9 @@ coreGenesForGenusPage <- function(afp, input, output) {
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence` >= !!id_min) 
     
-    # total number per species
-    species_counts <- afp %>%
-      distinct(Name, Species) %>%                  # unique sample-species pairs
-      group_by(Species) %>%
-      summarise(nspp = n(), .groups = "drop")
+    if (input$exclude_partial) {
+      afp_this_genus <- afp_this_genus %>% filter(!grepl("PARTIAL", Method))
+    }
     
     ### TODO: allow user to select node instead of gene, as the unit of measurement
     # gene frequency per species
@@ -168,28 +177,11 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     validate(need(nrow(df) > 0, "No species with this gene pass current thresholds."))
     
-    #if (nrow(geneCountPerSpp()) > 0) {
-      ggplot(df, aes(y=label, x=freq)) + 
+    ggplot(df, aes(y=label, x=freq)) + 
       geom_col(position='dodge', fill="navy") + 
       facet_wrap(~`Gene symbol`) + 
       theme_bw() +
       theme(legend.position="bottom")
-    #}
-    
-    # else {
-    #   ggplot() +
-    #     # Print a message to the plot area
-    #     annotate(
-    #       "text", 
-    #       x = 0.5, 
-    #       y = 0.5, 
-    #       label = "No data passess current filters, try again",
-    #       size = 6, 
-    #       color = "gray40"
-    #     ) +
-    #     # Remove axes and labels to make the plot completely blank
-    #     theme_void()
-    # }
       
   }) 
   

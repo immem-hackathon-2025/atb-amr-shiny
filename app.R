@@ -34,7 +34,7 @@ afp <- tbl(con, "read_parquet('data/parquet_by_genus/**/*.parquet', hive_partiti
 
 # Define UI for application that draws a histogram
 ui <- page_navbar(
-  title = "AllTheBacteria AMR Explorer",
+  title = "AllTheBacteria AMR+ Explorer",
   theme = bs_theme(preset = "lumen"),
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
