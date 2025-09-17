@@ -1,31 +1,33 @@
 # plot gene frequencies for a selected species and frequency range
-coreGenesForSpeciesPage <- function(afp, input, output) {
+coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
 
-  # --- Build species list from distinct samples (Name) per Species ---
-  # Only include species with at least 10 unique samples
-  species_counts <- afp %>%
-    distinct(Name, Species) %>%                  # unique sample-species pairs
-    group_by(Species) %>%
-    summarise(nspp = n(), .groups = "drop") %>%
-    filter(nspp >= 10) %>%
-    arrange(desc(nspp)) %>%
-    collect()
+  # Reactive to get current database connection based on element_type
+  current_afp <- reactive({
+    req(input$element_type)
+    connections[[input$element_type]]
+  })
+
+  # Use precomputed species data instead of calculating on demand
+  species_counts <- reactive({
+    req(input$element_type)
+    species_data[[input$element_type]]$counts
+  })
   
-  species_choices <- setNames(
-    species_counts$Species,
-    paste0(species_counts$Species, " (n=", species_counts$nspp, ")")
-  )
+  species_choices <- reactive({
+    req(input$element_type)
+    species_data[[input$element_type]]$choices
+  })
   
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
         # Select for AMR/VIRULENCE/STRESS
-        shinyWidgets::checkboxGroupButtons(
-        inputId = "element_type",
-        label = "Determinant(s) of interest",
-        choices = c("AMR", "VIRULENCE", "STRESS"), 
-        selected= c("AMR")
-      ),
+        shinyWidgets::radioGroupButtons(
+          inputId = "element_type",
+          label = "Determinant of interest",
+          choices = c("AMR", "VIRULENCE", "STRESS"), 
+          selected = "AMR"
+        ),
         selectizeInput(
           "selected_species",
           "Choose a species to explore its gene frequency:",
@@ -77,20 +79,22 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     )
   )
   
-  # Server-side selectize for species choices
-  updateSelectizeInput(
-    session = getDefaultReactiveDomain(),
-    inputId = "selected_species",
-    choices = species_choices,
-    selected = if (length(species_choices)) species_counts$Species[[1]] else NULL,
-    server = TRUE
-  )
+  # Server-side selectize for species choices - update when element_type changes
+  observe({
+    req(species_choices())
+    updateSelectizeInput(
+      session = getDefaultReactiveDomain(),
+      inputId = "selected_species",
+      choices = species_choices(),
+      selected = if (length(species_choices())) species_counts()$Species[[1]] else NULL,
+      server = TRUE
+    )
+  })
 
   # Reactive data for selected species and thresholds
   spp_tbl <- reactive({
-    req(input$selected_species)
-    spp_tbl <- afp %>% filter(Species == !!input$selected_species)
-    spp_tbl
+    req(input$selected_species, input$element_type)
+    current_afp() %>% filter(Species == !!input$selected_species)
   })
   
   coreGeneSpecies <- reactive({
@@ -122,7 +126,6 @@ coreGenesForSpeciesPage <- function(afp, input, output) {
     
     gene_freq_tbl <- gene_freq_tbl %>% 
       filter(!is.na(`Gene symbol`)) %>%
-      filter(`Element%20type` %in% !!input$element_type) %>%
       distinct(Name, `Gene symbol`, Class, Subclass) %>%        # unique sample-gene combos
       group_by(`Gene symbol`, Class, Subclass) %>%
       summarise(n = n(), .groups = "drop") %>%

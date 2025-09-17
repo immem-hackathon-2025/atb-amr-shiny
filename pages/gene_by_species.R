@@ -1,18 +1,35 @@
 # plot gene frequency across species
 
-geneAcrossSpeciesPage <- function(afp, input, output) {
+geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
+  
+  # Reactive to get current database connection based on element_type
+  current_afp <- reactive({
+    req(input$element_type)
+    connections[[input$element_type]]
+  })
+  
+  # Use precomputed gene data instead of calculating on demand
+  n_per_gene <- reactive({
+    req(input$element_type)
+    gene_data[[input$element_type]]$counts
+  })
+  
+  gene_list <- reactive({
+    req(input$element_type)
+    gene_data[[input$element_type]]$choices
+  })
   
   ui <- fluidPage(
     sidebarLayout(
       sidebarPanel(
         
         # filter for AMR/STRESS/VIRULENCE
-        shinyWidgets::checkboxGroupButtons(
+        shinyWidgets::radioGroupButtons(
           inputId = "element_type",
-          label = "Determinant(s) of interest",
+          label = "Determinant of interest",
           choices = c("AMR", "VIRULENCE", "STRESS"), 
-          selected= c("AMR")
-          ),
+          selected = "AMR"
+        ),
         
         selectizeInput(
           "selected_gene",
@@ -72,41 +89,14 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     )
   )
   
-  filtered_gene_list <- reactive({
-    req(input$element_type)
-    
-    filtered <- afp %>%
-      filter(`Element%20type` %in% input$element_type) %>%
-      group_by(`Gene symbol`) %>%
-      summarise(
-        n = n(),
-        nspp = n_distinct(Species),
-        .groups = "drop"
-      ) %>%
-      filter(!is.na(`Gene symbol`)) %>%
-      arrange(desc(n)) %>%
-      collect()
-    
-    genes <- filtered$`Gene symbol`
-    names(genes) <- paste0(
-      filtered$`Gene symbol`,
-      " (n=", filtered$n,
-      " in ", filtered$nspp,
-      " species)"
-    )
-    
-    genes
-  })
-  
-  # Server-side selectize for gene choices
+  # Server-side selectize for gene choices - update when element_type changes
   observe({
-    gene_choices <- filtered_gene_list()
-    
+    req(gene_list())
     updateSelectizeInput(
       session = getDefaultReactiveDomain(),
       inputId = "selected_gene",
-      choices = gene_choices,
-      selected = if (length(gene_choices)) gene_choices[[1]] else NULL,
+      choices = gene_list(),
+      selected = if (length(gene_list())) gene_list()[[1]] else NULL,
       server = TRUE
     )
   })
@@ -119,7 +109,7 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     req(input$selected_gene, input$min_genomes_per_species, input$min_freq, input$identity_threshold, input$coverage_threshold)
     
     # total number per species
-    species_counts <- afp %>%
+    species_counts <- current_afp() %>%
       distinct(Name, Species) %>%                  # unique sample-species pairs
       group_by(Species) %>%
       summarise(nspp = n(), .groups = "drop")
@@ -128,8 +118,7 @@ geneAcrossSpeciesPage <- function(afp, input, output) {
     id_min  <- input$identity_threshold  * 100
     cov_min <- input$coverage_threshold  * 100
     
-    afp_this_gene <- afp %>% 
-      filter(`Element%20type` %in% !!input$element_type) %>%
+    afp_this_gene <- current_afp() %>% 
       filter(`Gene symbol` == !!input$selected_gene) %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
       filter(`% Identity to reference sequence` >= !!id_min)

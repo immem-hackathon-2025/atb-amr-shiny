@@ -1,36 +1,31 @@
 # plot gene frequencies for a selected species and threshold
 
-coreGenesForGenusPage <- function(afp, input, output) {
+coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   
-  afp <- afp %>%
-    mutate(
-      Genus = sql("substr(Species, 1, instr(Species, ' ') - 1)"),
-      species_name = sql("substr(Species, instr(Species, ' ') + 1)")
-    )
+  # Reactive to get current database connection based on element_type
+  current_afp <- reactive({
+    req(input$element_type)
+    connections[[input$element_type]]
+  })
   
-  # get list of genera to select from
-  # total number per genus
-  genus_counts <- afp %>%
-    distinct(Name, Genus) %>%                  # unique sample-species pairs
-    group_by(Genus) %>%
-    summarise(n = n(), .groups = "drop") 
+  afp_with_genus <- reactive({
+    current_afp() %>%
+      mutate(
+        Genus = sql("substr(Species, 1, instr(Species, ' ') - 1)"),
+        species_name = sql("substr(Species, instr(Species, ' ') + 1)")
+      )
+  })
   
-  genus_counts <- afp %>%
-    distinct(Species, Genus) %>%                  # unique sample-species pairs
-    group_by(Genus) %>%
-    summarise(nspp = n(), .groups = "drop") %>%
-    filter(nspp >= 10) %>%
-    left_join(genus_counts, by="Genus") %>%
-    arrange(desc(nspp)) %>% collect()
+  # Use precomputed genus data instead of calculating on demand
+  genus_counts <- reactive({
+    req(input$element_type)
+    genus_data[[input$element_type]]$counts
+  })
   
-  genus_list <- genus_counts$Genus
-  names(genus_list) <- paste(
-    genus_counts$Genus,
-    " (n=", genus_counts$n,
-    " in ", genus_counts$nspp,
-    " species)",
-    sep = ""
-  )
+  genus_list <- reactive({
+    req(input$element_type)
+    genus_data[[input$element_type]]$choices
+  })
   
   ui <- fluidPage(
       sidebarLayout(
@@ -98,17 +93,21 @@ coreGenesForGenusPage <- function(afp, input, output) {
       )
   )
   
-  # Server-side selectize for genus choices
-  updateSelectizeInput(
-    session = getDefaultReactiveDomain(),
-    inputId = "selected_genus",
-    choices = genus_list,
-    selected = if (length(genus_list)) genus_list[[1]] else NULL,
-    server = TRUE
-  )
+  # Server-side selectize for genus choices - update when element_type changes
+  observe({
+    req(genus_list())
+    updateSelectizeInput(
+      session = getDefaultReactiveDomain(),
+      inputId = "selected_genus",
+      choices = genus_list(),
+      selected = if (length(genus_list())) genus_list()[[1]] else NULL,
+      server = TRUE
+    )
+  })
 
   genus_tbl <- reactive({
-    afp %>% filter(Genus == !!input$selected_genus)
+    req(input$selected_genus, input$element_type)
+    afp_with_genus() %>% filter(Genus == !!input$selected_genus)
   })
   
   geneCountPerSpp <- reactive({
@@ -116,8 +115,12 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     req(input$core_threshold2, input$selected_genus, input$min_genomes_per_species, input$identity_threshold, input$coverage_threshold)
     
+    # Convert proportions [0,1] to percentages [0,100] to match the AFP columns
+    id_min  <- input$identity_threshold  * 100
+    cov_min <- input$coverage_threshold  * 100
+    
     # total number per species
-    species_counts <- afp %>%
+    species_counts <- afp_with_genus() %>%
       distinct(Name, Species) %>%                  # unique sample-species pairs
       group_by(Species) %>%
       summarise(nspp = n(), .groups = "drop")
@@ -128,8 +131,7 @@ coreGenesForGenusPage <- function(afp, input, output) {
     
     afp_this_genus <- genus_tbl() %>%
       filter(`% Coverage of reference sequence` >= !!cov_min) %>%
-      filter(`% Identity to reference sequence` >= !!id_min) %>%
-      filter(`Element%20type` %in% !!input$element_type)
+      filter(`% Identity to reference sequence` >= !!id_min)
     
     if (input$exclude_partial) {
       afp_this_genus <- afp_this_genus %>% filter(!grepl("PARTIAL", Method))
