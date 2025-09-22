@@ -1,21 +1,21 @@
 # plot gene frequencies for a selected species and frequency range
 coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
 
-  # Reactive to get current database connection based on element_type
+  # Reactive to get current database connection based on element_type_species
   current_afp <- reactive({
-    req(input$element_type)
-    connections[[input$element_type]]
+    req(input$element_type_species)
+    connections[[input$element_type_species]]
   })
 
   # Use precomputed species data instead of calculating on demand
   species_counts <- reactive({
-    req(input$element_type)
-    species_data[[input$element_type]]$counts
+    req(input$element_type_species)
+    species_data[[input$element_type_species]]$counts
   })
   
   species_choices <- reactive({
-    req(input$element_type)
-    species_data[[input$element_type]]$choices
+    req(input$element_type_species)
+    species_data[[input$element_type_species]]$choices
   })
   
   ui <- page_fluid(
@@ -24,7 +24,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
         
         # Select for AMR/VIRULENCE/STRESS
         shinyWidgets::radioGroupButtons(
-          inputId = "element_type",
+          inputId = "element_type_species",
           label = "Determinant of interest",
           choices = c("AMR", "VIRULENCE", "STRESS"), 
           selected = "AMR"
@@ -84,7 +84,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
     )
   )
   
-  # Server-side selectize for species choices - update when element_type changes
+  # Server-side selectize for species choices - update when element_type_species changes
   observe({
     req(species_choices())
     updateSelectizeInput(
@@ -98,7 +98,7 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
 
   # Reactive data for selected species and thresholds
   spp_tbl <- reactive({
-    req(input$selected_species, input$element_type)
+    req(input$selected_species, input$element_type_species)
     current_afp() %>% filter(Species == !!input$selected_species)
   })
   
@@ -183,8 +183,8 @@ coreGenesForSpeciesPage <- function(connections, species_data, input, output) {
       geom_col()
     
     # if virulence only, set colour to navy
-    if (length(input$element_type)==1) {
-      if (input$element_type=="VIRULENCE") {
+    if (length(input$element_type_species)==1) {
+      if (input$element_type_species=="VIRULENCE") {
         basic_plot <- df %>%
           ggplot(aes(x = freq, y = reorder(`Gene symbol`, freq))) + 
             geom_col(fill="navy")

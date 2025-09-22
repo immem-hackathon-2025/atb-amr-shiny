@@ -2,10 +2,10 @@
 
 coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   
-  # Reactive to get current database connection based on element_type
+  # Reactive to get current database connection based on element_type_genus
   current_afp <- reactive({
-    req(input$element_type)
-    connections[[input$element_type]]
+    req(input$element_type_genus)
+    connections[[input$element_type_genus]]
   })
   
   afp_with_genus <- reactive({
@@ -18,13 +18,13 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   
   # Use precomputed genus data instead of calculating on demand
   genus_counts <- reactive({
-    req(input$element_type)
-    genus_data[[input$element_type]]$counts
+    req(input$element_type_genus)
+    genus_data[[input$element_type_genus]]$counts
   })
   
   genus_list <- reactive({
-    req(input$element_type)
-    genus_data[[input$element_type]]$choices
+    req(input$element_type_genus)
+    genus_data[[input$element_type_genus]]$choices
   })
   
   ui <- page_fluid(
@@ -32,7 +32,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
           sidebarPanel(
             # Select for AMR/VIRULENCE/STRESS
             shinyWidgets::radioGroupButtons(
-              inputId = "element_type",
+              inputId = "element_type_genus",
               label = "Determinant of interest",
               choices = c("AMR", "VIRULENCE", "STRESS"), 
               selected = "AMR"
@@ -93,7 +93,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
       )
   )
   
-  # Server-side selectize for genus choices - update when element_type changes
+  # Server-side selectize for genus choices - update when element_type_genus changes
   observe({
     req(genus_list())
     updateSelectizeInput(
@@ -106,7 +106,7 @@ coreGenesForGenusPage <- function(connections, genus_data, input, output) {
   })
 
   genus_tbl <- reactive({
-    req(input$selected_genus, input$element_type)
+    req(input$selected_genus, input$element_type_genus)
     afp_with_genus() %>% filter(Genus == !!input$selected_genus)
   })
   

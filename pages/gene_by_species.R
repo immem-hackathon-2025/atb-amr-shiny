@@ -2,21 +2,21 @@
 
 geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
   
-  # Reactive to get current database connection based on element_type
+  # Reactive to get current database connection based on element_type_gene
   current_afp <- reactive({
-    req(input$element_type)
-    connections[[input$element_type]]
+    req(input$element_type_gene)
+    connections[[input$element_type_gene]]
   })
   
   # Use precomputed gene data instead of calculating on demand
   n_per_gene <- reactive({
-    req(input$element_type)
-    gene_data[[input$element_type]]$counts
+    req(input$element_type_gene)
+    gene_data[[input$element_type_gene]]$counts
   })
   
   gene_list <- reactive({
-    req(input$element_type)
-    gene_data[[input$element_type]]$choices
+    req(input$element_type_gene)
+    gene_data[[input$element_type_gene]]$choices
   })
   
   ui <- page_fluid(
@@ -25,7 +25,7 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
         
         # filter for AMR/STRESS/VIRULENCE
         shinyWidgets::radioGroupButtons(
-          inputId = "element_type",
+          inputId = "element_type_gene",
           label = "Determinant of interest",
           choices = c("AMR", "VIRULENCE", "STRESS"), 
           selected = "AMR"
@@ -94,7 +94,7 @@ geneAcrossSpeciesPage <- function(connections, gene_data, input, output) {
     )
   )
   
-  # Server-side selectize for gene choices - update when element_type changes
+  # Server-side selectize for gene choices - update when element_type_gene changes
   observe({
     req(gene_list())
     updateSelectizeInput(
